@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Catálogo de Casas 3D</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+
+    margin: 0;
+    padding: 0;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: #f5f7fa;
+
+    color: #1f2937;
+}
+
+
+/* =========================================================
+   CABEÇALHO
+========================================================= */
+
+.header {
+
+    background:
+        linear-gradient(
+            135deg,
+            #172554,
+            #2563eb
+        );
+
+    color: white;
+
+    padding: 35px 18px;
+
+    text-align: center;
+}
+
+.header h1 {
+
+    margin: 0;
+
+    font-size: 26px;
+
+    line-height: 1.2;
+}
+
+.header p {
+
+    margin: 10px 0 0;
+
+    font-size: 14px;
+
+    opacity: 0.9;
+}
+
+
+/* =========================================================
+   CONTEÚDO
+========================================================= */
+
+.catalogo {
+
+    width: 100%;
+
+    max-width: 1400px;
+
+    margin: auto;
+
+    padding:
+        18px
+        12px
+        40px;
+}
+
+
+/* =========================================================
+   CARD DA CASA
+========================================================= */
+
+.casa {
+
+    background: white;
+
+    border-radius: 14px;
+
+    margin-bottom: 20px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 2px 8px rgba(0,0,0,0.06),
+        0 8px 25px rgba(0,0,0,0.04);
+}
+
+
+/* =========================================================
+   CABEÇALHO DA CASA
+========================================================= */
+
+.nome {
+
+    padding:
+        16px
+        15px
+        12px;
+
+    font-size: 17px;
+
+    font-weight: 700;
+
+    line-height: 1.4;
+
+    color: #172554;
+}
+
+
+/* Número da casa */
+
+.numero {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-width: 30px;
+
+    height: 30px;
+
+    margin-right: 8px;
+
+    border-radius: 50%;
+
+    background: #2563eb;
+
+    color: white;
+
+    font-size: 14px;
+
+    font-weight: bold;
+}
+
+
+/* =========================================================
+   THUMBNAILS
+========================================================= */
+
+.imagens {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 8px;
+
+    padding:
+        0
+        10px
+        12px;
+}
+
+
+.imagem {
+
+    position: relative;
+
+    overflow: hidden;
+
+    border-radius: 9px;
+
+    background: #e5e7eb;
+}
+
+
+.imagem img {
+
+    display: block;
+
+    width: 100%;
+
+    aspect-ratio: 16 / 10;
+
+    object-fit: cover;
+
+    transition:
+        transform 0.25s ease,
+        opacity 0.25s ease;
+}
+
+
+.imagem:hover img {
+
+    transform: scale(1.04);
+
+    opacity: 0.92;
+}
+
+
+/* =========================================================
+   TEMPO
+========================================================= */
+
+.tempo {
+
+    position: absolute;
+
+    bottom: 6px;
+
+    left: 6px;
+
+    background:
+        rgba(0,0,0,0.72);
+
+    color: white;
+
+    padding:
+        4px
+        7px;
+
+    border-radius: 5px;
+
+    font-size: 11px;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (min-width: 600px) {
+
+    .header {
+
+        padding:
+            45px
+            25px;
+    }
+
+    .header h1 {
+
+        font-size: 32px;
+    }
+
+    .catalogo {
+
+        padding:
+            25px
+            20px
+            50px;
+    }
+
+    .casa {
+
+        margin-bottom: 25px;
+    }
+
+    .nome {
+
+        padding:
+            18px
+            20px
+            14px;
+
+        font-size: 19px;
+    }
+
+    .imagens {
+
+        gap: 10px;
+
+        padding:
+            0
+            15px
+            15px;
+    }
+}
+
+
+/* =========================================================
+   DESKTOP
+========================================================= */
+
+@media (min-width: 900px) {
+
+    .header {
+
+        padding:
+            55px
+            30px;
+    }
+
+    .header h1 {
+
+        font-size: 38px;
+    }
+
+    .header p {
+
+        font-size: 16px;
+    }
+
+    .catalogo {
+
+        padding:
+            30px
+            25px
+            60px;
+    }
+
+    .casa {
+
+        margin-bottom: 30px;
+
+        border-radius: 16px;
+    }
+
+    .nome {
+
+        padding:
+            20px
+            22px
+            15px;
+
+        font-size: 20px;
+    }
+
+    .imagens {
+
+        grid-template-columns:
+            repeat(4, 1fr);
+
+        gap: 10px;
+
+        padding:
+            0
+            18px
+            18px;
+    }
+
+    .tempo {
+
+        font-size: 12px;
+    }
+}
+
+
+/* =========================================================
+   TELAS GRANDES
+========================================================= */
+
+@media (min-width: 1300px) {
+
+    .catalogo {
+
+        padding-left: 35px;
+
+        padding-right: 35px;
+    }
+
+    .imagens {
+
+        gap: 12px;
+    }
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header class="header">
+
+    <h1>
+        Catálogo de Casas 3D
+    </h1>
+
+    <p>
+        Explore os projetos e visualize
+        cada casa em diferentes momentos do vídeo.
+    </p>
+
+</header>
+
+
+<main class="catalogo">
+
+
+<article class="casa">
+
+    <div class="nome">
+
+        <span class="numero">
+            1
+        </span>
+
+        Casa 3D Completa com 2 Quartos   Garagem _ Planta Moderna 11_60 x 9_40(480P)
+
+    </div>
+
+
+    <div class="imagens">
+
+
+        <div class="imagem">
+
+            <img
+                src="thumbnails/Casa 3D Completa com 2 Quartos   Garagem _ Planta Moderna 11_60 x 9_40(480P)_1.jpg"
+                alt="Casa 3D Completa com 2 Quartos   Garagem _ Planta Moderna 11_60 x 9_40(480P) - 45s"
+                loading="lazy"
+            >
+
+            <div class="tempo">
+                45s
+            </div>
+
+        </div>
+
+
+        <div class="imagem">
+
+            <img
+                src="thumbnails/Casa 3D Completa com 2 Quartos   Garagem _ Planta Moderna 11_60 x 9_40(480P)_2.jpg"
+                alt="Casa 3D Completa com 2 Quartos   Garagem _ Planta Moderna 11_60 x 9_40(480P) - 55s"
+                loading="lazy"
+            >
+
+            <div class="tempo">
+                55s
+            </div>
+
+        </div>
+
+
+        <div class="imagem">
+
+            <img
+                src="thumbnails/Casa 3D Completa com 2 Quartos   Garagem _ Planta Moderna 11_60 x 9_40(480P)_3.jpg"
+                alt="Casa 3D Completa com 2 Quartos   Garagem _ Planta Moderna 11_60 x 9_40(480P) - 1min 5s"
+                loading="lazy"
+            >
+
+            <div class="tempo">
+                1min 5s
+            </div>
+
+        </div>
+
+
+        <div class="imagem">
+
+            <img
+                src="thumbnails/Casa 3D Completa com 2 Quartos   Garagem _ Planta Moderna 11_60 x 9_40(480P)_4.jpg"
+                alt="Casa 3D Completa com 2 Quartos   Garagem _ Planta Moderna 11_60 x 9_40(480P) - 1min 15s"
+                loading="lazy"
+            >
+
+            <div class="tempo">
+                1min 15s
+            </div>
+
+        </div>
+
+
+    </div>
+
+</article>
+
+
+<article class="casa">
+
+    <div class="nome">
+
+        <span class="numero">
+            2
+        </span>
+
+        CASA MODERNA em 3D com 3 QUARTOS e Pé Direito Alto _ Projeto 8_25x13m(480P)
+
+    </div>
+
+
+    <div class="imagens">
+
+
+        <div class="imagem">
+
+            <img
+                src="thumbnails/CASA MODERNA em 3D com 3 QUARTOS e Pé Direito Alto _ Projeto 8_25x13m(480P)_1.jpg"
+                alt="CASA MODERNA em 3D com 3 QUARTOS e Pé Direito Alto _ Projeto 8_25x13m(480P) - 45s"
+                loading="lazy"
+            >
+
+            <div class="tempo">
+                45s
+            </div>
+
+        </div>
+
+
+        <div class="imagem">
+
+            <img
+                src="thumbnails/CASA MODERNA em 3D com 3 QUARTOS e Pé Direito Alto _ Projeto 8_25x13m(480P)_2.jpg"
+                alt="CASA MODERNA em 3D com 3 QUARTOS e Pé Direito Alto _ Projeto 8_25x13m(480P) - 55s"
+                loading="lazy"
+            >
+
+            <div class="tempo">
+                55s
+            </div>
+
+        </div>
+
+
+        <div class="imagem">
+
+            <img
+                src="thumbnails/CASA MODERNA em 3D com 3 QUARTOS e Pé Direito Alto _ Projeto 8_25x13m(480P)_3.jpg"
+                alt="CASA MODERNA em 3D com 3 QUARTOS e Pé Direito Alto _ Projeto 8_25x13m(480P) - 1min 5s"
+                loading="lazy"
+            >
+
+            <div class="tempo">
+                1min 5s
+            </div>
+
+        </div>
+
+
+        <div class="imagem">
+
+            <img
+                src="thumbnails/CASA MODERNA em 3D com 3 QUARTOS e Pé Direito Alto _ Projeto 8_25x13m(480P)_4.jpg"
+                alt="CASA MODERNA em 3D com 3 QUARTOS e Pé Direito Alto _ Projeto 8_25x13m(480P) - 1min 15s"
+                loading="lazy"
+            >
+
+            <div class="tempo">
+                1min 15s
+            </div>
+
+        </div>
+
+
+    </div>
+
+</article>
+
+
+<article class="casa">
+
+    <div class="nome">
+
+        <span class="numero">
+            3
+        </span>
+
+        CASA TÉRREA EM L MODERNA _ Planta de Casa 3D 8_40x16_40 com 2 Quartos_ Suíte e Varanda(480P)
+
+    </div>
+
+
+    <div class="imagens">
+
+
+        <div class="imagem">
+
+            <img
+                src="thumbnails/CASA TÉRREA EM L MODERNA _ Planta de Casa 3D 8_40x16_40 com 2 Quartos_ Suíte e Varanda(480P)_1.jpg"
+                alt="CASA TÉRREA EM L MODERNA _ Planta de Casa 3D 8_40x16_40 com 2 Quartos_ Suíte e Varanda(480P) - 45s"
+                loading="lazy"
+            >
+
+            <div class="tempo">
+                45s
+            </div>
+
+        </div>
+
+
+        <div class="imagem">
+
+            <img
+                src="thumbnails/CASA TÉRREA EM L MODERNA _ Planta de Casa 3D 8_40x16_40 com 2 Quartos_ Suíte e Varanda(480P)_2.jpg"
+                alt="CASA TÉRREA EM L MODERNA _ Planta de Casa 3D 8_40x16_40 com 2 Quartos_ Suíte e Varanda(480P) - 55s"
+                loading="lazy"
+            >
+
+            <div class="tempo">
+                55s
+            </div>
+
+        </div>
+
+
+        <div class="imagem">
+
+            <img
+                src="thumbnails/CASA TÉRREA EM L MODERNA _ Planta de Casa 3D 8_40x16_40 com 2 Quartos_ Suíte e Varanda(480P)_3.jpg"
+                alt="CASA TÉRREA EM L MODERNA _ Planta de Casa 3D 8_40x16_40 com 2 Quartos_ Suíte e Varanda(480P) - 1min 5s"
+                loading="lazy"
+            >
+
+            <div class="tempo">
+                1min 5s
+            </div>
+
+        </div>
+
+
+        <div class="imagem">
+
+            <img
+                src="thumbnails/CASA TÉRREA EM L MODERNA _ Planta de Casa 3D 8_40x16_40 com 2 Quartos_ Suíte e Varanda(480P)_4.jpg"
+                alt="CASA TÉRREA EM L MODERNA _ Planta de Casa 3D 8_40x16_40 com 2 Quartos_ Suíte e Varanda(480P) - 1min 15s"
+                loading="lazy"
+            >
+
+            <div class="tempo">
+                1min 15s
+            </div>
+
+        </div>
+
+
+    </div>
+
+</article>
+
+
+<article class="casa">
+
+    <div class="nome">
+
+        <span class="numero">
+            4
+        </span>
+
+        Linda Casa 3D com três Quartos e Cozinha Americana(720P_HD)
+
+    </div>
+
+
+    <div class="imagens">
+
+
+        <div class="imagem">
+
+            <img
+                src="thumbnails/Linda Casa 3D com três Quartos e Cozinha Americana(720P_HD)_1.jpg"
+                alt="Linda Casa 3D com três Quartos e Cozinha Americana(720P_HD) - 45s"
+                loading="lazy"
+            >
+
+            <div class="tempo">
+                45s
+            </div>
+
+        </div>
+
+
+        <div class="imagem">
+
+            <img
+                src="thumbnails/Linda Casa 3D com três Quartos e Cozinha Americana(720P_HD)_2.jpg"
+                alt="Linda Casa 3D com três Quartos e Cozinha Americana(720P_HD) - 55s"
+                loading="lazy"
+            >
+
+            <div class="tempo">
+                55s
+            </div>
+
+        </div>
+
+
+        <div class="imagem">
+
+            <img
+                src="thumbnails/Linda Casa 3D com três Quartos e Cozinha Americana(720P_HD)_3.jpg"
+                alt="Linda Casa 3D com três Quartos e Cozinha Americana(720P_HD) - 1min 5s"
+                loading="lazy"
+            >
+
+            <div class="tempo">
+                1min 5s
+            </div>
+
+        </div>
+
+
+        <div class="imagem">
+
+            <img
+                src="thumbnails/Linda Casa 3D com três Quartos e Cozinha Americana(720P_HD)_4.jpg"
+                alt="Linda Casa 3D com três Quartos e Cozinha Americana(720P_HD) - 1min 15s"
+                loading="lazy"
+            >
+
+            <div class="tempo">
+                1min 15s
+            </div>
+
+        </div>
+
+
+    </div>
+
+</article>
+
+
+<article class="casa">
+
+    <div class="nome">
+
+        <span class="numero">
+            5
+        </span>
+
+        Linda Planta de Casa  3D com dois Quartos e Cozinha Americana(720P_HD)
+
+    </div>
+
+
+    <div class="imagens">
+
+
+        <div class="imagem">
+
+            <img
+                src="thumbnails/Linda Planta de Casa  3D com dois Quartos e Cozinha Americana(720P_HD)_1.jpg"
+                alt="Linda Planta de Casa  3D com dois Quartos e Cozinha Americana(720P_HD) - 45s"
+                loading="lazy"
+            >
+
+            <div class="tempo">
+                45s
+            </div>
+
+        </div>
+
+
+        <div class="imagem">
+
+            <img
+                src="thumbnails/Linda Planta de Casa  3D com dois Quartos e Cozinha Americana(720P_HD)_2.jpg"
+                alt="Linda Planta de Casa  3D com dois Quartos e Cozinha Americana(720P_HD) - 55s"
+                loading="lazy"
+            >
+
+            <div class="tempo">
+                55s
+            </div>
+
+        </div>
+
+
+        <div class="imagem">
+
+            <img
+                src="thumbnails/Linda Planta de Casa  3D com dois Quartos e Cozinha Americana(720P_HD)_3.jpg"
+                alt="Linda Planta de Casa  3D com dois Quartos e Cozinha Americana(720P_HD) - 1min 5s"
+                loading="lazy"
+            >
+
+            <div class="tempo">
+                1min 5s
+            </div>
+
+        </div>
+
+
+        <div class="imagem">
+
+            <img
+                src="thumbnails/Linda Planta de Casa  3D com dois Quartos e Cozinha Americana(720P_HD)_4.jpg"
+                alt="Linda Planta de Casa  3D com dois Quartos e Cozinha Americana(720P_HD) - 1min 15s"
+                loading="lazy"
+            >
+
+            <div class="tempo">
+                1min 15s
+            </div>
+
+        </div>
+
+
+    </div>
+
+</article>
+
+
+<article class="casa">
+
+    <div class="nome">
+
+        <span class="numero">
+            6
+        </span>
+
+        Planta 3D Casa Duplex com Sala com Pé direito duplo e Cozinha americana(720P_HD)
+
+    </div>
+
+
+    <div class="imagens">
+
+
+        <div class="imagem">
+
+            <img
+                src="thumbnails/Planta 3D Casa Duplex com Sala com Pé direito duplo e Cozinha americana(720P_HD)_1.jpg"
+                alt="Planta 3D Casa Duplex com Sala com Pé direito duplo e Cozinha americana(720P_HD) - 45s"
+                loading="lazy"
+            >
+
+            <div class="tempo">
+                45s
+            </div>
+
+        </div>
+
+
+        <div class="imagem">
+
+            <img
+                src="thumbnails/Planta 3D Casa Duplex com Sala com Pé direito duplo e Cozinha americana(720P_HD)_2.jpg"
+                alt="Planta 3D Casa Duplex com Sala com Pé direito duplo e Cozinha americana(720P_HD) - 55s"
+                loading="lazy"
+            >
+
+            <div class="tempo">
+                55s
+            </div>
+
+        </div>
+
+
+        <div class="imagem">
+
+            <img
+                src="thumbnails/Planta 3D Casa Duplex com Sala com Pé direito duplo e Cozinha americana(720P_HD)_3.jpg"
+                alt="Planta 3D Casa Duplex com Sala com Pé direito duplo e Cozinha americana(720P_HD) - 1min 5s"
+                loading="lazy"
+            >
+
+            <div class="tempo">
+                1min 5s
+            </div>
+
+        </div>
+
+
+        <div class="imagem">
+
+            <img
+                src="thumbnails/Planta 3D Casa Duplex com Sala com Pé direito duplo e Cozinha americana(720P_HD)_4.jpg"
+                alt="Planta 3D Casa Duplex com Sala com Pé direito duplo e Cozinha americana(720P_HD) - 1min 15s"
+                loading="lazy"
+            >
+
+            <div class="tempo">
+                1min 15s
+            </div>
+
+        </div>
+
+
+    </div>
+
+</article>
+
+
+<article class="casa">
+
+    <div class="nome">
+
+        <span class="numero">
+            7
+        </span>
+
+        Planta 3D com cozinha americana(720P_HD)
+
+    </div>
+
+
+    <div class="imagens">
+
+
+        <div class="imagem">
+
+            <img
+                src="thumbnails/Planta 3D com cozinha americana(720P_HD)_1.jpg"
+                alt="Planta 3D com cozinha americana(720P_HD) - 45s"
+                loading="lazy"
+            >
+
+            <div class="tempo">
+                45s
+            </div>
+
+        </div>
+
+
+        <div class="imagem">
+
+            <img
+                src="thumbnails/Planta 3D com cozinha americana(720P_HD)_2.jpg"
+                alt="Planta 3D com cozinha americana(720P_HD) - 55s"
+                loading="lazy"
+            >
+
+            <div class="tempo">
+                55s
+            </div>
+
+        </div>
+
+
+        <div class="imagem">
+
+            <img
+                src="thumbnails/Planta 3D com cozinha americana(720P_HD)_3.jpg"
+                alt="Planta 3D com cozinha americana(720P_HD) - 1min 5s"
+                loading="lazy"
+            >
+
+            <div class="tempo">
+                1min 5s
+            </div>
+
+        </div>
+
+
+        <div class="imagem">
+
+            <img
+                src="thumbnails/Planta 3D com cozinha americana(720P_HD)_4.jpg"
+                alt="Planta 3D com cozinha americana(720P_HD) - 1min 15s"
+                loading="lazy"
+            >
+
+            <div class="tempo">
+                1min 15s
+            </div>
+
+        </div>
+
+
+    </div>
+
+</article>
+
+
+<article class="casa">
+
+    <div class="nome">
+
+        <span class="numero">
+            8
+        </span>
+
+        Planta 3D com dois quartos(720P_HD)
+
+    </div>
+
+
+    <div class="imagens">
+
+
+        <div class="imagem">
+
+            <img
+                src="thumbnails/Planta 3D com dois quartos(720P_HD)_1.jpg"
+                alt="Planta 3D com dois quartos(720P_HD) - 45s"
+                loading="lazy"
+            >
+
+            <div class="tempo">
+                45s
+            </div>
+
+        </div>
+
+
+        <div class="imagem">
+
+            <img
+                src="thumbnails/Planta 3D com dois quartos(720P_HD)_2.jpg"
+                alt="Planta 3D com dois quartos(720P_HD) - 55s"
+                loading="lazy"
+            >
+
+            <div class="tempo">
+                55s
+            </div>
+
+        </div>
+
+
+        <div class="imagem">
+
+            <img
+                src="thumbnails/Planta 3D com dois quartos(720P_HD)_3.jpg"
+                alt="Planta 3D com dois quartos(720P_HD) - 1min 5s"
+                loading="lazy"
+            >
+
+            <div class="tempo">
+                1min 5s
+            </div>
+
+        </div>
+
+
+        <div class="imagem">
+
+            <img
+                src="thumbnails/Planta 3D com dois quartos(720P_HD)_4.jpg"
+                alt="Planta 3D com dois quartos(720P_HD) - 1min 15s"
+                loading="lazy"
+            >
+
+            <div class="tempo">
+                1min 15s
+            </div>
+
+        </div>
+
+
+    </div>
+
+</article>
+
+
+<article class="casa">
+
+    <div class="nome">
+
+        <span class="numero">
+            9
+        </span>
+
+        Planta 3D com dois Quartos_ Cozinha Americana e Garagem(720P_HD)
+
+    </div>
+
+
+    <div class="imagens">
+
+
+        <div class="imagem">
+
+            <img
+                src="thumbnails/Planta 3D com dois Quartos_ Cozinha Americana e Garagem(720P_HD)_1.jpg"
+                alt="Planta 3D com dois Quartos_ Cozinha Americana e Garagem(720P_HD) - 45s"
+                loading="lazy"
+            >
+
+            <div class="tempo">
+                45s
+            </div>
+
+        </div>
+
+
+        <div class="imagem">
+
+            <img
+                src="thumbnails/Planta 3D com dois Quartos_ Cozinha Americana e Garagem(720P_HD)_2.jpg"
+                alt="Planta 3D com dois Quartos_ Cozinha Americana e Garagem(720P_HD) - 55s"
+                loading="lazy"
+            >
+
+            <div class="tempo">
+                55s
+            </div>
+
+        </div>
+
+
+        <div class="imagem">
+
+            <img
+                src="thumbnails/Planta 3D com dois Quartos_ Cozinha Americana e Garagem(720P_HD)_3.jpg"
+                alt="Planta 3D com dois Quartos_ Cozinha Americana e Garagem(720P_HD) - 1min 5s"
+                loading="lazy"
+            >
+
+            <div class="tempo">
+                1min 5s
+            </div>
+
+        </div>
+
+
+        <div class="imagem">
+
+            <img
+                src="thumbnails/Planta 3D com dois Quartos_ Cozinha Americana e Garagem(720P_HD)_4.jpg"
+                alt="Planta 3D com dois Quartos_ Cozinha Americana e Garagem(720P_HD) - 1min 15s"
+                loading="lazy"
+            >
+
+            <div class="tempo">
+                1min 15s
+            </div>
+
+        </div>
+
+
+    </div>
+
+</article>
+
+
+<article class="casa">
+
+    <div class="nome">
+
+        <span class="numero">
+            10
+        </span>
+
+        Planta 3D com dois Quartos_ dois Banheiros e Cozinha Americana(720P_HD)
+
+    </div>
+
+
+    <div class="imagens">
+
+
+        <div class="imagem">
+
+            <img
+                src="thumbnails/Planta 3D com dois Quartos_ dois Banheiros e Cozinha Americana(720P_HD)_1.jpg"
+                alt="Planta 3D com dois Quartos_ dois Banheiros e Cozinha Americana(720P_HD) - 45s"
+                loading="lazy"
+            >
+
+            <div class="tempo">
+                45s
+            </div>
+
+        </div>
+
+
+        <div class="imagem">
+
+            <img
+                src="thumbnails/Planta 3D com dois Quartos_ dois Banheiros e Cozinha Americana(720P_HD)_2.jpg"
+                alt="Planta 3D com dois Quartos_ dois Banheiros e Cozinha Americana(720P_HD) - 55s"
+                loading="lazy"
+            >
+
+            <div class="tempo">
+                55s
+            </div>
+
+        </div>
+
+
+        <div class="imagem">
+
+            <img
+                src="thumbnails/Planta 3D com dois Quartos_ dois Banheiros e Cozinha Americana(720P_HD)_3.jpg"
+                alt="Planta 3D com dois Quartos_ dois Banheiros e Cozinha Americana(720P_HD) - 1min 5s"
+                loading="lazy"
+            >
+
+            <div class="tempo">
+                1min 5s
+            </div>
+
+        </div>
+
+
+        <div class="imagem">
+
+            <img
+                src="thumbnails/Planta 3D com dois Quartos_ dois Banheiros e Cozinha Americana(720P_HD)_4.jpg"
+                alt="Planta 3D com dois Quartos_ dois Banheiros e Cozinha Americana(720P_HD) - 1min 15s"
+                loading="lazy"
+            >
+
+            <div class="tempo">
+                1min 15s
+            </div>
+
+        </div>
+
+
+    </div>
+
+</article>
+
+
+<article class="casa">
+
+    <div class="nome">
+
+        <span class="numero">
+            11
+        </span>
+
+        Planta 3D com dois quartos e  Cozinha americana  medindo 60_46 m2(720P_HD)
+
+    </div>
+
+
+    <div class="imagens">
+
+
+        <div class="imagem">
+
+            <img
+                src="thumbnails/Planta 3D com dois quartos e  Cozinha americana  medindo 60_46 m2(720P_HD)_1.jpg"
+                alt="Planta 3D com dois quartos e  Cozinha americana  medindo 60_46 m2(720P_HD) - 45s"
+                loading="lazy"
+            >
+
+            <div class="tempo">
+                45s
+            </div>
+
+        </div>
+
+
+        <div class="imagem">
+
+            <img
+                src="thumbnails/Planta 3D com dois quartos e  Cozinha americana  medindo 60_46 m2(720P_HD)_2.jpg"
+                alt="Planta 3D com dois quartos e  Cozinha americana  medindo 60_46 m2(720P_HD) - 55s"
+                loading="lazy"
+            >
+
+            <div class="tempo">
+                55s
+            </div>
+
+        </div>
+
+
+        <div class="imagem">
+
+            <img
+                src="thumbnails/Planta 3D com dois quartos e  Cozinha americana  medindo 60_46 m2(720P_HD)_3.jpg"
+                alt="Planta 3D com dois quartos e  Cozinha americana  medindo 60_46 m2(720P_HD) - 1min 5s"
+                loading="lazy"
+            >
+
+            <div class="tempo">
+                1min 5s
+            </div>
+
+        </div>
+
+
+        <div class="imagem">
+
+            <img
+                src="thumbnails/Planta 3D com dois quartos e  Cozinha americana  medindo 60_46 m2(720P_HD)_4.jpg"
+                alt="Planta 3D com dois quartos e  Cozinha americana  medindo 60_46 m2(720P_HD) - 1min 15s"
+                loading="lazy"
+            >
+
+            <div class="tempo">
+                1min 15s
+            </div>
+
+        </div>
+
+
+    </div>
+
+</article>
+
+
+</main>
+
+</body>
+
+</html>
+
