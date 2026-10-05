@@ -1,10 +1,39 @@
 #!/bin/bash
 
-BASE="/media/alex/EE509C6A509C3B73/Casas3D"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+BASE="$SCRIPT_DIR"
 
 ORIGINAIS="$BASE/Originais"
 THUMBNAILS="$BASE/thumbnails"
-HTML="$BASE/catalogo.html"
+HTML="$BASE/index.html"
+CATALOGO_HTML="$BASE/catalogo.html"
+
+normalizar_nome_casa() {
+
+    local nome="$1"
+
+    nome="${nome%.*}"
+    nome="${nome//_/ }"
+
+    while [[ "$nome" == *"  "* ]]; do
+        nome="${nome//  / }"
+    done
+
+    nome="${nome//\(480P\)/}"
+    nome="${nome//\(720P_HD\)/}"
+    nome="${nome//\(720P_60FPS\)/}"
+    nome="${nome//\(720P\)/}"
+    nome="${nome//\(480P_HD\)/}"
+    nome="${nome//\(360P\)/}"
+    nome="${nome//\(1080P\)/}"
+    nome="${nome//\(480P_HD\)/}"
+    nome="${nome//  / }"
+
+    nome="${nome#${nome%%[![:space:]]*}}"
+    nome="${nome%${nome##*[![:space:]]}}"
+
+    echo "$nome"
+}
 
 mkdir -p "$THUMBNAILS"
 
@@ -609,6 +638,111 @@ body {
     }
 }
 
+/* =========================================================
+   CONTROLE DE SELEÇÃO E WHATSAPP
+========================================================= */
+
+.casa-topo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding: 0 15px 12px;
+}
+
+.preco-resumo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    background: #fef3c7;
+    color: #92400e;
+    border: 1px solid #facc15;
+    font-size: 13px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.selecao {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    border-radius: 999px;
+    background: #e0edff;
+    color: #102a63;
+    border: 1px solid #bfd5ff;
+    padding: 8px 12px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    user-select: none;
+}
+
+.selecao input {
+    margin: 0 8px 0 0;
+    accent-color: #2563eb;
+    transform: scale(1.15);
+}
+
+.barra-whatsapp {
+    position: sticky;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: min(1200px, calc(100% - 24px));
+    margin: 0 auto 18px;
+    padding: 12px 14px;
+    background: rgba(17, 24, 39, 0.96);
+    color: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.25);
+    z-index: 30;
+}
+
+.barra-whatsapp strong {
+    font-size: 14px;
+    line-height: 1.2;
+}
+
+#enviarWhatsApp {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    min-width: 180px;
+}
+
+#enviarWhatsApp:disabled {
+    opacity: 0.6;
+    cursor: default;
+}
+
+@media (max-width: 600px) {
+    .casa-topo {
+        padding: 0 10px 10px;
+    }
+
+    .barra-whatsapp {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+    }
+
+    #enviarWhatsApp {
+        width: 100%;
+    }
+}
+
 </style>
 
 </head>
@@ -864,6 +998,8 @@ do
     F4=$(formatar_tempo "$T4")
 
 
+    NOME_EXIBICAO=$(normalizar_nome_casa "$BASE_NOME")
+
     cat >> "$HTML" <<EOF
 
 <article class="casa">
@@ -874,7 +1010,21 @@ do
             $NUMERO
         </span>
 
-        $BASE_NOME
+        $NOME_EXIBICAO
+
+    </div>
+
+    <div class="casa-topo">
+
+        <label class="selecao">
+            <input
+                type="checkbox"
+                class="casa-checkbox"
+                value="$NUMERO"
+                data-nome="$NOME_EXIBICAO"
+            >
+            <span>Selecionar</span>
+        </label>
 
     </div>
 
@@ -886,7 +1036,7 @@ do
 
             <img
                 src="thumbnails/${BASE_NOME}_1.jpg"
-                alt="${BASE_NOME} - $F1"
+                alt="${NOME_EXIBICAO} - $F1"
                 loading="lazy"
             >
 
@@ -901,7 +1051,7 @@ do
 
             <img
                 src="thumbnails/${BASE_NOME}_2.jpg"
-                alt="${BASE_NOME} - $F2"
+                alt="${NOME_EXIBICAO} - $F2"
                 loading="lazy"
             >
 
@@ -916,7 +1066,7 @@ do
 
             <img
                 src="thumbnails/${BASE_NOME}_3.jpg"
-                alt="${BASE_NOME} - $F3"
+                alt="${NOME_EXIBICAO} - $F3"
                 loading="lazy"
             >
 
@@ -931,7 +1081,7 @@ do
 
             <img
                 src="thumbnails/${BASE_NOME}_4.jpg"
-                alt="${BASE_NOME} - $F4"
+                alt="${NOME_EXIBICAO} - $F4"
                 loading="lazy"
             >
 
@@ -959,12 +1109,107 @@ cat >> "$HTML" <<EOF
 
 </main>
 
+<div class="barra-whatsapp">
+
+    <div>
+        <strong id="contador">
+            0 casas selecionadas
+        </strong>
+        <div id="precoResumo" class="preco-resumo">
+            Mínimo: 3 casas — 500MT
+        </div>
+    </div>
+
+    <button id="enviarWhatsApp" type="button">
+        Enviar pelo WhatsApp
+    </button>
+
+</div>
+
+<script>
+    const numeroWhatsApp = "258842922516";
+    const checkboxes = document.querySelectorAll(".casa-checkbox");
+    const contador = document.getElementById("contador");
+    const precoResumo = document.getElementById("precoResumo");
+    const botao = document.getElementById("enviarWhatsApp");
+
+    function calcularPreco(quantidade) {
+        if (quantidade === 0) {
+            return { total: 0, texto: "Mínimo: 3 casas — 500MT" };
+        }
+
+        if (quantidade === 3) {
+            return { total: 500, texto: "Preço: 500MT para 3 casas" };
+        }
+
+        if (quantidade <= 10) {
+            return { total: 1000, texto: "Preço: 1000MT para 4 a 10 casas" };
+        }
+
+        if (quantidade <= 20) {
+            return { total: 1700, texto: "Preço: 1700MT para 11 a 20 casas" };
+        }
+
+        return { total: 3000, texto: "Preço: 3000MT para 21+ casas" };
+    }
+
+    function atualizarContador() {
+        const selecionadas = document.querySelectorAll(".casa-checkbox:checked");
+        const quantidade = selecionadas.length;
+
+        const preco = calcularPreco(quantidade);
+
+        contador.textContent =
+            quantidade === 1
+                ? "1 casa selecionada"
+                : quantidade + " casas selecionadas";
+
+        precoResumo.textContent = preco.texto;
+        botao.disabled = quantidade < 3;
+    }
+
+    checkboxes.forEach(function (checkbox) {
+        checkbox.addEventListener("change", atualizarContador);
+    });
+
+    botao.addEventListener("click", function () {
+        const selecionadas = document.querySelectorAll(".casa-checkbox:checked");
+
+        if (selecionadas.length < 3) {
+            alert("Selecione pelo menos 3 casas para continuar.");
+            return;
+        }
+
+        const quantidade = selecionadas.length;
+        const preco = calcularPreco(quantidade);
+        let mensagem = "Olá! Tenho interesse nas seguintes casas:\n\n";
+
+        selecionadas.forEach(function (checkbox) {
+            mensagem += checkbox.value + ". " + checkbox.dataset.nome + "\n";
+        });
+
+        mensagem += "\nPreço: " + preco.total + "MT para " + quantidade + " casa" + (quantidade === 1 ? "" : "s") + ".";
+        mensagem += "\nGostaria de receber mais informações sobre estas casas.";
+
+        const link =
+            "https://wa.me/" +
+            numeroWhatsApp +
+            "?text=" +
+            encodeURIComponent(mensagem);
+
+        window.location.href = link;
+    });
+
+    atualizarContador();
+</script>
+
 </body>
 
 </html>
 
 EOF
 
+cp "$HTML" "$CATALOGO_HTML"
 
 # ============================================================
 # FINAL
@@ -979,6 +1224,9 @@ echo "Vídeos processados: $NUMERO"
 echo ""
 echo "HTML:"
 echo "$HTML"
+echo ""
+echo "HTML duplicado:"
+echo "$CATALOGO_HTML"
 echo ""
 echo "Thumbnails:"
 echo "$THUMBNAILS"
