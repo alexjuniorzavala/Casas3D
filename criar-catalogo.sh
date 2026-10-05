@@ -651,21 +651,6 @@ body {
     padding: 0 15px 12px;
 }
 
-.preco-resumo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 40px;
-    padding: 8px 12px;
-    border-radius: 10px;
-    background: #fef3c7;
-    color: #92400e;
-    border: 1px solid #facc15;
-    font-size: 13px;
-    font-weight: 700;
-    text-align: center;
-}
-
 .selecao {
     display: inline-flex;
     align-items: center;
@@ -686,6 +671,37 @@ body {
     margin: 0 8px 0 0;
     accent-color: #2563eb;
     transform: scale(1.15);
+}
+
+.toggle-geral {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 0 0 18px;
+}
+
+.checkbox-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border-radius: 999px;
+    border: 1px solid #cbd5e1;
+    background: white;
+    color: #0f172a;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(15, 23, 42, 0.06);
+}
+
+.checkbox-btn input {
+    accent-color: #2563eb;
+    width: 16px;
+    height: 16px;
 }
 
 .barra-whatsapp {
@@ -727,9 +743,188 @@ body {
     cursor: default;
 }
 
+.pricing-floating-btn {
+    position: fixed;
+    right: 18px;
+    bottom: 110px;
+    z-index: 40;
+    background: linear-gradient(135deg, #7c3aed, #2563eb);
+    color: white;
+    border: none;
+    border-radius: 999px;
+    padding: 14px 18px;
+    box-shadow: 0 15px 35px rgba(79, 70, 229, 0.35);
+    font-size: 14px;
+    font-weight: 800;
+    cursor: pointer;
+    animation: pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 15px 35px rgba(79, 70, 229, 0.35);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 18px 38px rgba(37, 99, 235, 0.5);
+    }
+}
+
+.pricing-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.62);
+    display: grid;
+    place-items: center;
+    z-index: 50;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+.pricing-modal.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.pricing-panel {
+    position: relative;
+    width: min(980px, calc(100% - 24px));
+    max-height: 85vh;
+    overflow-y: auto;
+    background: linear-gradient(180deg, #f8fafc 0%, #eef2ff 100%);
+    border-radius: 22px;
+    padding: 28px 20px 16px;
+    box-shadow: 0 25px 60px rgba(15, 23, 42, 0.28);
+}
+
+.pricing-header {
+    text-align: center;
+    margin-bottom: 18px;
+}
+
+.pricing-header h3 {
+    margin: 0 0 8px;
+    font-size: 28px;
+    color: #0f172a;
+}
+
+.pricing-header p {
+    margin: 0;
+    color: #475569;
+    font-size: 14px;
+}
+
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+}
+
+.pricing-card {
+    background: white;
+    border: 1px solid #dfe7f5;
+    border-radius: 18px;
+    padding: 20px 16px;
+    box-shadow: 0 12px 22px rgba(15, 23, 42, 0.04);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.pricing-card.popular {
+    background: linear-gradient(180deg, #eef2ff, #ffffff);
+    border: 2px solid #8b5cf6;
+    transform: translateY(-4px);
+}
+
+.pricing-label {
+    display: inline-block;
+    align-self: flex-start;
+    background: #dbeafe;
+    color: #1d4ed8;
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.pricing-card.popular .pricing-label {
+    background: #ede9fe;
+    color: #6d28d9;
+}
+
+.pricing-card h4 {
+    margin: 0;
+    font-size: 20px;
+    color: #0f172a;
+}
+
+.pricing-card .preco {
+    font-size: 30px;
+    font-weight: 900;
+    color: #111827;
+}
+
+.pricing-card .preco small {
+    font-size: 14px;
+    font-weight: 700;
+    color: #475569;
+}
+
+.pricing-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 8px;
+    color: #334155;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.pricing-card li::before {
+    content: "✓";
+    color: #16a34a;
+    font-weight: 800;
+    margin-right: 8px;
+}
+
+.pricing-card .badge {
+    display: inline-flex;
+    align-self: flex-start;
+    background: #fef3c7;
+    color: #92400e;
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.pricing-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 50%;
+    background: #e2e8f0;
+    color: #0f172a;
+    font-size: 24px;
+    cursor: pointer;
+}
+
 @media (max-width: 600px) {
     .casa-topo {
         padding: 0 10px 10px;
+    }
+
+    .toggle-geral {
+        justify-content: center;
     }
 
     .barra-whatsapp {
@@ -740,6 +935,12 @@ body {
 
     #enviarWhatsApp {
         width: 100%;
+    }
+
+    .pricing-floating-btn {
+        right: 14px;
+        bottom: 100px;
+        padding: 12px 16px;
     }
 }
 
@@ -1109,15 +1310,26 @@ cat >> "$HTML" <<EOF
 
 </main>
 
+<div class="toggle-geral">
+
+    <label class="checkbox-btn">
+        <input type="checkbox" id="selecionarTodos">
+        <span>Selecionar todos</span>
+    </label>
+
+    <label class="checkbox-btn">
+        <input type="checkbox" id="desmarcarTodos">
+        <span>Desmarcar todos</span>
+    </label>
+
+</div>
+
 <div class="barra-whatsapp">
 
     <div>
         <strong id="contador">
             0 casas selecionadas
         </strong>
-        <div id="precoResumo" class="preco-resumo">
-            Mínimo: 3 casas — 500MT
-        </div>
     </div>
 
     <button id="enviarWhatsApp" type="button">
@@ -1126,69 +1338,151 @@ cat >> "$HTML" <<EOF
 
 </div>
 
+<button class="pricing-floating-btn" id="pricingToggle" type="button" aria-expanded="false">
+    💰 Pacotes
+</button>
+
+<div class="pricing-modal" id="pricingModal" aria-hidden="true">
+    <div class="pricing-panel" role="dialog" aria-modal="true" aria-labelledby="pricingTitle">
+        <button class="pricing-close" id="pricingClose" type="button" aria-label="Fechar pacotes">×</button>
+
+        <div class="pricing-header">
+            <h3 id="pricingTitle">Planos de acesso</h3>
+            <p>Escolha o pacote ideal para explorar os modelos.</p>
+        </div>
+
+        <div class="pricing-grid">
+
+            <article class="pricing-card">
+                <span class="pricing-label">Escolha</span>
+                <h4>Pacote ESCOLHA</h4>
+                <div class="preco">500 <small>MT</small></div>
+                <ul>
+                    <li>3 modelos</li>
+                    <li>Vídeos 3D</li>
+                    <li>Plantas com dimensões</li>
+                    <li>Visualização exterior e interior</li>
+                </ul>
+            </article>
+
+            <article class="pricing-card popular">
+                <span class="pricing-label">Mais popular</span>
+                <h4>Pacote EXPLORE</h4>
+                <div class="preco">1.000 <small>MT</small></div>
+                <div class="badge">⭐ MAIS POPULAR</div>
+                <ul>
+                    <li>10 modelos</li>
+                    <li>Vídeos 3D completos</li>
+                    <li>Plantas com dimensões</li>
+                    <li>Mais estilos para comparar</li>
+                </ul>
+            </article>
+
+            <article class="pricing-card">
+                <span class="pricing-label">Compare</span>
+                <h4>Pacote COMPARE</h4>
+                <div class="preco">1.700 <small>MT</small></div>
+                <ul>
+                    <li>20 modelos</li>
+                    <li>Vídeos 3D</li>
+                    <li>Grande variedade de estilos</li>
+                    <li>Ideal para comparar opções</li>
+                </ul>
+            </article>
+
+            <article class="pricing-card">
+                <span class="pricing-label">Completo</span>
+                <h4>Catálogo completo</h4>
+                <div class="preco">3.000 <small>MT</small></div>
+                <div class="badge">💰 MELHOR CUSTO</div>
+                <ul>
+                    <li>+50 modelos</li>
+                    <li>Vídeos 3D</li>
+                    <li>Plantas com dimensões</li>
+                    <li>Exploração ampla antes de escolher</li>
+                </ul>
+            </article>
+
+        </div>
+    </div>
+</div>
+
 <script>
     const numeroWhatsApp = "258842922516";
     const checkboxes = document.querySelectorAll(".casa-checkbox");
     const contador = document.getElementById("contador");
-    const precoResumo = document.getElementById("precoResumo");
     const botao = document.getElementById("enviarWhatsApp");
-
-    function calcularPreco(quantidade) {
-        if (quantidade === 0) {
-            return { total: 0, texto: "Mínimo: 3 casas — 500MT" };
-        }
-
-        if (quantidade === 3) {
-            return { total: 500, texto: "Preço: 500MT para 3 casas" };
-        }
-
-        if (quantidade <= 10) {
-            return { total: 1000, texto: "Preço: 1000MT para 4 a 10 casas" };
-        }
-
-        if (quantidade <= 20) {
-            return { total: 1700, texto: "Preço: 1700MT para 11 a 20 casas" };
-        }
-
-        return { total: 3000, texto: "Preço: 3000MT para 21+ casas" };
-    }
+    const selecionarTodos = document.getElementById("selecionarTodos");
+    const desmarcarTodos = document.getElementById("desmarcarTodos");
+    const pricingToggle = document.getElementById("pricingToggle");
+    const pricingModal = document.getElementById("pricingModal");
+    const pricingClose = document.getElementById("pricingClose");
 
     function atualizarContador() {
         const selecionadas = document.querySelectorAll(".casa-checkbox:checked");
         const quantidade = selecionadas.length;
-
-        const preco = calcularPreco(quantidade);
 
         contador.textContent =
             quantidade === 1
                 ? "1 casa selecionada"
                 : quantidade + " casas selecionadas";
 
-        precoResumo.textContent = preco.texto;
-        botao.disabled = quantidade < 3;
+        botao.disabled = quantidade === 0;
+
+        if (checkboxes.length > 0) {
+            selecionarTodos.checked = quantidade === checkboxes.length;
+            desmarcarTodos.checked = quantidade === 0;
+        }
+    }
+
+    function abrirPricing() {
+        pricingModal.classList.add("visible");
+        pricingModal.setAttribute("aria-hidden", "false");
+        pricingToggle.setAttribute("aria-expanded", "true");
+    }
+
+    function fecharPricing() {
+        pricingModal.classList.remove("visible");
+        pricingModal.setAttribute("aria-hidden", "true");
+        pricingToggle.setAttribute("aria-expanded", "false");
     }
 
     checkboxes.forEach(function (checkbox) {
         checkbox.addEventListener("change", atualizarContador);
     });
 
+    selecionarTodos.addEventListener("change", function () {
+        if (this.checked) {
+            checkboxes.forEach(function (checkbox) {
+                checkbox.checked = true;
+            });
+        }
+        atualizarContador();
+    });
+
+    desmarcarTodos.addEventListener("change", function () {
+        if (this.checked) {
+            checkboxes.forEach(function (checkbox) {
+                checkbox.checked = false;
+            });
+        }
+        atualizarContador();
+    });
+
     botao.addEventListener("click", function () {
         const selecionadas = document.querySelectorAll(".casa-checkbox:checked");
 
-        if (selecionadas.length < 3) {
-            alert("Selecione pelo menos 3 casas para continuar.");
+        if (selecionadas.length === 0) {
+            alert("Selecione pelo menos uma casa.");
             return;
         }
 
-        const quantidade = selecionadas.length;
-        const preco = calcularPreco(quantidade);
         let mensagem = "Olá! Tenho interesse nas seguintes casas:\n\n";
 
         selecionadas.forEach(function (checkbox) {
             mensagem += checkbox.value + ". " + checkbox.dataset.nome + "\n";
         });
 
-        mensagem += "\nPreço: " + preco.total + "MT para " + quantidade + " casa" + (quantidade === 1 ? "" : "s") + ".";
         mensagem += "\nGostaria de receber mais informações sobre estas casas.";
 
         const link =
@@ -1198,6 +1492,29 @@ cat >> "$HTML" <<EOF
             encodeURIComponent(mensagem);
 
         window.location.href = link;
+    });
+
+    pricingToggle.addEventListener("click", function () {
+        if (pricingModal.classList.contains("visible")) {
+            fecharPricing();
+            return;
+        }
+
+        abrirPricing();
+    });
+
+    pricingClose.addEventListener("click", fecharPricing);
+
+    pricingModal.addEventListener("click", function (event) {
+        if (event.target === pricingModal) {
+            fecharPricing();
+        }
+    });
+
+    document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && pricingModal.classList.contains("visible")) {
+            fecharPricing();
+        }
     });
 
     atualizarContador();
