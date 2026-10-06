@@ -1,5 +1,6 @@
 Originais/
 *.mp4
+!video.mp4
 *.MP4
 *.mov
 *.MOV
