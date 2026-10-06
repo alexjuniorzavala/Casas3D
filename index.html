@@ -88,6 +88,22 @@ body {
         40px;
 }
 
+.video-apresentacao {
+    width: min(1200px, calc(100% - 24px));
+    margin: 20px auto 0;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #0f172a;
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+}
+
+.video-apresentacao video {
+    display: block;
+    width: 100%;
+    height: auto;
+    background: #0f172a;
+}
+
 
 /* =========================================================
    CARD DA CASA
@@ -707,6 +723,12 @@ body {
 
 </header>
 
+<div class="video-apresentacao">
+    <video autoplay muted controls playsinline loop>
+        <source src="video.mp4" type="video/mp4">
+        Seu navegador não suporta vídeos em HTML5.
+    </video>
+</div>
 
 <main class="catalogo">
 
