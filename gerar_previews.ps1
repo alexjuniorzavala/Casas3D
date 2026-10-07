@@ -1,218 +1,455 @@
-```powershell
-$Origem = "C:\Casas3D\Originais"
-$Destino = "C:\Casas3D\Previews"
+#!/bin/bash
 
-$FFmpeg = "C:\ffmpeg\bin\ffmpeg.exe"
-$FFprobe = "C:\ffmpeg\bin\ffprobe.exe"
+# ============================================================
+# CASAS3D — CRIAR TRECHOS RÁPIDOS
+# ============================================================
 
-# Criar pasta de previews se não existir
-New-Item -ItemType Directory -Force -Path $Destino | Out-Null
+BASE="/media/alex/EE509C6A509C3B73/Casas3D"
 
-$Videos = Get-ChildItem $Origem -File |
-    Where-Object {
-        $_.Extension -match '\.(mp4|mov|mkv|avi|webm)$'
-    }
+ORIGEM="$BASE/Originais"
+DESTINO="$BASE/Trechos"
 
-$total = $Videos.Count
-$contador = 0
+mkdir -p "$DESTINO"
 
-foreach ($Video in $Videos) {
+# ============================================================
+# CONFIGURAÇÕES
+# ============================================================
 
-    $contador++
+CLIP=12
 
-    $Saida = Join-Path $Destino "$($Video.BaseName)_preview.mp4"
+# 5 posições do vídeo
+POSICOES=(0.05 0.25 0.45 0.65 0.85)
 
-    Write-Host ""
-    Write-Host "[$contador/$total] $($Video.Name)" -ForegroundColor Cyan
+# Resolução para pré-visualização
+LARGURA=854
+ALTURA=480
 
-    # ============================================================
-    # VERIFICAR SE O PREVIEW JÁ EXISTE
-    # ============================================================
 
-    if (Test-Path $Saida) {
+# ============================================================
+# VERIFICAR FFMPEG
+# ============================================================
 
-        Write-Host "Preview já existe. Ignorado." -ForegroundColor DarkYellow
+if ! command -v ffmpeg >/dev/null 2>&1; then
+
+    echo "FFmpeg não está instalado."
+
+    echo ""
+    echo "Instale com:"
+    echo "sudo apt install ffmpeg"
+
+    exit 1
+fi
+
+
+if ! command -v ffprobe >/dev/null 2>&1; then
+
+    echo "FFprobe não está instalado."
+
+    exit 1
+fi
+
+
+# ============================================================
+# ENTRAR NA PASTA
+# ============================================================
+
+cd "$ORIGEM" || exit 1
+
+
+# ============================================================
+# DETECTAR VÍDEOS
+# ============================================================
+
+VIDEOS=()
+
+for VIDEO in \
+    *.mp4 *.MP4 \
+    *.mov *.MOV \
+    *.mkv *.MKV \
+    *.avi *.AVI \
+    *.webm *.WEBM
+do
+
+    [ -f "$VIDEO" ] || continue
+
+    VIDEOS+=("$VIDEO")
+
+done
+
+
+TOTAL=${#VIDEOS[@]}
+
+
+if [ "$TOTAL" -eq 0 ]; then
+
+    echo "Nenhum vídeo encontrado."
+
+    exit 1
+
+fi
+
+
+# ============================================================
+# VERIFICAR SE HÁ INTEL QSV
+# ============================================================
+
+if ffmpeg -hide_banner -encoders 2>/dev/null | grep -q "h264_qsv"; then
+
+    ENCODER="h264_qsv"
+
+    echo ""
+    echo "Intel Quick Sync detectado."
+    echo "Usando aceleração de hardware."
+
+else
+
+    ENCODER="libx264"
+
+    echo ""
+    echo "Intel Quick Sync não disponível."
+    echo "Usando libx264 ultrafast."
+
+fi
+
+
+echo ""
+echo "============================================"
+echo "CASAS3D — CRIAR TRECHOS"
+echo "============================================"
+echo ""
+echo "Vídeos encontrados: $TOTAL"
+echo "Resolução: ${LARGURA}x${ALTURA}"
+echo "Duração de cada trecho: ${CLIP}s"
+echo "Encoder: $ENCODER"
+echo ""
+
+
+# ============================================================
+# PROCESSAR
+# ============================================================
+
+CONTADOR=0
+
+
+for VIDEO in "${VIDEOS[@]}"
+do
+
+    CONTADOR=$((CONTADOR + 1))
+
+    BASE_NOME="${VIDEO%.*}"
+
+    SAIDA="$DESTINO/${BASE_NOME}_trechos.mp4"
+
+
+    echo ""
+    echo "[$CONTADOR/$TOTAL]"
+    echo "$VIDEO"
+
+
+    # ========================================================
+    # SE JÁ EXISTE
+    # ========================================================
+
+    if [ -f "$SAIDA" ]; then
+
+        echo "→ Já existe. Ignorado."
 
         continue
-    }
 
-    # ============================================================
-    # DESCOBRIR DURAÇÃO DO VÍDEO
-    # ============================================================
+    fi
 
-    $DuracaoTexto = & $FFprobe `
-        -v error `
-        -show_entries format=duration `
-        -of default=noprint_wrappers=1:nokey=1 `
-        $Video.FullName
 
-    if (-not $DuracaoTexto) {
+    # ========================================================
+    # DURAÇÃO
+    # ========================================================
 
-        Write-Host "Não foi possível descobrir a duração. Ignorado." -ForegroundColor Red
-
-        continue
-    }
-
-    $Duracao = [double]::Parse(
-        $DuracaoTexto,
-        [Globalization.CultureInfo]::InvariantCulture
+    DURACAO=$(ffprobe \
+        -v error \
+        -show_entries format=duration \
+        -of default=noprint_wrappers=1:nokey=1 \
+        "$VIDEO"
     )
 
-    # ============================================================
-    # VÍDEOS MUITO CURTOS
-    # ============================================================
 
-    if ($Duracao -lt 6) {
+    if [ -z "$DURACAO" ]; then
 
-        Write-Host "Vídeo com menos de 6 segundos. Ignorado." -ForegroundColor Red
+        echo "→ Não foi possível obter duração."
 
         continue
-    }
 
-    # ============================================================
-    # CONFIGURAÇÃO DO PREVIEW
-    # ============================================================
+    fi
 
-    $ClipDuracao = 12
 
-    # Posições relativas dentro do vídeo
+    # ========================================================
+    # MÁXIMO PARA INÍCIO DOS CLIPES
+    # ========================================================
+
+    MAX=$(awk \
+        -v d="$DURACAO" \
+        -v c="$CLIP" \
+        'BEGIN {
+            x=d-c;
+            if (x<0) x=0;
+            print x
+        }'
+    )
+
+
+    # ========================================================
+    # CALCULAR OS 5 INÍCIOS
+    # ========================================================
+
+    TEMPOS=()
+
+
+    for POS in "${POSICOES[@]}"
+    do
+
+        T=$(awk \
+            -v d="$DURACAO" \
+            -v p="$POS" \
+            -v max="$MAX" \
+            'BEGIN {
+                x=d*p;
+
+                if (x>max)
+                    x=max;
+
+                if (x<0)
+                    x=0;
+
+                printf "%.2f",x
+            }'
+        )
+
+        TEMPOS+=("$T")
+
+    done
+
+
+    echo "→ Duração: ${DURACAO}s"
+    echo "→ Cortes: ${TEMPOS[*]}"
+
+
+    # ========================================================
+    # ARGUMENTOS
+    # ========================================================
+
+    ARGS=()
+
+
+    # --------------------------------------------------------
+    # 5 entradas
     #
-    # 5%   -> início
-    # 25%  -> primeira parte
-    # 45%  -> centro
-    # 65%  -> segunda parte
-    # 85%  -> final
-    #
-    # Resultado:
-    # 5 segmentos x 6 segundos = aproximadamente 30 segundos
+    # -ss ANTES de -i = seeking rápido
+    # --------------------------------------------------------
 
-    $Posicoes = @(0.05, 0.25, 0.45, 0.65, 0.85)
+    for T in "${TEMPOS[@]}"
+    do
 
-    $MaxInicio = $Duracao - $ClipDuracao
-
-    $Argumentos = [System.Collections.Generic.List[string]]::new()
-
-    $Filtros = [System.Collections.Generic.List[string]]::new()
-
-    # ============================================================
-    # CRIAR OS 5 SEGMENTOS
-    # ============================================================
-
-    for ($i = 0; $i -lt 5; $i++) {
-
-        $Inicio = [math]::Min(
-            $Duracao * $Posicoes[$i],
-            $MaxInicio
+        ARGS+=(
+            "-ss" "$T"
+            "-t" "$CLIP"
+            "-i" "$VIDEO"
         )
 
-        $Inicio = [math]::Max(0, $Inicio)
+    done
 
-        $InicioTexto = $Inicio.ToString(
-            "0.###",
-            [Globalization.CultureInfo]::InvariantCulture
+
+    # ========================================================
+    # FILTROS
+    # ========================================================
+
+    FILTERS=()
+
+
+    for I in 0 1 2 3 4
+    do
+
+        FILTERS+=(
+            "[$I:v]"\
+"scale=${LARGURA}:${ALTURA}:force_original_aspect_ratio=decrease,"\
+"pad=${LARGURA}:${ALTURA}:(ow-iw)/2:(oh-ih)/2,"\
+"fps=24,"\
+"format=yuv420p"\
+"[v$I]"
         )
 
-        $Argumentos.Add("-ss")
-        $Argumentos.Add($InicioTexto)
+    done
 
-        $Argumentos.Add("-t")
-        $Argumentos.Add("$ClipDuracao")
 
-        $Argumentos.Add("-i")
-        $Argumentos.Add($Video.FullName)
+    # ========================================================
+    # CONCATENAR
+    # ========================================================
 
-        # Normalizar cada segmento
-        $Filtros.Add(
-            "[$i`:v]" +
-            "scale=1280:720:force_original_aspect_ratio=decrease," +
-            "pad=1280:720:(ow-iw)/2:(oh-ih)/2," +
-            "setsar=1," +
-            "fps=30," +
-            "format=yuv420p" +
-            "[v$i]"
-        )
-    }
+    FILTER_COMPLEX=""
 
-    # ============================================================
-    # JUNTAR OS SEGMENTOS
-    # ============================================================
+    for I in 0 1 2 3 4
+    do
 
-    $FiltroFinal = (
-        ($Filtros -join ";") +
-        ";" +
-        "[v0][v1][v2][v3][v4]" +
-        "concat=n=5:v=1:a=0," +
+        if [ "$I" -gt 0 ]; then
+            FILTER_COMPLEX+=";"
+        fi
 
-        # ========================================================
-        # MARCA DE ÁGUA
-        # ========================================================
+        FILTER_COMPLEX+="${FILTERS[$I]}"
 
-        "drawtext=" +
-        "fontfile='C\:/Windows/Fonts/arial.ttf':" +
-        "text='Pre-visualição':" +
-        "fontcolor=white:" +
-        "fontsize=42:" +
-        "box=1:" +
-        "boxcolor=black@0.6:" +
-        "boxborderw=12:" +
-        "x=30:" +
-        "y=30" +
+    done
 
+
+    FILTER_COMPLEX+=";"
+
+    FILTER_COMPLEX+="[v0][v1][v2][v3][v4]"
+    FILTER_COMPLEX+="concat=n=5:v=1:a=0"
+
+
+    # ========================================================
+    # MARCA D'ÁGUA
+    # ========================================================
+
+    FILTER_COMPLEX+=",drawtext="
+    FILTER_COMPLEX+="text='Trechos':"
+    FILTER_COMPLEX+="fontcolor=white:"
+    FILTER_COMPLEX+="fontsize=36:"
+    FILTER_COMPLEX+="box=1:"
+    FILTER_COMPLEX+="boxcolor=black@0.6:"
+    FILTER_COMPLEX+="boxborderw=8:"
+    FILTER_COMPLEX+="x=20:"
+    FILTER_COMPLEX+="y=20"
+
+
+    # ========================================================
+    # FILTRO FINAL
+    # ========================================================
+
+    FILTER_COMPLEX+="[v]"
+
+
+    ARGS+=(
+        "-filter_complex"
+        "$FILTER_COMPLEX"
+
+        "-map"
         "[v]"
+
+        "-an"
     )
 
-    $Argumentos.Add("-filter_complex")
-    $Argumentos.Add($FiltroFinal)
 
-    # ============================================================
-    # CONFIGURAÇÃO DA SAÍDA
-    # ============================================================
+    # ========================================================
+    # ENCODER
+    # ========================================================
 
-    $Argumentos.Add("-map")
-    $Argumentos.Add("[v]")
+    if [ "$ENCODER" = "h264_qsv" ]; then
 
-    $Argumentos.Add("-an")
+        # Intel Quick Sync
 
-    $Argumentos.Add("-c:v")
-    $Argumentos.Add("libx264")
+        ARGS+=(
+            "-c:v"
+            "h264_qsv"
 
-    $Argumentos.Add("-preset")
-    $Argumentos.Add("veryfast")
+            "-global_quality"
+            "28"
 
-    $Argumentos.Add("-crf")
-    $Argumentos.Add("27")
+            "-look_ahead"
+            "0"
 
-    $Argumentos.Add("-movflags")
-    $Argumentos.Add("+faststart")
+            "-preset"
+            "veryfast"
+        )
 
-    $Argumentos.Add("-y")
+    else
 
-    $Argumentos.Add($Saida)
+        # CPU
+        #
+        # ultrafast = muito mais rápido
+        # que veryfast
+        #
+        # CRF 30 = preview, não vídeo final
 
-    # ============================================================
-    # EXECUTAR FFMPEG
-    # ============================================================
+        ARGS+=(
+            "-c:v"
+            "libx264"
 
-    & $FFmpeg @Argumentos
+            "-preset"
+            "ultrafast"
 
-    if ($LASTEXITCODE -eq 0) {
+            "-crf"
+            "30"
 
-        Write-Host "Preview criado com sucesso." -ForegroundColor Green
+            "-threads"
+            "0"
+        )
 
-    }
-    else {
+    fi
 
-        Write-Host "ERRO ao processar este vídeo." -ForegroundColor Red
 
-        # Remover arquivo incompleto, caso tenha sido criado
-        if (Test-Path $Saida) {
-            Remove-Item $Saida -Force
-        }
-    }
-}
+    # ========================================================
+    # MP4
+    # ========================================================
 
-Write-Host ""
-Write-Host "============================================" -ForegroundColor Green
-Write-Host "PROCESSAMENTO CONCLUÍDO" -ForegroundColor Green
-Write-Host "============================================" -ForegroundColor Green
-```
+    ARGS+=(
+        "-movflags"
+        "+faststart"
+
+        "-y"
+
+        "$SAIDA"
+    )
+
+
+    # ========================================================
+    # EXECUTAR
+    # ========================================================
+
+    INICIO=$(date +%s)
+
+
+    ffmpeg \
+        -hide_banner \
+        -loglevel warning \
+        "${ARGS[@]}"
+
+
+    RESULTADO=$?
+
+
+    FIM=$(date +%s)
+
+    TEMPO_EXECUCAO=$((FIM - INICIO))
+
+
+    # ========================================================
+    # RESULTADO
+    # ========================================================
+
+    if [ "$RESULTADO" -eq 0 ]; then
+
+        echo ""
+        echo "✓ Concluído em ${TEMPO_EXECUCAO}s"
+        echo "$SAIDA"
+
+    else
+
+        echo ""
+        echo "✗ ERRO"
+
+        rm -f "$SAIDA"
+
+    fi
+
+done
+
+
+# ============================================================
+# FINAL
+# ============================================================
+
+echo ""
+echo "============================================"
+echo "PROCESSAMENTO CONCLUÍDO"
+echo "============================================"
+echo ""
+echo "Total: $TOTAL"
+echo "Saída:"
+echo "$DESTINO"
+echo ""

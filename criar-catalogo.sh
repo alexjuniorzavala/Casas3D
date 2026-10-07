@@ -965,6 +965,46 @@ body {
 
 </header>
 
+<section class="video-apresentacao-section" aria-label="Como são os vídeos">
+    <div class="video-apresentacao-header">
+        <h2>Como são os vídeos</h2>
+    </div>
+
+    <div class="video-carousel" aria-live="polite">
+        <article class="video-slide active">
+            <video muted autoplay playsinline loop preload="auto">
+                <source src="Videos/Casa 3D Completa com 2 Quartos   Garagem _ Planta Moderna 11_60 x 9_40(480P)_trechos.mp4" type="video/mp4">
+            </video>
+            <div class="video-meta">
+                <span>Casa 3D Completa com 2 Quartos e Garagem</span>
+            </div>
+        </article>
+
+        <article class="video-slide">
+            <video muted playsinline loop preload="none">
+                <source src="Videos/CASA MODERNA em 3D com 3 QUARTOS e Pé Direito Alto _ Projeto 8_25x13m(480P)_trechos.mp4" type="video/mp4">
+            </video>
+            <div class="video-meta">
+                <span>Casa Moderna em 3D com 3 Quartos</span>
+            </div>
+        </article>
+
+        <article class="video-slide">
+            <video muted playsinline loop preload="none">
+                <source src="Videos/CASA TÉRREA EM L MODERNA _ Planta de Casa 3D 8_40x16_40 com 2 Quartos_ Suíte e Varanda(480P)_trechos.mp4" type="video/mp4">
+            </video>
+            <div class="video-meta">
+                <span>Casa Térrea Moderna com 2 Quartos e Suíte</span>
+            </div>
+        </article>
+    </div>
+
+    <div class="video-paginacao" aria-label="Navegação dos vídeos">
+        <button class="video-dot active" type="button" data-slide="0" aria-label="Vídeo 1"></button>
+        <button class="video-dot" type="button" data-slide="1" aria-label="Vídeo 2"></button>
+        <button class="video-dot" type="button" data-slide="2" aria-label="Vídeo 3"></button>
+    </div>
+</section>
 
 <main class="catalogo">
 
@@ -1408,13 +1448,21 @@ cat >> "$HTML" <<EOF
     const contador = document.getElementById("contador");
     const botao = document.getElementById("enviarWhatsApp");
     const toggleSelecionarTodos = document.getElementById("toggleSelecionarTodos");
-    const toggleIcon = toggleSelecionarTodos.querySelector(".toggle-icon");
-    const toggleLabel = toggleSelecionarTodos.querySelector(".toggle-label");
+    const toggleIcon = toggleSelecionarTodos ? toggleSelecionarTodos.querySelector(".toggle-icon") : null;
+    const toggleLabel = toggleSelecionarTodos ? toggleSelecionarTodos.querySelector(".toggle-label") : null;
     const pricingToggle = document.getElementById("pricingToggle");
     const pricingModal = document.getElementById("pricingModal");
     const pricingClose = document.getElementById("pricingClose");
+    const introSlides = Array.from(document.querySelectorAll(".video-slide"));
+    const introDots = Array.from(document.querySelectorAll(".video-dot"));
+    let introSlideAtual = 0;
+    let introTimer = null;
 
     function atualizarToggleGeral() {
+        if (!toggleSelecionarTodos || !toggleIcon || !toggleLabel) {
+            return;
+        }
+
         const selecionadas = document.querySelectorAll(".casa-checkbox:checked").length;
         const todosSelecionados = checkboxes.length > 0 && selecionadas === checkboxes.length;
 
@@ -1438,12 +1486,20 @@ cat >> "$HTML" <<EOF
     }
 
     function abrirPricing() {
+        if (!pricingModal || !pricingToggle) {
+            return;
+        }
+
         pricingModal.classList.add("visible");
         pricingModal.setAttribute("aria-hidden", "false");
         pricingToggle.setAttribute("aria-expanded", "true");
     }
 
     function fecharPricing() {
+        if (!pricingModal || !pricingToggle) {
+            return;
+        }
+
         pricingModal.classList.remove("visible");
         pricingModal.setAttribute("aria-hidden", "true");
         pricingToggle.setAttribute("aria-expanded", "false");
@@ -1453,15 +1509,64 @@ cat >> "$HTML" <<EOF
         checkbox.addEventListener("change", atualizarContador);
     });
 
-    toggleSelecionarTodos.addEventListener("click", function () {
-        const selecionadas = document.querySelectorAll(".casa-checkbox:checked").length;
-        const todosSelecionados = checkboxes.length > 0 && selecionadas === checkboxes.length;
+    if (toggleSelecionarTodos) {
+        toggleSelecionarTodos.addEventListener("click", function () {
+            const selecionadas = document.querySelectorAll(".casa-checkbox:checked").length;
+            const todosSelecionados = checkboxes.length > 0 && selecionadas === checkboxes.length;
 
-        checkboxes.forEach(function (checkbox) {
-            checkbox.checked = !todosSelecionados;
+            checkboxes.forEach(function (checkbox) {
+                checkbox.checked = !todosSelecionados;
+            });
+
+            atualizarContador();
+        });
+    }
+
+    function mostrarSlideIntroducao(index) {
+        introSlides.forEach(function (slide, slideIndex) {
+            const isActive = slideIndex === index;
+            slide.classList.toggle("active", isActive);
+
+            const video = slide.querySelector("video");
+            if (!video) {
+                return;
+            }
+
+            video.pause();
+            video.currentTime = 0;
+
+            if (isActive) {
+                video.muted = true;
+                video.play().catch(function () {});
+            }
         });
 
-        atualizarContador();
+        introDots.forEach(function (dot, dotIndex) {
+            dot.classList.toggle("active", dotIndex === index);
+        });
+    }
+
+    function avancarSlideIntroducao() {
+        introSlideAtual = (introSlideAtual + 1) % introSlides.length;
+        mostrarSlideIntroducao(introSlideAtual);
+    }
+
+    if (introSlides.length > 0) {
+        mostrarSlideIntroducao(0);
+        introTimer = setInterval(avancarSlideIntroducao, 5000);
+    }
+
+    introDots.forEach(function (dot) {
+        dot.addEventListener("click", function () {
+            const proximo = Number(this.dataset.slide);
+            introSlideAtual = proximo;
+            mostrarSlideIntroducao(introSlideAtual);
+
+            if (introTimer) {
+                clearInterval(introTimer);
+                introTimer = setInterval(avancarSlideIntroducao, 5000);
+            }
+        });
     });
 
     botao.addEventListener("click", function () {
@@ -1489,25 +1594,31 @@ cat >> "$HTML" <<EOF
         window.location.href = link;
     });
 
-    pricingToggle.addEventListener("click", function () {
-        if (pricingModal.classList.contains("visible")) {
-            fecharPricing();
-            return;
-        }
+    if (pricingToggle) {
+        pricingToggle.addEventListener("click", function () {
+            if (pricingModal.classList.contains("visible")) {
+                fecharPricing();
+                return;
+            }
 
-        abrirPricing();
-    });
+            abrirPricing();
+        });
+    }
 
-    pricingClose.addEventListener("click", fecharPricing);
+    if (pricingClose) {
+        pricingClose.addEventListener("click", fecharPricing);
+    }
 
-    pricingModal.addEventListener("click", function (event) {
-        if (event.target === pricingModal) {
-            fecharPricing();
-        }
-    });
+    if (pricingModal) {
+        pricingModal.addEventListener("click", function (event) {
+            if (event.target === pricingModal) {
+                fecharPricing();
+            }
+        });
+    }
 
     document.addEventListener("keydown", function (event) {
-        if (event.key === "Escape" && pricingModal.classList.contains("visible")) {
+        if (event.key === "Escape" && pricingModal && pricingModal.classList.contains("visible")) {
             fecharPricing();
         }
     });

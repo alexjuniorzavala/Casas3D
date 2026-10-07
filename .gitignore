@@ -1,6 +1,8 @@
 Originais/
+Videos/*
+!Videos/*.mp4
+!Videos/*.MP4
 *.mp4
-!video.mp4
 *.MP4
 *.mov
 *.MOV
