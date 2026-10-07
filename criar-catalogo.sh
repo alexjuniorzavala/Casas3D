@@ -1312,15 +1312,10 @@ cat >> "$HTML" <<EOF
 
 <div class="toggle-geral">
 
-    <label class="checkbox-btn">
-        <input type="checkbox" id="selecionarTodos">
-        <span>Selecionar todos</span>
-    </label>
-
-    <label class="checkbox-btn">
-        <input type="checkbox" id="desmarcarTodos">
-        <span>Desmarcar todos</span>
-    </label>
+    <button type="button" class="checkbox-btn" id="toggleSelecionarTodos" aria-pressed="false">
+        <span class="toggle-icon" aria-hidden="true">✓</span>
+        <span class="toggle-label">Selecionar todos</span>
+    </button>
 
 </div>
 
@@ -1412,11 +1407,22 @@ cat >> "$HTML" <<EOF
     const checkboxes = document.querySelectorAll(".casa-checkbox");
     const contador = document.getElementById("contador");
     const botao = document.getElementById("enviarWhatsApp");
-    const selecionarTodos = document.getElementById("selecionarTodos");
-    const desmarcarTodos = document.getElementById("desmarcarTodos");
+    const toggleSelecionarTodos = document.getElementById("toggleSelecionarTodos");
+    const toggleIcon = toggleSelecionarTodos.querySelector(".toggle-icon");
+    const toggleLabel = toggleSelecionarTodos.querySelector(".toggle-label");
     const pricingToggle = document.getElementById("pricingToggle");
     const pricingModal = document.getElementById("pricingModal");
     const pricingClose = document.getElementById("pricingClose");
+
+    function atualizarToggleGeral() {
+        const selecionadas = document.querySelectorAll(".casa-checkbox:checked").length;
+        const todosSelecionados = checkboxes.length > 0 && selecionadas === checkboxes.length;
+
+        toggleSelecionarTodos.classList.toggle("active", todosSelecionados);
+        toggleSelecionarTodos.setAttribute("aria-pressed", String(todosSelecionados));
+        toggleIcon.textContent = todosSelecionados ? "✓" : "";
+        toggleLabel.textContent = todosSelecionados ? "Desmarcar todos" : "Selecionar todos";
+    }
 
     function atualizarContador() {
         const selecionadas = document.querySelectorAll(".casa-checkbox:checked");
@@ -1428,11 +1434,7 @@ cat >> "$HTML" <<EOF
                 : quantidade + " casas selecionadas";
 
         botao.disabled = quantidade === 0;
-
-        if (checkboxes.length > 0) {
-            selecionarTodos.checked = quantidade === checkboxes.length;
-            desmarcarTodos.checked = quantidade === 0;
-        }
+        atualizarToggleGeral();
     }
 
     function abrirPricing() {
@@ -1451,21 +1453,14 @@ cat >> "$HTML" <<EOF
         checkbox.addEventListener("change", atualizarContador);
     });
 
-    selecionarTodos.addEventListener("change", function () {
-        if (this.checked) {
-            checkboxes.forEach(function (checkbox) {
-                checkbox.checked = true;
-            });
-        }
-        atualizarContador();
-    });
+    toggleSelecionarTodos.addEventListener("click", function () {
+        const selecionadas = document.querySelectorAll(".casa-checkbox:checked").length;
+        const todosSelecionados = checkboxes.length > 0 && selecionadas === checkboxes.length;
 
-    desmarcarTodos.addEventListener("change", function () {
-        if (this.checked) {
-            checkboxes.forEach(function (checkbox) {
-                checkbox.checked = false;
-            });
-        }
+        checkboxes.forEach(function (checkbox) {
+            checkbox.checked = !todosSelecionados;
+        });
+
         atualizarContador();
     });
 
