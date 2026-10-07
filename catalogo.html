@@ -7552,6 +7552,14 @@ body {
 </div>
 
 <script>
+    if ("serviceWorker" in navigator) {
+        window.addEventListener("load", function () {
+            navigator.serviceWorker.register("./sw.js").catch(function (error) {
+                console.warn("Service Worker não foi registrado:", error);
+            });
+        });
+    }
+
     const numeroWhatsApp = "258842922516";
     const checkboxes = document.querySelectorAll(".casa-checkbox");
     const contador = document.getElementById("contador");

@@ -972,8 +972,8 @@ body {
 
     <div class="video-carousel" aria-live="polite">
         <article class="video-slide active">
-            <video muted autoplay playsinline loop preload="auto">
-                <source src="Videos/Casa 3D Completa com 2 Quartos   Garagem _ Planta Moderna 11_60 x 9_40(480P)_trechos.mp4" type="video/mp4">
+            <video muted autoplay playsinline loop preload="metadata">
+                <source src="Videos/Casa%203D%20Completa%20com%202%20Quartos%20%20%20Garagem%20_%20Planta%20Moderna%2011_60%20x%209_40(480P)_trechos.mp4" type="video/mp4">
             </video>
             <div class="video-meta">
                 <span>Casa 3D Completa com 2 Quartos e Garagem</span>
@@ -981,8 +981,8 @@ body {
         </article>
 
         <article class="video-slide">
-            <video muted playsinline loop preload="none">
-                <source src="Videos/CASA MODERNA em 3D com 3 QUARTOS e Pé Direito Alto _ Projeto 8_25x13m(480P)_trechos.mp4" type="video/mp4">
+            <video muted playsinline loop preload="metadata">
+                <source src="Videos/CASA%20MODERNA%20em%203D%20com%203%20QUARTOS%20e%20P%C3%A9%20Direito%20Alto%20_%20Projeto%208_25x13m(480P)_trechos.mp4" type="video/mp4">
             </video>
             <div class="video-meta">
                 <span>Casa Moderna em 3D com 3 Quartos</span>
@@ -990,8 +990,8 @@ body {
         </article>
 
         <article class="video-slide">
-            <video muted playsinline loop preload="none">
-                <source src="Videos/CASA TÉRREA EM L MODERNA _ Planta de Casa 3D 8_40x16_40 com 2 Quartos_ Suíte e Varanda(480P)_trechos.mp4" type="video/mp4">
+            <video muted playsinline loop preload="metadata">
+                <source src="Videos/CASA%20T%C3%89RREA%20EM%20L%20MODERNA%20_%20Planta%20de%20Casa%203D%208_40x16_40%20com%202%20Quartos_%20Su%C3%ADte%20e%20Varanda(480P)_trechos.mp4" type="video/mp4">
             </video>
             <div class="video-meta">
                 <span>Casa Térrea Moderna com 2 Quartos e Suíte</span>
@@ -1443,6 +1443,14 @@ cat >> "$HTML" <<EOF
 </div>
 
 <script>
+    if ("serviceWorker" in navigator) {
+        window.addEventListener("load", function () {
+            navigator.serviceWorker.register("./sw.js").catch(function (error) {
+                console.warn("Service Worker não foi registrado:", error);
+            });
+        });
+    }
+
     const numeroWhatsApp = "258842922516";
     const checkboxes = document.querySelectorAll(".casa-checkbox");
     const contador = document.getElementById("contador");
@@ -1455,8 +1463,11 @@ cat >> "$HTML" <<EOF
     const pricingClose = document.getElementById("pricingClose");
     const introSlides = Array.from(document.querySelectorAll(".video-slide"));
     const introDots = Array.from(document.querySelectorAll(".video-dot"));
+    const introTempoSlide = 60000;
     let introSlideAtual = 0;
     let introTimer = null;
+    let touchStartX = 0;
+    let touchCurrentX = 0;
 
     function atualizarToggleGeral() {
         if (!toggleSelecionarTodos || !toggleIcon || !toggleLabel) {
@@ -1534,10 +1545,15 @@ cat >> "$HTML" <<EOF
 
             video.pause();
             video.currentTime = 0;
+            video.muted = true;
+            video.playsInline = true;
+            video.autoplay = isActive;
 
             if (isActive) {
-                video.muted = true;
-                video.play().catch(function () {});
+                const tocar = video.play();
+                if (tocar && typeof tocar.catch === "function") {
+                    tocar.catch(function () {});
+                }
             }
         });
 
@@ -1551,9 +1567,22 @@ cat >> "$HTML" <<EOF
         mostrarSlideIntroducao(introSlideAtual);
     }
 
+    function retrocederSlideIntroducao() {
+        introSlideAtual = (introSlideAtual - 1 + introSlides.length) % introSlides.length;
+        mostrarSlideIntroducao(introSlideAtual);
+    }
+
+    function reiniciarTimerIntroducao() {
+        if (introTimer) {
+            clearInterval(introTimer);
+        }
+
+        introTimer = setInterval(avancarSlideIntroducao, introTempoSlide);
+    }
+
     if (introSlides.length > 0) {
         mostrarSlideIntroducao(0);
-        introTimer = setInterval(avancarSlideIntroducao, 5000);
+        reiniciarTimerIntroducao();
     }
 
     introDots.forEach(function (dot) {
@@ -1561,13 +1590,37 @@ cat >> "$HTML" <<EOF
             const proximo = Number(this.dataset.slide);
             introSlideAtual = proximo;
             mostrarSlideIntroducao(introSlideAtual);
-
-            if (introTimer) {
-                clearInterval(introTimer);
-                introTimer = setInterval(avancarSlideIntroducao, 5000);
-            }
+            reiniciarTimerIntroducao();
         });
     });
+
+    const introCarousel = document.querySelector(".video-carousel");
+    if (introCarousel) {
+        introCarousel.addEventListener("touchstart", function (event) {
+            touchStartX = event.touches[0].clientX;
+            touchCurrentX = touchStartX;
+        }, { passive: true });
+
+        introCarousel.addEventListener("touchmove", function (event) {
+            touchCurrentX = event.touches[0].clientX;
+        }, { passive: true });
+
+        introCarousel.addEventListener("touchend", function () {
+            const diff = touchCurrentX - touchStartX;
+
+            if (Math.abs(diff) < 50) {
+                return;
+            }
+
+            if (diff < 0) {
+                avancarSlideIntroducao();
+            } else {
+                retrocederSlideIntroducao();
+            }
+
+            reiniciarTimerIntroducao();
+        });
+    }
 
     botao.addEventListener("click", function () {
         const selecionadas = document.querySelectorAll(".casa-checkbox:checked");
