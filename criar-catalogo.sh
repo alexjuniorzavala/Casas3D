@@ -48,6 +48,40 @@ mkdir -p "$THUMBNAILS"
 # 1min 35s = 95 segundos
 
 TEMPOS_PADRAO=(45 55 65 75)
+TOTAL_IMAGENS=30
+
+# ============================================================
+# GERAR TEMPO AUTOMÁTICO PARA AS IMAGENS ADICIONAIS
+# ============================================================
+
+gerar_tempo_automatico() {
+
+    local DURACAO_TOTAL="$1"
+    local INDICE="$2"
+    local TOTAL="$3"
+
+    if [ -z "$DURACAO_TOTAL" ] || [ "$DURACAO_TOTAL" = "0" ]; then
+        echo "0"
+        return
+    fi
+
+    awk -v dur="$DURACAO_TOTAL" -v idx="$INDICE" -v total="$TOTAL" '
+        BEGIN {
+            if (dur <= 0) {
+                print 0
+                exit 0
+            }
+
+            if (idx <= 0) {
+                print 0
+                exit 0
+            }
+
+            frac = idx / (total + 1)
+            print dur * frac
+        }
+    '
+}
 
 # ============================================================
 # CONVERTER TEMPO PARA SEGUNDOS
@@ -468,12 +502,94 @@ body {
     opacity: 0.92;
 }
 
+    .ver-mais {
+        grid-column: 1 / -1;
+        border: none;
+        border-radius: 12px;
+        background: linear-gradient(135deg, #2563eb, #7c3aed);
+        color: white;
+        font-weight: 800;
+        font-size: 13px;
+        cursor: pointer;
+        padding: 12px 14px;
+        margin-top: 4px;
+        box-shadow: 0 12px 25px rgba(79, 70, 229, 0.2);
+    }
 
-/* =========================================================
-   TEMPO
-========================================================= */
+    .gallery-modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.76);
+        display: grid;
+        place-items: center;
+        padding: 18px;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s ease;
+        z-index: 80;
+    }
 
-.tempo {
+    .gallery-modal.visible {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .gallery-panel {
+        position: relative;
+        width: min(1100px, 100%);
+        max-height: 88vh;
+        overflow-y: auto;
+        background: #f8fafc;
+        border-radius: 20px;
+        padding: 26px 18px 18px;
+        box-shadow: 0 25px 60px rgba(15, 23, 42, 0.3);
+    }
+
+    .gallery-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 12px;
+    }
+
+    .gallery-header h3 {
+        margin: 0;
+        color: #0f172a;
+        font-size: clamp(20px, 3vw, 28px);
+    }
+
+    .gallery-close {
+        border: none;
+        border-radius: 50%;
+        background: #e2e8f0;
+        width: 38px;
+        height: 38px;
+        font-size: 24px;
+        color: #0f172a;
+        cursor: pointer;
+    }
+
+    .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 12px;
+    }
+
+    .gallery-item {
+        overflow: hidden;
+        border-radius: 12px;
+        background: white;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+    }
+
+    .gallery-item img {
+        display: block;
+        width: 100%;
+        aspect-ratio: 16 / 10;
+        object-fit: cover;
+    }
 
     position: absolute;
 
@@ -1148,42 +1264,30 @@ do
 
     # --------------------------------------------------------
     # CRIAR THUMBNAILS
+    # Mantém qualidade máxima e gera 30 imagens por casa.
+    # As 4 primeiras seguem os tempos destacados do card.
     # --------------------------------------------------------
 
-    for POS in 0 1 2 3
+    for POS in $(seq 1 "$TOTAL_IMAGENS")
     do
 
-        TEMPO="${TEMPOS[$POS]}"
+        if [ "$POS" -le 4 ]; then
+            TEMPO="${TEMPOS[$((POS - 1))]}"
+        else
+            TEMPO=$(gerar_tempo_automatico "$DURACAO" "$POS" "$TOTAL_IMAGENS")
+        fi
 
         TEMPO_FORMATADO=$(formatar_tempo "$TEMPO")
 
-
-        # ----------------------------------------------------
-        # Se o momento for maior que a duração,
-        # utilizar 90% do vídeo
-        # ----------------------------------------------------
-
         if awk "BEGIN {exit !($DURACAO < $TEMPO)}"
         then
-
-            TEMPO_REAL=$(awk \
-                "BEGIN {print $DURACAO * 0.90}")
-
+            TEMPO_REAL=$(awk "BEGIN {print $DURACAO * 0.90}")
         else
-
             TEMPO_REAL="$TEMPO"
-
         fi
 
-
-        # Nome fixo baseado na posição.
-        # Isso evita problemas caso o usuário escolha
-        # tempos diferentes entre execuções.
-
-        POSICAO=$((POS + 1))
-
+        POSICAO="$POS"
         SAIDA="$THUMBNAILS/${BASE_NOME}_${POSICAO}.jpg"
-
 
         LOG_TEMP=$(mktemp)
 
@@ -1196,26 +1300,21 @@ do
             -an \
             -sn \
             -frames:v 1 \
-            -q:v 2 \
-            -vf "scale=500:-1:flags=lanczos" \
+            -q:v 1 \
             -y \
             "$SAIDA" 2>"$LOG_TEMP"
 
         STATUS=$?
 
         if [ "$STATUS" -eq 0 ] && [ -s "$SAIDA" ]; then
-
             echo "  ✓ Imagem $POSICAO — $TEMPO_FORMATADO"
-
         else
-
             if [ -s "$LOG_TEMP" ]; then
                 echo "  ⚠ Imagem $POSICAO — $TEMPO_FORMATADO (ffmpeg reportou aviso/erro)"
                 cat "$LOG_TEMP"
             else
                 echo "  ✗ Imagem $POSICAO — $TEMPO_FORMATADO"
             fi
-
         fi
 
         rm -f "$LOG_TEMP"
@@ -1243,7 +1342,7 @@ do
 
     cat >> "$HTML" <<EOF
 
-<article class="casa">
+<article class="casa" data-base="${BASE_NOME}" data-nome="${NOME_EXIBICAO}">
 
     <div class="nome">
 
@@ -1332,6 +1431,9 @@ do
 
         </div>
 
+        <button type="button" class="ver-mais" data-base="${BASE_NOME}" data-nome="${NOME_EXIBICAO}">
+            Ver mais
+        </button>
 
     </div>
 
@@ -1349,6 +1451,16 @@ done
 cat >> "$HTML" <<EOF
 
 </main>
+
+<div class="gallery-modal" id="galleryModal" aria-hidden="true">
+    <div class="gallery-panel" role="dialog" aria-modal="true" aria-labelledby="galleryTitle">
+        <div class="gallery-header">
+            <h3 id="galleryTitle">Galeria da casa</h3>
+            <button type="button" class="gallery-close" id="galleryClose" aria-label="Fechar galeria">×</button>
+        </div>
+        <div class="gallery-grid" id="galleryGrid"></div>
+    </div>
+</div>
 
 <div class="toggle-geral">
 
@@ -1461,6 +1573,10 @@ cat >> "$HTML" <<EOF
     const pricingToggle = document.getElementById("pricingToggle");
     const pricingModal = document.getElementById("pricingModal");
     const pricingClose = document.getElementById("pricingClose");
+    const galleryModal = document.getElementById("galleryModal");
+    const galleryGrid = document.getElementById("galleryGrid");
+    const galleryTitle = document.getElementById("galleryTitle");
+    const galleryClose = document.getElementById("galleryClose");
     const introSlides = Array.from(document.querySelectorAll(".video-slide"));
     const introDots = Array.from(document.querySelectorAll(".video-dot"));
     const introTempoSlide = 60000;
@@ -1468,6 +1584,40 @@ cat >> "$HTML" <<EOF
     let introTimer = null;
     let touchStartX = 0;
     let touchCurrentX = 0;
+
+    function abrirGaleria(baseNome, nomeCasa) {
+        if (!galleryModal || !galleryGrid || !galleryTitle) {
+            return;
+        }
+
+        galleryTitle.textContent = nomeCasa || "Galeria da casa";
+        galleryGrid.innerHTML = "";
+
+        for (let index = 1; index <= 30; index += 1) {
+            const item = document.createElement("figure");
+            item.className = "gallery-item";
+
+            const imagem = document.createElement("img");
+            imagem.src = "thumbnails/" + baseNome + "_" + index + ".jpg";
+            imagem.alt = nomeCasa + " - imagem " + index;
+            imagem.loading = "lazy";
+
+            item.appendChild(imagem);
+            galleryGrid.appendChild(item);
+        }
+
+        galleryModal.classList.add("visible");
+        galleryModal.setAttribute("aria-hidden", "false");
+    }
+
+    function fecharGaleria() {
+        if (!galleryModal) {
+            return;
+        }
+
+        galleryModal.classList.remove("visible");
+        galleryModal.setAttribute("aria-hidden", "true");
+    }
 
     function atualizarToggleGeral() {
         if (!toggleSelecionarTodos || !toggleIcon || !toggleLabel) {
@@ -1670,9 +1820,33 @@ cat >> "$HTML" <<EOF
         });
     }
 
+    document.querySelectorAll(".ver-mais").forEach(function (botaoGaleria) {
+        botaoGaleria.addEventListener("click", function () {
+            abrirGaleria(this.dataset.base, this.dataset.nome);
+        });
+    });
+
+    if (galleryClose) {
+        galleryClose.addEventListener("click", fecharGaleria);
+    }
+
+    if (galleryModal) {
+        galleryModal.addEventListener("click", function (event) {
+            if (event.target === galleryModal) {
+                fecharGaleria();
+            }
+        });
+    }
+
     document.addEventListener("keydown", function (event) {
-        if (event.key === "Escape" && pricingModal && pricingModal.classList.contains("visible")) {
-            fecharPricing();
+        if (event.key === "Escape") {
+            if (pricingModal && pricingModal.classList.contains("visible")) {
+                fecharPricing();
+            }
+
+            if (galleryModal && galleryModal.classList.contains("visible")) {
+                fecharGaleria();
+            }
         }
     });
 

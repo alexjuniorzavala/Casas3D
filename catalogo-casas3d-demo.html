@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casas3D — Teste de camadas</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 24px 16px;
+            background: #f3f6fb;
+            font-family: Arial, sans-serif;
+            color: #172033;
+        }
+
+        .cartao {
+            max-width: 800px;
+            margin: 0 auto;
+            overflow: hidden;
+            background: white;
+            border-radius: 14px;
+            box-shadow: 0 5px 20px #17255418;
+        }
+
+        .titulo {
+            padding: 16px;
+        }
+
+        .titulo h2 {
+            margin: 0 0 6px;
+            font-size: 20px;
+        }
+
+        .titulo p {
+            margin: 0;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        /* Contentor do vídeo e das camadas */
+        .video-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            background: #000;
+        }
+
+        /* O iframe ocupa todo o contentor */
+        .video-container iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Camada inferior: 20% da altura e 100% da largura */
+        .layer-inferior {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 20%;
+            background: #172554;
+            z-index: 2;
+
+            /* Não bloqueia cliques no iframe */
+            pointer-events: none;
+        }
+
+        /* Camada superior: 20% da altura e 75% da largura */
+        .layer-superior {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 75%;
+            height: 20%;
+            background: #172554;
+            z-index: 2;
+
+            /* Não bloqueia cliques no iframe */
+            pointer-events: none;
+        }
+
+        .legenda {
+            padding: 12px 16px;
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 12px 8px;
+            }
+
+            .layer-superior {
+                width: 75%;
+                height: 20%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <article class="cartao">
+
+        <div class="titulo">
+            <h2>01. Modelo de casa 3D</h2>
+            <p>Exemplo de vídeo incorporado no catálogo Casas3D.</p>
+        </div>
+
+        <div class="video-container">
+
+            <iframe
+                src="https://www.youtube-nocookie.com/embed/M7lc1UVf-VE?rel=0"
+                title="Vídeo de demonstração"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="origin"
+                allowfullscreen>
+            </iframe>
+
+            <!-- Cobre a parte superior esquerda -->
+            <div class="layer-superior"></div>
+
+            <!-- Cobre toda a parte inferior -->
+            <div class="layer-inferior"></div>
+
+        </div>
+
+        <div class="legenda">
+            Demonstração visual das camadas sobrepostas ao player.
+        </div>
+
+    </article>
+
+</body>
+</html>
