@@ -37,11 +37,11 @@ fi
 
 echo ""
 echo "=========================================="
-echo "        GERAR THUMBNAILS"
+echo "      GERAR IMAGENS NÍTIDAS"
 echo "=========================================="
 echo ""
 
-echo "Removendo thumbnails antigas..."
+echo "Removendo imagens antigas..."
 rm -f "$THUMBNAILS"/*.jpg
 
 TOTAL_VIDEOS="${#VIDEOS[@]}"
@@ -92,8 +92,7 @@ do
             -an \
             -sn \
             -frames:v 1 \
-            -q:v 2 \
-            -vf "scale=500:-1:flags=lanczos" \
+            -q:v 1 \
             -y \
             "$SAIDA"
 
@@ -107,6 +106,6 @@ do
 done
 
 echo ""
-echo "Processo concluído. Thumbnails salvas em:"
+echo "Processo concluído. Imagens nítidas salvas em:"
 echo "$THUMBNAILS"
 echo ""

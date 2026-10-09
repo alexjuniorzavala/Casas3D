@@ -1,5 +1,5 @@
 (function () {
-  const TOTAL_IMAGENS = 30;
+  const TOTAL_IMAGENS = 15;
   const STYLE_ID = 'gallery-enhancer-styles';
 
   const state = {
