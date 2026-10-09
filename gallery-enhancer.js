@@ -227,7 +227,6 @@
         left: 50%;
         transform: translateX(-50%) translateY(-10px);
         width: min(420px, calc(100vw - 24px));
-        padding: 14px 16px 12px;
         border-radius: 16px;
         background: rgba(15, 23, 42, 0.94);
         color: white;
@@ -236,6 +235,9 @@
         opacity: 0;
         pointer-events: none;
         transition: opacity 0.25s ease, transform 0.25s ease;
+        height: 230px;
+        text-align: center;
+        align-content: center;
       }
 
       .gallery-enhancer-tutorial.visible {
@@ -653,18 +655,18 @@
     tutorial.className = 'gallery-enhancer-tutorial';
     tutorial.innerHTML = `
       <h4>Selecione as casas que quiser</h4>
-      <p>Explore as imagens e escolha quantas casas quiser antes de enviar pelo WhatsApp.</p>
+      <p>Explore as imagens e escolha suas casas clicando em 'Selecionar'. Ao terminar, clique no botão 'Enviar pelo Whatsapp' para comprar.</p>
       <button type="button" class="gallery-enhancer-tutorial-close">Entendi</button>
     `;
 
     const closeButton = tutorial.querySelector('.gallery-enhancer-tutorial-close');
     closeButton.addEventListener('click', function () {
       tutorial.classList.remove('visible');
-      try {
+/*       try {
         localStorage.setItem(key, '1');
       } catch (error) {
         // sem fallback necessário
-      }
+      } */
       setTimeout(function () {
         tutorial.remove();
       }, 200);

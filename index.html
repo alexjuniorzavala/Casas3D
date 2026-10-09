@@ -101,7 +101,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 14px;
 }
 
 .video-apresentacao-header h2 {
@@ -790,7 +789,12 @@ body {
 
 <section class="video-apresentacao-section" aria-label="Como são os vídeos">
     <div class="video-apresentacao-header">
-        <h2>Como são os vídeos</h2>
+        <h2><strong>Veja como são os vídeos</strong></h2>
+    </div>
+
+    <div class="video-alert-card" style="margin: 12px; display: flex; align-items: center; gap: 8px; max-width: 520px; padding: 10px 12px; border-radius: 12px; background: #fff7ed; color: #9a4d00; border: 1px solid #fed7aa; font-size: 12px; font-weight: 600;">
+        <span aria-hidden="true">⚠️</span>
+        <span>Aqui são exibidos apenas cortes dos vídeos. Os vídeos reais são completos e com qualidade realistica.</span>
     </div>
 
     <div class="video-carousel" aria-live="polite">
@@ -7704,7 +7708,7 @@ body {
         toggleSelecionarTodos.classList.toggle("active", todosSelecionados);
         toggleSelecionarTodos.setAttribute("aria-pressed", String(todosSelecionados));
         toggleIcon.textContent = todosSelecionados ? "✓" : "";
-        toggleLabel.textContent = todosSelecionados ? "Desmarcar todos" : "Selecionar todos";
+        toggleLabel.textContent = todosSelecionados ? "Desmarcar todas" : "Selecionar todas";
     }
 
     function atualizarContador() {
