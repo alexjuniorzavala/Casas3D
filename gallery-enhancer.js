@@ -12,7 +12,8 @@
     hideTimer: null,
     touchStartX: 0,
     touchStartY: 0,
-    isDragging: false
+    isDragging: false,
+    imageCacheDays: 3
   };
 
   function ensureStyles() {
@@ -188,6 +189,21 @@
         cursor: pointer;
       }
 
+      .gallery-enhancer-toggle {
+        position: absolute;
+        top: 14px;
+        left: 150px;
+        z-index: 3;
+        border: none;
+        border-radius: 999px;
+        background: rgba(34, 197, 94, 0.85);
+        color: white;
+        padding: 9px 14px;
+        font-size: 12px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
       .gallery-enhancer-count {
         position: absolute;
         bottom: 18px;
@@ -203,6 +219,56 @@
         color: white;
         font-size: 13px;
         font-weight: 700;
+      }
+
+      .gallery-enhancer-tutorial {
+        position: fixed;
+        top: 18px;
+        left: 50%;
+        transform: translateX(-50%) translateY(-10px);
+        width: min(420px, calc(100vw - 24px));
+        padding: 14px 16px 12px;
+        border-radius: 16px;
+        background: rgba(15, 23, 42, 0.94);
+        color: white;
+        box-shadow: 0 18px 40px rgba(2, 6, 23, 0.4);
+        z-index: 1200;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.25s ease, transform 0.25s ease;
+      }
+
+      .gallery-enhancer-tutorial.visible {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateX(-50%) translateY(0);
+      }
+
+      .gallery-enhancer-tutorial h4 {
+        margin: 0 0 6px;
+        font-size: 16px;
+      }
+
+      .gallery-enhancer-tutorial p {
+        margin: 0;
+        font-size: 13px;
+        line-height: 1.5;
+        color: #e2e8f0;
+      }
+
+      .gallery-enhancer-tutorial-close {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 12px;
+        border: none;
+        border-radius: 999px;
+        background: linear-gradient(135deg, #22c55e, #16a34a);
+        color: white;
+        padding: 8px 14px;
+        font-size: 12px;
+        font-weight: 800;
+        cursor: pointer;
       }
     `;
 
@@ -240,6 +306,44 @@
     }
   }
 
+  function getHouseCheckboxFromCard(card) {
+    if (!card) {
+      return null;
+    }
+
+    return card.querySelector('.casa-checkbox');
+  }
+
+  function updateModalToggleState() {
+    if (!state.modal || !state.card) {
+      return;
+    }
+
+    const button = state.modal.querySelector('.gallery-enhancer-toggle');
+    const checkbox = getHouseCheckboxFromCard(state.card);
+
+    if (!button || !checkbox) {
+      return;
+    }
+
+    const checked = !!checkbox.checked;
+    button.textContent = checked ? 'Desmarcar casa' : 'Selecionar casa';
+    button.setAttribute('aria-pressed', String(checked));
+  }
+
+  function toggleCurrentHouseSelection() {
+    const checkbox = getHouseCheckboxFromCard(state.card);
+    if (!checkbox) {
+      return;
+    }
+
+    checkbox.checked = !checkbox.checked;
+    if (typeof window.atualizarContador === 'function') {
+      window.atualizarContador();
+    }
+    updateModalToggleState();
+  }
+
   function getBaseNameFromSrc(src) {
     if (!src) {
       return '';
@@ -275,6 +379,43 @@
       urls.push('thumbnails/' + baseName + '_' + index + '.jpg');
     }
     return urls;
+  }
+
+  function getImageCacheKey(url) {
+    return 'gallery-cache:' + encodeURIComponent(url);
+  }
+
+  async function ensureImageCached(url) {
+    if (!url || !('caches' in window)) {
+      return url;
+    }
+
+    const cacheKey = getImageCacheKey(url);
+    const ttl = 1000 * 60 * 60 * 24 * state.imageCacheDays;
+    const now = Date.now();
+
+    try {
+      const savedAt = Number(localStorage.getItem(cacheKey) || '0');
+      if (savedAt && now - savedAt < ttl) {
+        return url;
+      }
+
+      const cache = await caches.open('casas3d-images');
+      const cached = await cache.match(url);
+      if (cached && savedAt && now - savedAt < ttl) {
+        return url;
+      }
+
+      const response = await fetch(url, { cache: 'force-cache' });
+      if (response.ok) {
+        await cache.put(url, response.clone());
+        localStorage.setItem(cacheKey, String(now));
+      }
+    } catch (error) {
+      return url;
+    }
+
+    return url;
   }
 
   function syncViewportMode() {
@@ -336,7 +477,7 @@
     syncViewportMode();
   }
 
-  function renderSlide() {
+  async function renderSlide() {
     if (!state.modal) {
       return;
     }
@@ -349,10 +490,13 @@
     }
 
     state.currentIndex = Math.min(Math.max(state.currentIndex, 0), state.urls.length - 1);
-    image.src = state.urls[state.currentIndex];
+    const url = state.urls[state.currentIndex];
+    const cachedUrl = await ensureImageCached(url);
+    image.src = cachedUrl;
     image.alt = (state.card ? getCasaTitle(state.card) : 'Galeria da casa') + ' - imagem ' + (state.currentIndex + 1);
     count.textContent = (state.currentIndex + 1) + ' / ' + state.urls.length;
     applyOrientation();
+    updateModalToggleState();
   }
 
   function buildModal() {
@@ -368,6 +512,7 @@
     modal.innerHTML = `
       <div class="gallery-enhancer-shell" role="dialog" aria-modal="true" aria-labelledby="gallery-enhancer-title">
         <button type="button" class="gallery-enhancer-rotate" aria-label="Virar imagem">Virar para vertical</button>
+        <button type="button" class="gallery-enhancer-toggle" aria-label="Selecionar casa" aria-pressed="false">Selecionar casa</button>
         <button type="button" class="gallery-enhancer-close" aria-label="Fechar galeria">×</button>
         <button type="button" class="gallery-enhancer-arrow prev" aria-label="Imagem anterior">‹</button>
         <div class="gallery-enhancer-stage">
@@ -382,6 +527,7 @@
     const prevButton = modal.querySelector('.gallery-enhancer-arrow.prev');
     const nextButton = modal.querySelector('.gallery-enhancer-arrow.next');
     const rotateButton = modal.querySelector('.gallery-enhancer-rotate');
+    const toggleButton = modal.querySelector('.gallery-enhancer-toggle');
     const shell = modal.querySelector('.gallery-enhancer-shell');
     const stage = modal.querySelector('.gallery-enhancer-stage');
 
@@ -391,6 +537,11 @@
         saveOrientation(state.baseName, state.orientation);
       }
       applyOrientation();
+      showArrows();
+    });
+
+    toggleButton.addEventListener('click', function () {
+      toggleCurrentHouseSelection();
       showArrows();
     });
 
@@ -488,6 +639,43 @@
     return modal;
   }
 
+  function showTutorialOnce() {
+    const key = 'gallery-tutorial-shown';
+    try {
+      if (localStorage.getItem(key) === '1') {
+        return;
+      }
+    } catch (error) {
+      return;
+    }
+
+    const tutorial = document.createElement('div');
+    tutorial.className = 'gallery-enhancer-tutorial';
+    tutorial.innerHTML = `
+      <h4>Selecione as casas que quiser</h4>
+      <p>Explore as imagens e escolha quantas casas quiser antes de enviar pelo WhatsApp.</p>
+      <button type="button" class="gallery-enhancer-tutorial-close">Entendi</button>
+    `;
+
+    const closeButton = tutorial.querySelector('.gallery-enhancer-tutorial-close');
+    closeButton.addEventListener('click', function () {
+      tutorial.classList.remove('visible');
+      try {
+        localStorage.setItem(key, '1');
+      } catch (error) {
+        // sem fallback necessário
+      }
+      setTimeout(function () {
+        tutorial.remove();
+      }, 200);
+    });
+
+    document.body.appendChild(tutorial);
+    requestAnimationFrame(function () {
+      tutorial.classList.add('visible');
+    });
+  }
+
   function openGallery(card, startIndex) {
     const images = card ? card.querySelectorAll('.imagens img') : [];
     if (!images.length) {
@@ -516,6 +704,7 @@
     modal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
     applyOrientation();
+    updateModalToggleState();
     renderSlide();
     showArrows();
   }
@@ -555,6 +744,7 @@
   function init() {
     ensureStyles();
     enhanceCards();
+    showTutorialOnce();
     window.addEventListener('orientationchange', function () {
       if (state.modal && state.modal.classList.contains('visible')) {
         syncViewportMode();
