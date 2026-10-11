@@ -1,5 +1,5 @@
 (function () {
-  const TOTAL_IMAGENS = 15;
+  const TOTAL_IMAGENS = 26;
   const STYLE_ID = 'gallery-enhancer-styles';
 
   const state = {
@@ -24,20 +24,6 @@
     const style = document.createElement('style');
     style.id = STYLE_ID;
     style.textContent = `
-      .gallery-enhancer-btn {
-        grid-column: 1 / -1;
-        margin-top: 6px;
-        border: none;
-        border-radius: 12px;
-        background: linear-gradient(135deg, #2563eb, #7c3aed);
-        color: white;
-        padding: 12px 14px;
-        font-size: 13px;
-        font-weight: 800;
-        cursor: pointer;
-        box-shadow: 0 12px 25px rgba(79, 70, 229, 0.2);
-      }
-
       .gallery-enhancer-modal {
         position: fixed;
         inset: 0;
@@ -146,7 +132,7 @@
 
       .gallery-enhancer-shell.viewport-portrait .gallery-enhancer-arrow {
         top: auto;
-        bottom: 18px;
+        bottom: 60px;
         transform: none;
       }
 
@@ -219,6 +205,30 @@
         color: white;
         font-size: 13px;
         font-weight: 700;
+      }
+
+      .gallery-enhancer-rotate-tip {
+        position: absolute;
+        top: 18px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 4;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 14px;
+        border-radius: 999px;
+        color: white;
+        background: rgba(255, 0, 0, 0.8);
+        color: white;
+        font-size: 12px;
+        font-weight: 700;
+        box-shadow: 0 12px 30px rgba(2, 6, 23, 0.25);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+      }
+
+      .gallery-enhancer-rotate-tip.hidden {
+        display: none;
       }
 
       .gallery-enhancer-tutorial {
@@ -513,6 +523,7 @@
 
     modal.innerHTML = `
       <div class="gallery-enhancer-shell" role="dialog" aria-modal="true" aria-labelledby="gallery-enhancer-title">
+        <div class="gallery-enhancer-rotate-tip hidden" aria-live="polite">📱 Vire o celular para melhor visualização</div>
         <button type="button" class="gallery-enhancer-rotate" aria-label="Virar imagem">Virar para vertical</button>
         <button type="button" class="gallery-enhancer-toggle" aria-label="Selecionar casa" aria-pressed="false">Selecionar casa</button>
         <button type="button" class="gallery-enhancer-close" aria-label="Fechar galeria">×</button>
@@ -678,6 +689,28 @@
     });
   }
 
+  function showFirstOpenRotateTip() {
+    const key = 'gallery-first-open-rotate-tip';
+/*     try {
+      if (localStorage.getItem(key) === '1') {
+        return;
+      }
+      localStorage.setItem(key, '1');
+    } catch (error) {
+      return;
+    } */
+
+    const tip = state.modal ? state.modal.querySelector('.gallery-enhancer-rotate-tip') : null;
+    if (!tip) {
+      return;
+    }
+
+    tip.classList.remove('hidden');
+    setTimeout(function () {
+      tip.classList.add('hidden');
+    }, 3000);
+  }
+
   function openGallery(card, startIndex) {
     const images = card ? card.querySelectorAll('.imagens img') : [];
     if (!images.length) {
@@ -709,6 +742,7 @@
     updateModalToggleState();
     renderSlide();
     showArrows();
+    showFirstOpenRotateTip();
   }
 
   function enhanceCards() {
@@ -719,16 +753,52 @@
       }
 
       const button = imagens.querySelector('.gallery-enhancer-btn');
-      if (!button) {
-        const btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className = 'gallery-enhancer-btn';
-        btn.textContent = 'Ver mais';
-        btn.addEventListener('click', function (event) {
-          event.stopPropagation();
-          openGallery(card, 0);
+      if (button) {
+        button.remove();
+      }
+
+      if (imagens.dataset.galleryEnhanced === 'true') {
+        const imageNodes = imagens.querySelectorAll('img');
+        imageNodes.forEach(function (img) {
+          img.style.cursor = 'pointer';
+          img.addEventListener('click', function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            openGallery(card, getImageIndexFromSrc(img.getAttribute('src')));
+          });
         });
-        imagens.appendChild(btn);
+        return;
+      }
+
+      imagens.dataset.galleryEnhanced = 'true';
+      imagens.style.gridTemplateColumns = 'repeat(auto-fit, minmax(170px, 1fr))';
+      imagens.style.gap = '10px';
+
+      const baseImage = imagens.querySelector('img');
+      const baseName = baseImage ? getBaseNameFromSrc(baseImage.getAttribute('src')) : '';
+
+      if (baseName) {
+        const currentImages = Array.from(imagens.querySelectorAll('img'));
+        const currentCount = currentImages.length;
+
+        for (let index = currentCount + 1; index <= TOTAL_IMAGENS; index += 1) {
+          const wrapper = document.createElement('div');
+          wrapper.className = 'imagem';
+
+          const img = document.createElement('img');
+          img.src = 'thumbnails/' + baseName + '_' + index + '.jpg';
+          img.alt = getCasaTitle(card) + ' - imagem ' + index;
+          img.loading = 'lazy';
+          img.style.cursor = 'pointer';
+          img.addEventListener('click', function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            openGallery(card, index - 1);
+          });
+
+          wrapper.appendChild(img);
+          imagens.appendChild(wrapper);
+        }
       }
 
       const imageNodes = imagens.querySelectorAll('img');
