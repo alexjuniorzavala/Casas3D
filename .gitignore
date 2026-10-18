@@ -1,10 +1,12 @@
 Originais/
-thumbnails/*
+thumbnails/
+thumbnailsYT/
+thumbnails_YT/
 Videos/*
+!Videos/Casas\ 3D\ 16p9.mp4
+
 *.mp4
 *.MP4
-!Videos/*.mp4
-!Videos/*.MP4
 *.mov
 *.MOV
 *.mkv

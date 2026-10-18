@@ -36,6 +36,77 @@ body {
     opacity: 0.9;
 }
 
+.contador-visitas {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 18px;
+    padding: 8px 16px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+.contador-visitas strong {
+    font-size: 15px;
+}
+
+.cta-botao {
+    position: fixed;
+    right: 16px;
+    bottom: 18px;
+    z-index: 1000;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 20px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    color: #fff;
+    font-weight: 700;
+    font-size: 15px;
+    text-decoration: none;
+    box-shadow: 0 8px 24px rgba(34, 197, 94, 0.35);
+}
+
+.cta-botao:hover {
+    filter: brightness(1.05);
+}
+
+.video-destaque {
+    width: 100%;
+    max-width: 1200px;
+    margin: 26px auto 0;
+    padding: 0 12px;
+}
+
+.video-destaque h2 {
+    margin: 0 0 14px;
+    font-size: clamp(24px, 3vw, 36px);
+    color: #172554;
+    text-align: center;
+}
+
+.video-container {
+    width: 100%;
+    border-radius: 18px;
+    overflow: hidden;
+    background: #0f172a;
+    box-shadow: 0 10px 28px rgba(15, 23, 42, 0.12);
+}
+
+.video-container video {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 70vh;
+    background: #000;
+}
+
 .catalogo {
     width: 100%;
     max-width: 1400px;
@@ -84,7 +155,6 @@ body {
 .imagem img {
     display: block;
     width: 100%;
-    aspect-ratio: 16 / 10;
     object-fit: cover;
     border-radius: 9px;
     background: #e5e7eb;
@@ -131,11 +201,27 @@ body {
 <header class="header">
     <h1>Catálogo de Casas 3D</h1>
     <p>Seleção organizada dos projetos com imagens da playlist oficial, usando as thumbnails em alta resolução do YouTube.</p>
+    <div class="contador-visitas" aria-live="polite">
+        <span>Acessos:</span>
+        <strong id="visitas-valor">Carregando...</strong>
+    </div>
 </header>
+
+<section class="video-destaque" aria-label="Vídeo de apresentação">
+    <h2>Veja como sao os videos</h2>
+    <div class="video-container">
+        <video autoplay muted loop playsinline controls>
+            <source src="Videos/Casas 3D 16p9.mp4" type="video/mp4">
+            Seu navegador não suporta vídeos em HTML5.
+        </video>
+    </div>
+</section>
 
 <main class="catalogo">
     <div id="catalog-grid" class="catalog-grid" aria-live="polite"></div>
 </main>
+
+<a class="cta-botao" href="https://wa.me/842922516/?text=Quero+comprar+as+casas+agora" target="_blank" rel="noopener noreferrer">Comprar tudo (99MT)</a>
 
 <script id="playlist-casas-data" type="application/json">{
   "playlist": {
@@ -3266,6 +3352,37 @@ body {
     }
 
     renderCatalogo();
+
+    if ("serviceWorker" in navigator) {
+        window.addEventListener("load", function () {
+            navigator.serviceWorker.register("./sw.js").catch(function (error) {
+                console.warn("Service Worker não pôde ser registrado:", error);
+            });
+        });
+    }
+
+    async function carregarContador() {
+        const contadorEl = document.getElementById("visitas-valor");
+        if (!contadorEl) return;
+
+        try {
+            const resposta = await fetch("https://api.countapi.xyz/hit/casas3d-github-pages/visitas?output=json", {
+                cache: "no-store"
+            });
+
+            if (!resposta.ok) {
+                throw new Error("Falha ao carregar contador");
+            }
+
+            const dados = await resposta.json();
+            const valor = Number(dados?.value ?? 0);
+            contadorEl.textContent = Number.isFinite(valor) ? valor.toLocaleString("pt-BR") : "N/D";
+        } catch (error) {
+            contadorEl.textContent = "N/D";
+        }
+    }
+
+    carregarContador();
 </script>
 </body>
 </html>

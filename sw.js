@@ -1,6 +1,8 @@
-const CACHE_NAME = "casas3d-videos-cache-v1";
-const VIDEO_CACHE_TTL_MS = 24 * 60 * 60 * 1000;
-const META_KEY = "/__casas3d_video_cache_meta__";
+const CACHE_NAME = "casas3d-media-cache-v3";
+const THREE_DAYS_MS = 3 * 24 * 60 * 60 * 1000;
+const VIDEO_CACHE_TTL_MS = THREE_DAYS_MS;
+const IMAGE_CACHE_TTL_MS = THREE_DAYS_MS;
+const META_KEY = "/__casas3d_media_cache_meta__";
 
 async function getCacheMeta(cache) {
     try {
@@ -60,10 +62,17 @@ self.addEventListener("fetch", function (event) {
 
     const url = new URL(request.url);
     const isVideoRequest = /\.(mp4|webm|mov|m4v)(\?.*)?$/i.test(url.pathname);
+    const isImageRequest = /\.(jpg|jpeg|png|gif|webp|bmp|svg)(\?.*)?$/i.test(url.pathname);
+    const isAllowedOrigin =
+        url.origin === self.location.origin ||
+        url.origin === "https://i.ytimg.com" ||
+        url.origin === "https://img.youtube.com";
 
-    if (!isVideoRequest || url.origin !== self.location.origin) {
+    if ((!isVideoRequest && !isImageRequest) || !isAllowedOrigin) {
         return;
     }
+
+    const ttl = isImageRequest ? IMAGE_CACHE_TTL_MS : VIDEO_CACHE_TTL_MS;
 
     event.respondWith(
         caches.open(CACHE_NAME).then(async function (cache) {
@@ -71,7 +80,7 @@ self.addEventListener("fetch", function (event) {
             const meta = await getCacheMeta(cache);
             const now = Date.now();
 
-            if (cachedResponse && now - meta.updatedAt < VIDEO_CACHE_TTL_MS) {
+            if (cachedResponse && now - meta.updatedAt < ttl) {
                 return cachedResponse;
             }
 

@@ -97,7 +97,7 @@ fi
 # CONFIGURAÇÃO DOS TRECHOS
 # ============================================================
 
-CLIP_DURACAO=12
+CLIP_DURACAO=5
 
 # Posições relativas:
 #
@@ -107,7 +107,13 @@ CLIP_DURACAO=12
 # 65% = segunda parte
 # 85% = final
 
-POSICOES=(0.05 0.25 0.45 0.65 0.85)
+POSICOES=(0.13 0.38 0.42 0.45 0.50 0.53 0.57 0.63 0.69)
+SEGMENTOS_PREVIEW="${SEGMENTOS_PREVIEW:-${#POSICOES[@]}}"
+
+if [ "$SEGMENTOS_PREVIEW" -gt "${#POSICOES[@]}" ]; then
+    echo "Atenção: SEGMENTOS_PREVIEW=$SEGMENTOS_PREVIEW excede as ${#POSICOES[@]} posições disponíveis. Ajustando para ${#POSICOES[@]}."
+    SEGMENTOS_PREVIEW="${#POSICOES[@]}"
+fi
 
 
 # ============================================================
@@ -218,10 +224,10 @@ do
 
 
     # ========================================================
-    # CRIAR OS 5 SEGMENTOS
+    # CRIAR OS SEGMENTOS DA PREVIEW
     # ========================================================
 
-    for I in 0 1 2 3 4
+    for (( I=0; I < SEGMENTOS_PREVIEW; I++ ))
     do
 
         POSICAO="${POSICOES[$I]}"
@@ -297,8 +303,13 @@ do
 
     FILTRO_FINAL+=";"
 
+    CONCAT_INPUTS=""
+    for (( I=0; I < SEGMENTOS_PREVIEW; I++ ))
+    do
+        CONCAT_INPUTS+="[v${I}]"
+    done
 
-    FILTRO_FINAL+="[v0][v1][v2][v3][v4]concat=n=5:v=1:a=0,"
+    FILTRO_FINAL+="${CONCAT_INPUTS}concat=n=${SEGMENTOS_PREVIEW}:v=1:a=0,"
 
 
     # ========================================================
