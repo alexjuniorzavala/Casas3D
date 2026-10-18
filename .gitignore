@@ -3,7 +3,6 @@ thumbnails/
 thumbnailsYT/
 thumbnails_YT/
 Videos/*
-!Videos/Casas\ 3D\ 16p9.mp4
 
 *.mp4
 *.MP4
@@ -15,3 +14,4 @@ Videos/*
 *.AVI
 *.webm
 *.WEBM
+!Videos/Casas3D16p9.mp4
