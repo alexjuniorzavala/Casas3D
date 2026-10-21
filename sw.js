@@ -1,7 +1,5 @@
-const CACHE_NAME = "casas3d-media-cache-v3";
-const THREE_DAYS_MS = 3 * 24 * 60 * 60 * 1000;
-const VIDEO_CACHE_TTL_MS = THREE_DAYS_MS;
-const IMAGE_CACHE_TTL_MS = THREE_DAYS_MS;
+const CACHE_NAME = "casas3d-media-cache-v4";
+const CACHE_TTL_MS = 30 * 24 * 60 * 60 * 1000;
 const META_KEY = "/__casas3d_media_cache_meta__";
 
 async function getCacheMeta(cache) {
@@ -12,9 +10,7 @@ async function getCacheMeta(cache) {
         }
 
         const data = await response.json();
-        return {
-            updatedAt: Number(data.updatedAt || 0)
-        };
+        return { updatedAt: Number(data.updatedAt || 0) };
     } catch (error) {
         return { updatedAt: 0 };
     }
@@ -28,6 +24,21 @@ async function setCacheMeta(cache, updatedAt) {
     });
 
     await cache.put(META_KEY, metaResponse);
+}
+
+function isAllowedOrigin(url) {
+    return (
+        url.origin === self.location.origin ||
+        url.hostname === "i.ytimg.com" ||
+        url.hostname === "img.youtube.com" ||
+        url.hostname.endsWith(".ytimg.com") ||
+        url.hostname.endsWith(".youtube.com")
+    );
+}
+
+function isMediaRequest(url) {
+    const pathname = url.pathname || "";
+    return /\.(mp4|webm|mov|m4v|jpg|jpeg|png|gif|webp|bmp|svg)(\?.*)?$/i.test(pathname);
 }
 
 self.addEventListener("install", function (event) {
@@ -61,18 +72,10 @@ self.addEventListener("fetch", function (event) {
     }
 
     const url = new URL(request.url);
-    const isVideoRequest = /\.(mp4|webm|mov|m4v)(\?.*)?$/i.test(url.pathname);
-    const isImageRequest = /\.(jpg|jpeg|png|gif|webp|bmp|svg)(\?.*)?$/i.test(url.pathname);
-    const isAllowedOrigin =
-        url.origin === self.location.origin ||
-        url.origin === "https://i.ytimg.com" ||
-        url.origin === "https://img.youtube.com";
 
-    if ((!isVideoRequest && !isImageRequest) || !isAllowedOrigin) {
+    if (!isMediaRequest(url) || !isAllowedOrigin(url)) {
         return;
     }
-
-    const ttl = isImageRequest ? IMAGE_CACHE_TTL_MS : VIDEO_CACHE_TTL_MS;
 
     event.respondWith(
         caches.open(CACHE_NAME).then(async function (cache) {
@@ -80,15 +83,15 @@ self.addEventListener("fetch", function (event) {
             const meta = await getCacheMeta(cache);
             const now = Date.now();
 
-            if (cachedResponse && now - meta.updatedAt < ttl) {
+            if (cachedResponse && now - meta.updatedAt < CACHE_TTL_MS) {
                 return cachedResponse;
             }
 
             try {
                 const networkResponse = await fetch(request, { cache: "no-store" });
 
-                if (networkResponse && networkResponse.status === 200) {
-                    cache.put(request, networkResponse.clone());
+                if (networkResponse && (networkResponse.status === 200 || networkResponse.type === "opaque")) {
+                    await cache.put(request, networkResponse.clone());
                     await setCacheMeta(cache, now);
                 }
 
