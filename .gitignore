@@ -1,9 +1,10 @@
 Originais/
 thumbnails/
+thumbnails/*
+thumbnails/*.jpg
 thumbnailsYT/
 thumbnails_YT/
 Videos/*
-
 *.mp4
 *.MP4
 *.mov
