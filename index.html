@@ -55,26 +55,48 @@ body {
     font-size: 15px;
 }
 
-.cta-botao {
+.cta-bar {
     position: fixed;
-    right: 16px;
-    bottom: 18px;
+    left: 0;
+    right: 0;
+    bottom: 0;
     z-index: 1000;
-    display: inline-flex;
+    padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+    background: rgba(15, 23, 42, 0.9);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(148, 163, 184, 0.3);
+    box-shadow: 0 -10px 30px rgba(15, 23, 42, 0.18);
+}
+
+.cta-botao {
+    display: flex;
     align-items: center;
     justify-content: center;
-    padding: 14px 20px;
-    border-radius: 999px;
+    width: min(100%, 540px);
+    min-height: 60px;
+    margin: 0 auto;
+    padding: 14px 22px;
+    border-radius: 16px;
     background: linear-gradient(135deg, #22c55e, #16a34a);
     color: #fff;
-    font-weight: 700;
-    font-size: 15px;
+    font-weight: 800;
+    font-size: clamp(16px, 2.8vw, 22px);
+    letter-spacing: 0.02em;
     text-decoration: none;
-    box-shadow: 0 8px 24px rgba(34, 197, 94, 0.35);
+    box-shadow: 0 10px 28px rgba(34, 197, 94, 0.35);
+    transition: transform 0.2s ease, filter 0.2s ease;
 }
 
 .cta-botao:hover {
     filter: brightness(1.05);
+}
+
+.cta-botao:active {
+    transform: scale(0.985);
+}
+
+body {
+    padding-bottom: 98px;
 }
 
 .video-destaque {
@@ -200,7 +222,7 @@ body {
 <body>
 <header class="header">
     <h1>Catálogo de Casas 3D</h1>
-    <p>Seleção organizada dos projetos com imagens da playlist oficial, usando as thumbnails em alta resolução do YouTube.</p>
+    <p>Explore mais de 300 opcoes de casas pequenas com design moderno</p>
     <div class="contador-visitas" aria-live="polite">
         <span>Acessos:</span>
         <strong id="visitas-valor">Carregando...</strong>
@@ -221,7 +243,9 @@ body {
     <div id="catalog-grid" class="catalog-grid" aria-live="polite"></div>
 </main>
 
-<a class="cta-botao" href="https://wa.me/842922516/?text=Quero+comprar+as+casas+agora" target="_blank" rel="noopener noreferrer">Comprar tudo (99MT)</a>
+<div class="cta-bar">
+    <a class="cta-botao" href="https://wa.me/842922516/?text=Quero+comprar+as+casas+agora" target="_blank" rel="noopener noreferrer">Comprar tudo (99MT)</a>
+</div>
 
 <script id="playlist-casas-data" type="application/json">{
   "playlist": {
