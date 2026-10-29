@@ -2,7 +2,7 @@ Originais/
 thumbnails/
 thumbnails/*
 thumbnails/*.jpg
-thumbnailsYT/
+!thumbnailsYT/
 thumbnails_YT/
 Videos/*
 *.mp4

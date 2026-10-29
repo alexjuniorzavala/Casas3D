@@ -4,6 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Casas 3D Pequenas</title>
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Casas 3D Pequenas" />
+  <meta property="og:description" content="Catálogo de casas pequenas e modernas com mais de 300 opções para inspirar sua próxima construção." />
+  <meta property="og:url" content="https://alexjuniorzavala.github.io/Casas3D/" />
+  <meta property="og:image" content="https://alexjuniorzavala.github.io/Casas3D/thumbnailsYT/001%20-%20House%20Design%20%EF%BD%9C%20Modern%20House%202%20Storey%20%20%EF%BD%9C%209m%20x%2016m%20%EF%BD%9C%205%20Bedrooms.jpg" />
+  <meta property="og:image:alt" content="Casa 3D pequena com 5 quartos" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Casas 3D Pequenas" />
+  <meta name="twitter:description" content="Catálogo de casas pequenas e modernas com mais de 300 opções para inspirar sua próxima construção." />
+  <meta name="twitter:image" content="https://alexjuniorzavala.github.io/Casas3D/thumbnailsYT/001%20-%20House%20Design%20%EF%BD%9C%20Modern%20House%202%20Storey%20%20%EF%BD%9C%209m%20x%2016m%20%EF%BD%9C%205%20Bedrooms.jpg" />
   <style>
 * {
     box-sizing: border-box;
@@ -3348,10 +3358,30 @@ body {
     const catalogGrid = document.getElementById('catalog-grid');
     const playlistData = JSON.parse(document.getElementById('playlist-casas-data').textContent);
 
+    function normalizeThumbnailTitle(value) {
+        return String(value || '')
+            .normalize('NFKC')
+            .replace(/\s*\|\s*/g, ' ｜ ')
+            .replace(/\s+/g, ' ')
+            .trim();
+    }
+
+    function getLocalThumbnailUrl(video, fallbackTitle = '') {
+        if (!video) return '';
+
+        const numero = Number(video.numero ?? 0);
+        const title = normalizeThumbnailTitle(video.titulo || video.nome || fallbackTitle || `Casa ${numero}`);
+
+        if (!numero && !title) return '';
+
+        return `./thumbnailsYT/${String(numero).padStart(3, '0')} - ${encodeURI(title)}.jpg`;
+    }
+
     function buildCard(video, index) {
         const number = video.numero || index + 1;
         const title = (video.titulo || video.nome || `Casa ${number}`).replace(/\s+/g, ' ').trim();
-        const image = video.thumbnailMaxRes || video.thumbnail || '';
+        const localImage = getLocalThumbnailUrl(video, title);
+        const fallbackImage = video.thumbnailMaxRes || video.thumbnail || '';
 
         return `
             <article class="casa">
@@ -3360,7 +3390,7 @@ body {
                     <span>${title}</span>
                 </div>
                 <div class="imagem">
-                    <img src="${image}" alt="${title}" loading="lazy" />
+                    <img src="${localImage}" alt="${title}" loading="lazy" onerror="this.onerror=null; this.src='${fallbackImage || localImage}';" />
                 </div>
             </article>
         `;
@@ -3368,7 +3398,7 @@ body {
 
     function renderCatalogo() {
         const videos = Array.isArray(playlistData?.videos) ? playlistData.videos : [];
-        const validVideos = videos.filter((video) => video && (video.thumbnailMaxRes || video.thumbnail));
+        const validVideos = videos.filter((video) => video && (video.numero || video.titulo || video.nome));
 
         catalogGrid.innerHTML = validVideos.length
             ? validVideos.map((video, index) => buildCard(video, index)).join('')

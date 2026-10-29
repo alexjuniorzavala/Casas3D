@@ -1,6 +1,13 @@
-const CACHE_NAME = "casas3d-media-cache-v4";
+const CACHE_NAME = "casas3d-media-cache-v5";
 const CACHE_TTL_MS = 30 * 24 * 60 * 60 * 1000;
 const META_KEY = "/__casas3d_media_cache_meta__";
+
+function normalizeCacheKey(url) {
+    const normalizedUrl = new URL(url);
+    normalizedUrl.search = "";
+    normalizedUrl.hash = "";
+    return normalizedUrl.href;
+}
 
 async function getCacheMeta(cache) {
     try {
@@ -72,14 +79,15 @@ self.addEventListener("fetch", function (event) {
     }
 
     const url = new URL(request.url);
-
     if (!isMediaRequest(url) || !isAllowedOrigin(url)) {
         return;
     }
 
+    const cacheKey = normalizeCacheKey(request.url);
+
     event.respondWith(
         caches.open(CACHE_NAME).then(async function (cache) {
-            const cachedResponse = await cache.match(request);
+            const cachedResponse = await cache.match(cacheKey);
             const meta = await getCacheMeta(cache);
             const now = Date.now();
 
@@ -89,18 +97,15 @@ self.addEventListener("fetch", function (event) {
 
             try {
                 const networkResponse = await fetch(request, { cache: "no-store" });
-
                 if (networkResponse && (networkResponse.status === 200 || networkResponse.type === "opaque")) {
-                    await cache.put(request, networkResponse.clone());
+                    await cache.put(cacheKey, networkResponse.clone());
                     await setCacheMeta(cache, now);
                 }
-
                 return networkResponse;
             } catch (error) {
                 if (cachedResponse) {
                     return cachedResponse;
                 }
-
                 throw error;
             }
         })
