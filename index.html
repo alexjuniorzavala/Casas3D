@@ -37,50 +37,245 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     margin: 0;
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
     background: #f5f7fa;
     color: #1f2937;
+    padding-top: 63px;
+    padding-bottom: 150px;
+}
+
+section[id], main[id], div[id] {
+    scroll-margin-top: 110px;
+}
+h3{
+    margin: 0 0 12px;
+    font-size: clamp(1.3rem, 3vw, 2.5rem);
+    line-height: 1.15;
+    letter-spacing: -0.04em;
+}
+h2{
+    margin: 0 0 4px;
+    font-size: clamp(1.3rem, 3vw, 2.5rem);
+
+    letter-spacing: -0.04em;
+}
+
+p{
+    margin: 0 0 18px;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: rgba(31, 41, 55, 0.9);
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: rgba(10, 18, 30, 0.72);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(148, 163, 184, 0.16);
+    box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
+}
+
+.navbar-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 10px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    min-height: 62px;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.nav-links a {
+    padding: 9px 12px;
+    border-radius: 999px;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    transition: all 0.2s ease;
+}
+
+.nav-links a:hover,
+.nav-links a:focus,
+.nav-links a:active {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.07);
 }
 
 .header {
-    background: linear-gradient(135deg, #172554, #2563eb);
+    overflow-y: scroll;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    min-height: 540px;
+    padding: 120px 4px 4px;
     color: white;
-    padding: 35px 18px;
-    text-align: center;
+    text-align: left;
+}
+.header div img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+
 }
 
-.header h1 {
-    margin: 0;
-    font-size: 26px;
-    line-height: 1.2;
+.header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(10, 18, 38, 0.18), rgba(10, 18, 38, 0.7));
 }
 
-.header p {
-    margin: 10px 0 0;
-    font-size: 14px;
-    opacity: 0.9;
+.header-content {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 1240px);
+    display: flex;
+    justify-content: flex-end;
 }
 
-.contador-visitas {
+.hero-card {
+	max-width: 520px;
+	background: rgba(15, 23, 42, 0.72);
+	border: 1px solid rgba(148, 163, 184, 0.3);
+	border-radius: 12px;
+	padding: 24px 28px;
+	box-shadow: 0 24px 50px rgba(15, 23, 42, 0.25);
+	backdrop-filter: blur(6px);
+}
+
+.hero-card h3 {
+    margin: 0 0 12px;
+    font-size: clamp(1.3rem, 3vw, 2.5rem);
+    line-height: 1.15;
+    letter-spacing: -0.04em;
+    color: #fff;
+}
+
+.hero-card p {
+    margin: 0 0 18px;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.hero-price {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 800;
+    font-size: clamp(1.40rem, 5vw, 3.1rem);
+    line-height: 1;
+    color: #facc15;
+    letter-spacing: -0.04em;
+}
+
+.hero-subtitle {
+    display: block;
+    margin-bottom: 12px;
+    font-size: 0.73rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #dbeafe;
+}
+
+.hero-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    margin-top: 18px;
-    padding: 8px 16px;
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.12);
-    border: 1px solid rgba(255, 255, 255, 0.22);
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: 0.02em;
+    width: 100%;
+    min-height: 40px;
+    border: none;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #2234c5, #11a045);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 800;
+    text-decoration: none;
+    box-shadow: 0 6px 10px rgba(34, 197, 94, 0.3);
 }
 
-.contador-visitas strong {
-    font-size: 15px;
+.hero-note {
+    display: block;
+    margin-top: 12px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+
+.contador-visitas {
+    display: none;
+}
+
+.catalog-filter-bar {
+    position: fixed;
+    left: 50%;
+    bottom: 88px;
+    transform: translateX(-50%);
+    z-index: 1001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    width: min(100% - 18px, 640px);
+    padding: 8px 10px;
+    border: 1px solid rgba(148, 163, 184, 0.22);
+    background: rgba(15, 23, 42, 0.74);
+    backdrop-filter: blur(14px);
+    border-radius: 999px;
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.15);
+}
+
+.filter-chip {
+    appearance: none;
+    border: 1px solid rgba(148, 163, 184, 0.24);
+    background: rgba(255, 255, 255, 0.04);
+    color: rgba(255, 255, 255, 0.82);
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 0.76rem;
+    font-weight: 700;
+    line-height: 1;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.filter-chip:hover,
+.filter-chip:focus {
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+}
+
+.filter-chip.is-active {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    border-color: transparent;
+    color: #fff;
+    box-shadow: 0 8px 18px rgba(34, 197, 94, 0.28);
 }
 
 .cta-bar {
@@ -113,6 +308,7 @@ body {
     text-decoration: none;
     box-shadow: 0 10px 28px rgba(34, 197, 94, 0.35);
     transition: transform 0.2s ease, filter 0.2s ease;
+    animation: pulseCTA 1.8s infinite;
 }
 
 .cta-botao:hover {
@@ -123,30 +319,50 @@ body {
     transform: scale(0.985);
 }
 
-body {
-    padding-bottom: 98px;
+@keyframes pulseCTA {
+    0% {
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.55);
+    }
+    70% {
+        box-shadow: 0 0 0 12px rgba(34, 197, 94, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+    }
 }
+
+@media (prefers-reduced-motion: reduce) {
+    .cta-botao,
+    .filter-chip {
+        animation: none;
+        transition: none;
+    }
+}
+
 
 .video-destaque {
-    width: 100%;
-    max-width: 1200px;
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 10px 28px rgba(34, 197, 94, 0.35);
     margin: 26px auto 0;
-    padding: 0 12px;
+    padding: 16px 12px;
+    width: 95%;
 }
 
-.video-destaque h2 {
-    margin: 0 0 14px;
-    font-size: clamp(24px, 3vw, 36px);
-    color: #172554;
+.video-destaque h3 {
     text-align: center;
+    font-weight:900;
+    margin: 0 0 14px;
+    font-size: clamp(1.3rem, 3vw, 2.5rem);
+    color: #172554;
 }
+
 
 .video-container {
     width: 100%;
-    border-radius: 18px;
+    border-radius: 8px;
     overflow: hidden;
     background: #0f172a;
-    box-shadow: 0 10px 28px rgba(15, 23, 42, 0.12);
 }
 
 .video-container video {
@@ -155,6 +371,123 @@ body {
     height: auto;
     max-height: 70vh;
     background: #000;
+}
+
+.offers-cards, .casas-tamanhos {
+    border-radius: 14px;
+    background: white;
+    padding: 16px 12px;
+    box-shadow: 0 10px 28px rgba(34, 197, 94, 0.35);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    max-width: 1240px;
+    width: 95%;
+    margin: 40px auto 0;
+}
+
+.images-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 8px;
+}
+
+.offer-card, .tamanhos-card {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #f1f5f9;
+    padding: 16px 12px;
+
+}
+
+
+.offer-card h3, .tamanhos-card h3 {
+    align-items: center;
+    margin: 0 0 2px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.offer-card p {
+    text-align: left;
+    margin: 0 0 4px;
+    color: #475569;
+}
+
+/* Image on the right side */
+.offer-card .right-side{
+    order: 2;
+}
+
+.offer-card .right-side img, .casas-tamanhos img {
+    display: block;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 9px;
+    background: #e5e7eb;
+}
+
+.ideal-para {
+    max-width: 1240px;
+    width: 95%;
+    margin: 40px auto 0;
+    padding: 24px 12px 0;
+}
+
+.ideal-para h2 {
+    margin: 0 0 20px;
+    text-align: center;
+    color: #172554;
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+}
+
+.ideal-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+}
+
+.ideal-card {
+    background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    border-radius: 16px;
+    padding: 20px 18px;
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+    text-align: left;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ideal-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 28px rgba(34, 197, 94, 0.12);
+}
+
+.ideal-image {
+    display: block;
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 14px;
+    box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
+}
+
+.ideal-card h3 {
+    margin: 0 0 8px;
+    color: #111827;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.ideal-card p {
+    margin: 0;
+    color: #475569;
+    line-height: 1.6;
 }
 
 .catalogo {
@@ -227,7 +560,7 @@ body {
 
 @media (min-width: 600px) {
     .header { padding: 45px 25px; }
-    .header h1 { font-size: 32px; }
+    .header h3 { font-size: 24px; }
     .catalogo { padding: 25px 20px 50px; }
     .nome { padding: 18px 20px 14px; font-size: 19px; }
     .imagem { padding: 0 15px 15px; }
@@ -235,7 +568,7 @@ body {
 
 @media (min-width: 900px) {
     .header { padding: 55px 30px; }
-    .header h1 { font-size: 38px; }
+    .header h3 { font-size: 24px; }
     .header p { font-size: 16px; }
     .catalogo { padding: 30px 25px 60px; }
     .nome { padding: 20px 22px 15px; font-size: 20px; }
@@ -247,31 +580,163 @@ body {
 }
 </style>
 </head>
-<body>
-<header class="header">
-    <h1>Catálogo de Casas 3D </h1>
-    <p>Explore +300 opçoes de casas <strong></strong> com design moderno</p>
-    <div class="contador-visitas" aria-live="polite">
-        <span>Acessos:</span>
-        <strong id="visitas-valor">Carregando...</strong>
+<body id="top">
+<nav class="navbar" aria-label="Navegação principal">
+    <div class="navbar-inner">
+        <div class="nav-links">
+            <a href="#inicio">Início</a>
+            <a href="#catalogo">Catálogo</a>
+            <a href="#video">Vídeo</a>
+            <a href="#contato">Contato</a>
+        </div>
+    </div>
+</nav>
+
+<header id="inicio" class="header">
+  <div><img src="imgs/Hero" alt=""></div>
+    <div class="header-content">
+        <div class="hero-card">
+            <h3>Veja a sua futura casa antes de construir! 🏡</h3>
+            <p>Explore mais de 300 modelos de casas modernas em 3D, com visualização interior e exterior e plantas com dimensões e medidas.</p>
+            <span class="hero-price">200 MT</span>
+            <span class="hero-subtitle">ACESSO PROMOCIONAL A +300 MODELOS</span>
+            <a class="hero-button" href="https://wa.me/842922516/?text=Quero+ter+acesso+as+casas" target="_blank" rel="noopener noreferrer">Quero ter acesso às casas</a>
+            <small class="hero-note">Veja primeiro os modelos no catálogo.</small>
+        </div>
     </div>
 </header>
 
-<section class="video-destaque" aria-label="Vídeo de apresentação">
-    <h2>Veja como sao os videos</h2>
+<section id="video" class="video-destaque" aria-label="Vídeo de apresentação">
+    <h3>Não são apenas fotografias. Explore as casas em 3D!</h3>
     <div class="video-container">
         <video autoplay muted loop playsinline controls>
             <source src="Videos/Casas3D16p9.mp4" type="video/mp4">
             Seu navegador não suporta vídeos em HTML5.
         </video>
     </div>
+    <p>Veja como são os nossos vídeos e descubra como pode explorar visualmente os espaços interiores e exteriores de diferentes modelos de casas.</p>
 </section>
 
-<main class="catalogo">
+
+<section class="offers-cards" aria-label="O que você vai receber">
+    <h2>O que você vai receber?</h2>
+    <div class="offer-card">
+      <div class="right-side offer-card-content images-grid">
+        <img src="imgs/304 - Tiny house Design ｜ 6m x 7m ｜ Beautiful Box Type House.jpg" alt="">
+        <img src="imgs/324 - Simple and Modern Small House Design ｜ 5m x 9m (45sqm).jpg" alt="">
+        <img src="imgs/130 - Modern House Design with swimming pool ｜ 18m x 20m.jpg" alt="">
+        <img src="imgs/251 - Lovely House Design with 3Bedrooms ｜ 9m x 11m House plan.jpg" alt="Modelo de casa 1">
+      </div>
+      <div class="left-side offer-card-content">
+          <h3>+300 modelos de casas</h3>
+          <p>Diferentes estilos, dimensões e propostas</p>
+        </div>
+    </div>
+    <div class="offer-card">
+      <div class="right-side offer-card-content">
+        <img src="imgs/107 - Small House Design ｜ 2Storey House ｜ 7m x 9m with 3Bedrooms.jpg" alt="Modelo de casa 2">
+      </div>
+      <div class="left-side offer-card-content">
+          <h3>Vídeos 3D realistas</h3>
+          <p>Explore visualmente o interior e exterior das casas.</p>
+        </div>
+    </div>
+    <div class="offer-card">
+      <div class="right-side offer-card-content">
+        <img src="imgs/011 - Small House Design ｜ Bangalow 5,8x5,8 Meter (34sqm).jpg" alt="Modelo de casa 3">
+      </div>
+      <div class="left-side offer-card-content">
+          <h3>Plantas com medidas</h3>
+          <p>Consulte as medidas e a distribuição dos compartimentos.</p>
+        </div>
+    </div>
+    <div class="offer-card">
+      <div class="right-side offer-card-content images-grid">
+        <img src="imgs/071 - House Design ｜ Simple House Design ｜ 10m x 16m with Swimming pool.jpg" alt="">
+        <img src="imgs/122 - Small House Design ｜ Simple House ｜ 5m x 11m with 3Bedroom.jpg" alt="">
+        <img src="imgs/125 - House Design ｜ 2 Storey House ｜ 12m x 12m with 5 Bedrooms.jpg" alt="">
+        <img src="imgs/294 - House Design ｜ Modern House ｜ 7m x 9m  2Storey ｜ 3 Bedrooms.jpg" alt="Modelo de casa 1">      </div>
+      <div class="left-side offer-card-content">
+          <h3>Inspiração para design</h3>
+          <p>Descubra cores, mobiliário, iluminação e acabamentos.</p>
+        </div>
+    </div>
+</section>
+
+<section class="casas-tamanhos" aria-label="Casas pequenas, médias e grandes">
+    <h2>Explore os diferentes tipos de casas</h2>
+    <div class="tamanhos-card">
+      <h3>Pequenas</h3>
+      <p>Para quem procura aproveitar melhor o espaço.</p>
+      <img src="imgs/155 - Modern small House ｜ 7m x 7m Design with Box Type.jpg" alt="">
+    </div>
+    <div class="tamanhos-card">
+      <h3>Médias</h3>
+      <p>Para quem procura um equilíbrio entre espaço e funcionalidade.</p>
+      <img src="imgs/075 - House Design ｜ Modern House 2 Storey  ｜ 9m x 12m with 4 Bedrooms.jpg" alt="">
+    </div>
+    <div class="tamanhos-card">
+      <h3>Grandes</h3>
+      <p>Para quem procura espaços amplos e elegantes.</p>
+      <img src="imgs/123 - Modern House ｜ 2 Storey House Design ｜ 15m x 17m with 5 Bedrooms.jpg" alt="">
+    </div>
+</section>
+
+<section class="ideal-para" aria-label="Para quem é este catálogo">
+  <div class="ideal-grid">
+    <article class="ideal-card">
+      <h2>Ideal para quem?</h2>
+        <img class="ideal-image" src="imgs/planear.png" alt="Casa moderna exterior" />
+        <h3>Está a planear construir</h3>
+        <p>Visualiza a casa ideal antes de tomar decisões importantes no projeto.</p>
+    </article>
+
+    <article class="ideal-card">
+        <img class="ideal-image" src="imgs/visualizar.png" alt="Interior moderno de casa" />
+        <h3>Quer ver antes de construir</h3>
+        <p>Explora o interior e exterior das casas para sentir a proposta antes do início.</p>
+    </article>
+
+    <article class="ideal-card">
+        <img class="ideal-image" src="imgs/inspiracao.png" alt="Sala de estar elegante" />
+        <h3>Procura inspiração</h3>
+        <p>Descobre estilos modernos, acabamentos e combinações de cores para o seu projeto.</p>
+    </article>
+
+    <article class="ideal-card">
+        <img class="ideal-image" src="imgs/referencias.png" alt="Equipe de construção e obra" />
+        <h3>Precisa de referências</h3>
+        <p>Mostra ideias ao pedreiro ou equipa de obra com exemplos claros e visuais.</p>
+    </article>
+
+    <article class="ideal-card">
+        <img class="ideal-image" src="imgs/plantas.png" alt="Plantas e projeto de arquitetura" />
+        <h3>Quer plantas com medidas</h3>
+        <p>Consulta layouts e dimensões para comparar soluções antes de construir.</p>
+    </article>
+
+    <article class="ideal-card">
+        <img class="ideal-image" src="imgs/luxuosa.png" alt="Casa elegante moderna" />
+        <h3>Sonha com uma casa elegante</h3>
+        <p>Encontra modelos modernos, luxuosos e funcionais para diferentes perfis.</p>
+    </article>
+  </div>
+</section>
+
+<main id="catalogo" class="catalogo">
     <div id="catalog-grid" class="catalog-grid" aria-live="polite"></div>
 </main>
 
-<div class="cta-bar">
+<div class="catalog-filter-bar" aria-label="Filtrar casas por tipo">
+    <button class="filter-chip is-active" data-filter="all" type="button">Todos</button>
+    <button class="filter-chip" data-filter="T1" type="button">T1</button>
+    <button class="filter-chip" data-filter="T2" type="button">T2</button>
+    <button class="filter-chip" data-filter="T3" type="button">T3</button>
+    <button class="filter-chip" data-filter="T4" type="button">T4</button>
+    <button class="filter-chip" data-filter="T6" type="button">T6</button>
+</div>
+
+<div id="contato" class="cta-bar">
     <a class="cta-botao" href="https://wa.me/842922516/?text=Quero+comprar+as+casas+agora" target="_blank" rel="noopener noreferrer">Comprar tudo (200MT)</a>
 </div>
 
@@ -3375,6 +3840,8 @@ body {
 <script>
     const catalogGrid = document.getElementById('catalog-grid');
     const playlistData = JSON.parse(document.getElementById('playlist-casas-data').textContent);
+    const filterButtons = Array.from(document.querySelectorAll('.filter-chip'));
+    let activeFilter = 'all';
 
     function normalizeThumbnailTitle(value) {
         return String(value || '')
@@ -3382,6 +3849,23 @@ body {
             .replace(/\s*\|\s*/g, ' ｜ ')
             .replace(/\s+/g, ' ')
             .trim();
+    }
+
+    function getHouseTypeFromTitle(title) {
+        const normalizedTitle = String(title || '').toLowerCase();
+        const bedroomMatch = normalizedTitle.match(/(\d+)\s*(?:bedroom|bedrooms|quarto|quartos)/i);
+
+        if (!bedroomMatch) {
+            return null;
+        }
+
+        const bedrooms = Number(bedroomMatch[1]);
+
+        if (![1, 2, 3, 4, 6].includes(bedrooms)) {
+            return null;
+        }
+
+        return `T${bedrooms}`;
     }
 
     function getLocalThumbnailUrl(video, fallbackTitle = '') {
@@ -3417,11 +3901,22 @@ body {
     function renderCatalogo() {
         const videos = Array.isArray(playlistData?.videos) ? playlistData.videos : [];
         const validVideos = videos.filter((video) => video && (video.numero || video.titulo || video.nome));
+        const filteredVideos = activeFilter === 'all'
+            ? validVideos
+            : validVideos.filter((video) => getHouseTypeFromTitle(video.titulo || video.nome || '') === activeFilter);
 
-        catalogGrid.innerHTML = validVideos.length
-            ? validVideos.map((video, index) => buildCard(video, index)).join('')
-            : '<div class="empty-state">Nenhuma imagem foi encontrada na playlist informada.</div>';
+        catalogGrid.innerHTML = filteredVideos.length
+            ? filteredVideos.map((video, index) => buildCard(video, index)).join('')
+            : '<div class="empty-state">Nenhuma casa encontrada para este tipo.</div>';
     }
+
+    filterButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+            activeFilter = button.dataset.filter || 'all';
+            filterButtons.forEach((chip) => chip.classList.toggle('is-active', chip === button));
+            renderCatalogo();
+        });
+    });
 
     renderCatalogo();
 
