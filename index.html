@@ -84,6 +84,12 @@ p{
     background: rgba(10, 18, 30, 0.72);
     border-bottom: 1px solid rgba(148, 163, 184, 0.16);
     box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
+    transform: translateY(0);
+    transition: transform 0.22s ease;
+}
+
+.navbar.is-hidden {
+    transform: translateY(-110%);
 }
 
 .navbar-inner {
@@ -584,9 +590,8 @@ p{
     <div class="navbar-inner">
         <div class="nav-links">
             <a href="#inicio">Início</a>
-            <a href="#catalogo">Catálogo</a>
+            <a href="#catalogo">Modelos</a>
             <a href="#video">Vídeo</a>
-            <a href="#contato">Contato</a>
         </div>
     </div>
 </nav>
@@ -696,7 +701,7 @@ p{
 
     <article class="ideal-card">
       <h3>Quer ver antes de construir</h3>
-      <p>Explora o interior e exterior das casas para sentir a proposta antes do início.</p>
+      <p>Explora o interior e exterior das casas para <strong>SENTIR</strong> a proposta antes do início.</p>
         <img class="ideal-image" src="imgs/visualizar.png" alt="Interior moderno de casa" />
     </article>
 
@@ -731,6 +736,7 @@ p{
 </main>
 
 <div class="catalog-filter-bar" aria-label="Filtrar casas por tipo">
+    <span style="color: white;">Tipos:</span>
     <button class="filter-chip is-active" data-filter="all" type="button">Todos</button>
     <button class="filter-chip" data-filter="T1" type="button">T1</button>
     <button class="filter-chip" data-filter="T2" type="button">T2</button>
@@ -3845,9 +3851,25 @@ p{
 }</script>
 <script>
     const catalogGrid = document.getElementById('catalog-grid');
+    const navbar = document.querySelector('.navbar');
     const playlistData = JSON.parse(document.getElementById('playlist-casas-data').textContent);
     const filterButtons = Array.from(document.querySelectorAll('.filter-chip'));
     let activeFilter = 'all';
+    let lastScrollY = window.scrollY;
+
+    function updateNavbarVisibility() {
+        if (!navbar) return;
+
+        const currentScrollY = window.scrollY;
+        const shouldHide = currentScrollY > lastScrollY && currentScrollY > 80;
+
+        navbar.classList.toggle('is-hidden', shouldHide);
+        lastScrollY = currentScrollY;
+    }
+
+    window.addEventListener('scroll', () => {
+        window.requestAnimationFrame(updateNavbarVisibility);
+    }, { passive: true });
 
     const PROMO_STORAGE_KEY = 'casas3d_promo_deadline';
 
@@ -3969,11 +3991,22 @@ p{
             : '<div class="empty-state">Nenhuma casa encontrada para este tipo.</div>';
     }
 
+    function scrollToCatalogSection() {
+        const catalogSection = document.getElementById('catalogo');
+        if (!catalogSection) return;
+
+        catalogSection.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+    }
+
     filterButtons.forEach((button) => {
         button.addEventListener('click', () => {
             activeFilter = button.dataset.filter || 'all';
             filterButtons.forEach((chip) => chip.classList.toggle('is-active', chip === button));
             renderCatalogo();
+            scrollToCatalogSection();
         });
     });
 
