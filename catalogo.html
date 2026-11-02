@@ -3269,26 +3269,98 @@
     const catalogGrid = document.getElementById('catalog-grid');
     const playlistData = JSON.parse(document.getElementById('playlist-casas-data').textContent);
 
+    function escapeHtml(value) {
+      return String(value ?? '').replace(/[&<>"']/g, (char) => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+      }[char]));
+    }
+
+    function getCatalogTitle(video) {
+      const numero = Number(video?.numero ?? 0);
+      const rawTitle = String(video?.titulo || video?.nome || '').trim();
+      if (!rawTitle) return `Casa ${numero || ''}`.trim();
+
+      const text = rawTitle
+        .normalize('NFKC')
+        .replace(/\s*\|\s*/g, ' - ')
+        .replace(/\s+/g, ' ')
+        .trim();
+
+      return text
+        .replace(/\bHouse Design\b/gi, 'Casa')
+        .replace(/\bModern House\b/gi, 'Casa Moderna')
+        .replace(/\bSmall House\b/gi, 'Casa Pequena')
+        .replace(/\bSimple House\b/gi, 'Casa Simples')
+        .replace(/\bTiny House\b/gi, 'Casa Compacta')
+        .replace(/\bFarm House\b/gi, 'Casa Rural')
+        .replace(/\bFarmhouse\b/gi, 'Casa Rural')
+        .replace(/\bBungalow\b/gi, 'Bangalô')
+        .replace(/\bBox Type\b/gi, 'Tipo Caixa')
+        .replace(/\bLoft House\b/gi, 'Casa Loft')
+        .replace(/\bTrailer\b/gi, 'Trailer')
+        .replace(/\bSwimming pool\b/gi, 'Piscina')
+        .replace(/\bMezzanine floor\b/gi, 'Mezanino')
+        .replace(/\b2 Storey\b/gi, '2 andares')
+        .replace(/\b3 Storey\b/gi, '3 andares')
+        .replace(/\b4 Storey\b/gi, '4 andares')
+        .replace(/\b5 Storey\b/gi, '5 andares')
+        .replace(/\b6 Storey\b/gi, '6 andares')
+        .replace(/\bwith\b/gi, 'com')
+        .replace(/\band\b/gi, 'e')
+        .replace(/\bBedroom\b/gi, 'quarto')
+        .replace(/\bBedrooms\b/gi, 'quartos')
+        .replace(/\bbedroom\b/gi, 'quarto')
+        .replace(/\bbedrooms\b/gi, 'quartos')
+        .replace(/\s*[,;]+\s*/g, ' ')
+        .replace(/(\d+)\s*(quartos?|quarto)/gi, (_, numero) => `T${numero}`)
+        .replace(/\s+/g, ' ')
+        .trim();
+    }
+
+    function normalizeThumbnailTitle(value) {
+      return String(value || '')
+        .normalize('NFKC')
+        .replace(/\s*\|\s*/g, ' ｜ ')
+        .replace(/\s+/g, ' ')
+        .trim();
+    }
+
+    function getLocalThumbnailUrl(video, fallbackTitle = '') {
+      if (!video) return '';
+
+      const numero = Number(video.numero ?? 0);
+      const title = normalizeThumbnailTitle(video.titulo || video.nome || fallbackTitle || `Casa ${numero}`);
+
+      if (!numero && !title) return '';
+
+      return `./thumbnailsYT/${String(numero).padStart(3, '0')} - ${title}.jpg`;
+    }
+
     function buildCard(video, index) {
       const number = video.numero || index + 1;
-      const title = (video.titulo || video.nome || 'Casa 3D').replace(/s+/g, ' ').trim();
-      const image = video.thumbnailMaxRes || video.thumbnail || '';
+      const title = getCatalogTitle(video).replace(/\s+/g, ' ').trim();
+      const localImage = getLocalThumbnailUrl(video, title);
+      const fallbackImage = video.thumbnailMaxRes || video.thumbnail || '';
       const url = video.url || '#';
 
       return `
         <article class="casa">
           <div class="nome">
             <span class="numero">${number}</span>
-            <span>${title}</span>
+            <span>${escapeHtml(title)}</span>
           </div>
 
           <div class="imagem">
-            <img src="${image}" alt="${title}" loading="lazy" />
+            <img src="${escapeHtml(localImage)}" alt="${escapeHtml(title)}" loading="lazy" onerror="this.onerror=null; this.src='${escapeHtml(fallbackImage || localImage)}';" />
           </div>
 
           <div class="card-meta">
             <span class="meta-tag">Casa ${number}</span>
-            <a class="video-link" href="${url}" target="_blank" rel="noreferrer noopener">Ver no YouTube</a>
+            <a class="video-link" href="${escapeHtml(url)}" target="_blank" rel="noreferrer noopener">Ver no YouTube</a>
           </div>
         </article>
       `;
@@ -3296,7 +3368,7 @@
 
     function renderCatalogo() {
       const videos = Array.isArray(playlistData?.videos) ? playlistData.videos : [];
-      const validVideos = videos.filter((video) => video && (video.thumbnailMaxRes || video.thumbnail));
+      const validVideos = videos.filter((video) => video && (video.numero || video.titulo || video.nome));
 
       catalogGrid.innerHTML = validVideos.length
         ? validVideos.map((video, index) => buildCard(video, index)).join('')

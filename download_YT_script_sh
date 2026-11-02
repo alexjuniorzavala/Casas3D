@@ -1,0 +1,1 @@
+yt-dlp --skip-download --write-thumbnail --convert-thumbnails jpg   -o "%(playlist_index)03d - %(title)s.%(ext)s"   "https://www.youtube.com/playlist?list=PLGGCCGavSUJOSJxW_joMjs7kw0qX2QLI5"

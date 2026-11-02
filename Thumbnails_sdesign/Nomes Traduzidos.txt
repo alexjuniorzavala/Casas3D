@@ -1,0 +1,174 @@
+1. Casa 1 — Casa simples | Ideia de design de casa | 12m x 8m (96m²) | 3 quartos
+2. Casa 2 — Linda casa simples | Ideia de design de casa | 8m x 11m com 2 quartos
+3. Casa 3 — Casa simples | Ideia de design de casa | 12m x 18m (216 m²) | 3 quartos
+4. Casa 4 — Ideia de design de casa simples | 9m x 12m (108m²) | 3 quartos
+5. Casa 5 — Casa simples | Ideia de design de casa | 8,5m x 16m (136m²) | 4 quartos
+6. Casa 6 — Ideia de design de casa | 10m x 14m (140 m²) | 4 quartos
+7. Casa 7 — Casa simples | Ideia de design de casa | 15m x 10m com 3 quartos
+8. Casa 8 — Ideia de design de casa | Casa simples | 11m x 15m com 3 quartos
+9. Casa 9 — Ideia de design de casa simples | 11m x 14m com 3 quartos
+10. Casa 10 — Ideia de design de casa simples | 12m x 20m com 3 quartos
+11. Casa 11 — Casa pequena | Ideia de design de casa | 7,5m x 9m com 2 quartos
+12. Casa 12 — Ideia de design de casa | 16m x 11m (176m²) | 3 quartos
+13. Casa 13 — Ideia de design de casa simples | 14m x 15m (130m²) | 3 quartos
+14. Casa 14 — Ideia de design de casa | Casa pequena 7m x 11m | 3 quartos
+15. Casa 15 — Casa simples | Design de casa com piscina | 15m x 9m (3 quartos)
+16. Casa 16 — Ideia de design de casa | Casa moderna de 2 andares | 9m x 11m (4 quartos)
+17. Casa 17 — Casa moderna | Design     de casa 12m x 16m, um pavimento (4 quartos)
+18. Casa 18 — Ideia de design de casa | Casa moderna 9m x 12m (108m²) | 3 quartos
+19. Casa 19 — Design de casa de 2 andares | 12m x 15m com 5 quartos (ideia de design)
+20. Casa 20 — Linda casa simples | Design de casa 4,2m x 9,5m com 2 quartos
+21. Casa 21 — Ideia de design de casa | Casa moderna 9m x 11m (99m²)
+22. Casa 22 — Casa moderna de um pavimento | 10m x 12m (3 quartos)
+23. Casa 23 — Design de casa de um pavimento | Design com 3 quartos (15m x 11m)
+24. Casa 24 — Casa moderna de um pavimento | 11m x 16m com 3 quartos
+25. Casa 25 — Ideia moderna de casa de 2 andares | 6m x 10m (3 quartos)
+26. Casa 26 — Ideia moderna de design de casa | 10m x 14m (140m²) | 3 quartos
+27. Casa 27 — Ideia de design de casa simples | 9,5m x 12m (114m²) | 3 quartos
+28. Casa 28 — Ideia de design de casa | Casa moderna 7,5m x 9m (68m²)
+29. Casa 29 — Ideia de design de casa | Casa moderna 8m x 14m (112m²)
+30. Casa 30 — Ideia de design de casa simples | 8m x 9,5m (76m²) | 2 quartos
+31. Casa 31 — Ideia moderna de design de casa | 11m x 11m (121m²) | 2 quartos
+32. Casa 32 — Casa simples | Ideia de design de casa | 9m x 12m (3 quartos)
+33. Casa 33 — Casa pequena moderna de 2 andares | 7,5m x 9m com 5 quartos
+34. Casa 34 — Casa simples | Ideia de design de casa | 6m x 9m com piscina
+35. Casa 35 — Casa pequena moderna | Ideia de design de casa | 6m x 9m (2 quartos)
+36. Casa 36 — Ideia moderna de design de casa | 12m x 15m, 2 andares | 4 quartos
+37. Casa 37 — Design de casa pequena moderna | Casa simples 6m x 8m
+38. Casa 38 — Casa moderna | Ideia de design de casa | 7,5m x 11m com piscina
+39. Casa 39 — Casa simples | Ideia de design de casa | 10m x 15m com 4 quartos
+40. Casa 40 — Casa moderna | Ideia de design de casa | 15m x 10m com estacionamento
+41. Casa 41 — Casa moderna de 2 andares | 9m x 11m com 4 quartos
+42. Casa 42 — Casa simples | Ideia de design de casa | 7,5m x 9m
+43. Casa 43 — Ideia moderna de design de casa | 9m x 10m, 2 andares (4 quartos)
+44. Casa 44 — Casa moderna | Ideia de design de casa | 7m x 9,5m com piscina
+45. Casa 45 — Casa simples | Ideia de design de casa | 10m x 12m com piscina
+46. Casa 46 — Casa moderna | Ideia de design de casa | 9m x 15m com 2 vagas de estacionamento
+47. Casa 47 — Casa simples | Ideia de design de casa | 11m x 7m, planta da casa
+48. Casa 48 — Casa moderna | Ideia de design de casa | 7,5m x 9,5m, 2 andares
+49. Casa 49 — Design de casa simples, 3 quartos | 9m x 12m (108m²)
+50. Casa 50 — Design de casa moderna, 3 quartos | 10m x 15m (150m²)
+51. Casa 51 — Design de casa moderna, 5 quartos | 12m x 18m (216m²)
+52. Casa 52 — Casa simples | Ideia de design de casa moderna | 9,5m x 12m
+53. Casa 53 — Ideia de design de casa moderna | 11m x 15m, 2 andares (5 quartos)
+54. Casa 54 — Casa simples | Ideia de design de casa | 7m x 9m com jardim
+55. Casa 55 — Ideia de design de casa simples | 6m x 9m, planta da casa (2 quartos)
+56. Casa 56 — Casa simples | Ideia de design de casa | 9m x 9m, 2 quartos (81m²)
+57. Casa 57 — Design de casa simples e bonita com piscina | 8m x 11m (2 quartos)
+58. Casa 58 — Design de casa moderna | Casa de 2 andares 7m x 9m (3 quartos)
+59. Casa 59 — Casa moderna | Ideia de design de casa | 9,5m x 11m com estacionamento
+60. Casa 60 — Casa simples | Ideia de design de casa 9,5m x 5m (tipo caixa)
+61. Casa 61 — Casa moderna | Ideia de design de casa | 11m x 15m, 3 quartos com 2 vagas de estacionamento
+62. Casa 62 — Casa simples | Ideia de design de casa | 9,2m x 12m, 3 quartos (110m²)
+63. Casa 63 — Casa simples | Ideia de design de casa | 9,7m x 11m (2 quartos)
+64. Casa 64 — Casa moderna | Ideia de design de casa | 11m x 12m (132m²) | 3 quartos
+65. Casa 65 — Casa pequena moderna | Ideia de design de casa | 6m x 9m (54m²) | 2 quartos
+66. Casa 66 — Casa moderna | Ideia de design de casa | 8m x 13,5m (4 quartos)
+67. Casa 67 — Casa moderna | Ideia de design de casa | 9m x 12m (3 quartos)
+68. Casa 68 — Casa pequena moderna | Ideia de design de casa | 6,2m x 7,5m (2 quartos)
+69. Casa 69 — Design de casa moderna e pequena | 2 andares 4,5m x 7m (2 quartos)
+70. Casa 70 — Casa simples e moderna | 7,5m x 11m com 2 quartos
+71. Casa 71 — Design de casa moderna | 9,7m x 7,2m, planta da casa com 2 quartos
+72. Casa 72 — Casa simples | Ideia de design de casa | 7m x 12m (2 quartos)
+73. Casa 73 — Casa moderna | Ideia de design de casa | 6,9m x 9m com piscina
+74. Casa 74 — Ideia de design de casa moderna | 7,5m x 9m (2 quartos)
+75. Casa 75 — Ideia moderna de design de casa | 2 andares 6m x 7m, 3 quartos
+76. Casa 76 — Casa moderna | Ideia de design de casa 10m x 10m | 3 quartos
+77. Casa 77 — Casa simples | Ideia de design de casa | 7m x 11m, 3 quartos
+78. Casa 78 — Casa moderna | Ideia de design de casa | 11m x 16m com 4 quartos
+79. Casa 79 — Casa simples e moderna | 9m x 14m (126m²) | 3 quartos
+80. Casa 80 — Casa simples e moderna | 6m x 11m (66m²), tipo caixa
+81. Casa 81 — Design de casa moderna | 10m x 12m com piscina | 3 quartos
+82. Casa 82 — Casa pequena e moderna | 2 quartos | 7,5m x 9m, planta da casa
+83. Casa 83 — Ideia de casa moderna e simples | 7m x 10m, 2 quartos
+84. Casa 84 — Design de casa simples | 8,5m x 12m, planta da casa (3 quartos)
+85. Casa 85 — Casa moderna de 2 andares | 7m x 9m, 3 quartos (Casa dos Sonhos)
+86. Casa 86 — Casa moderna dos sonhos | 9m x 12m, planta da casa (3 quartos)
+87. Casa 87 — O melhor design de casa moderna | 15m x 17m, 2 andares com 6 quartos
+88. Casa 88 — Design de casa perfeita | Casa moderna 6m x 11m (3 quartos)
+89. Casa 89 — Casa pequena moderna | Planta da casa 5m x 8m (Casa simples)
+90. Casa 90 — Casa pequena simples e moderna | 5m x 9m, 2 quartos (espaço pequeno)
+91. Casa 91 — Design de casa moderna incrível com estacionamento | 10m x 12m (3 quartos)
+92. Casa 92 — Casa simples | Ideia de design de casa | 7m x 10m (simples e moderno)
+93. Casa 93 — Experimente o luxo de uma casa moderna de 9m x 9m com piscina | 3 quartos
+94. Casa 94 — Casa simples | 7,2m x 7,2m, tipo caixa | 2 quartos
+95. Casa 95 — Design de casa moderna e simples | 7m x 9m | Casa de dois quartos
+96. Casa 96 — Projeto da casa 8m x 9m, 3 quartos (2 andares)
+97. Casa 97 — Casa simples | Ideia de design de casa | 6m x 9m com piscina (5 quartos)
+98. Casa 98 — Design de casa moderna | 10m x 15m, planta da casa | 4 quartos
+99. Casa 99 — Ideia de design de casa simples | 12 x 12 metros, 3 quartos | 109m², tour pela casa
+100. Casa 100 — Casa simples | 9 x 12 metros, ideia de design de casa | 3 quartos
+101. Casa 101 — Casa moderna | Design de casa de 2 andares | 7 x 9 metros (4 quartos)
+102. Casa 102 — Casa perfeita para um casal – 6,2 x 11 metros (simples e aconchegante)
+103. Casa 103 — Casa simples e moderna | 9 x 11 metros, planta da casa | 2 estacionamentos
+104. Casa 104 — Design de casa moderna | 9,7 x 20 metros, planta baixa | 3 quartos
+105. Casa 105 — Casa moderna | Ideia de design de casa | 12 x 18 metros | 3 quartos
+106. Casa 106 — O mais belo design de casa moderna com piscinas | 9 x 15 metros (3 quartos)
+107. Casa 107 — A melhor casa moderna com piscina | 10 x 19 metros, planta da casa (179m²)
+108. Casa 108 — Design de casa moderna | Design em um pequeno terreno | 8,5 x 11 metros (3 quartos)
+109. Casa 109 — Casa moderna | 9 x 9 metros | Design de casa de luxo com 3 quartos
+110. Casa 110 — Design de casa moderna com a vista de piscina mais incrível | 6,5 x 9,5 metros
+111. Casa 111 — Design de casa simples e moderno | 7 x 10 metros (por dentro do mais bonito)
+112. Casa 112 — Design de casa moderna | 9 x 12 metros (simples e moderno) | 3 quartos
+113. Casa 113 — Casa simples e moderna | Ideia de design de casa | 6m x 9m com 2 quartos
+114. Casa 114 — Design de casa moderna | Casa de 2 andares | 7 x 11 metros com 3 quartos
+115. Casa 115 — Design de casa moderna | 10 x 14 metros (acolhedor e moderno) | 4 quartos
+116. Casa 116 — Design de casa simples e moderno | 10 x 10 metros | 3 quartos
+117. Casa 117 — Design de casa moderna | 7 x 11 metros (casa incrível) | 3 quartos
+118. Casa 118 — Design de casa moderna | 7 x 9 metros, 2 andares | 3 quartos (acolhedores e modernos)
+119. Casa 119 — Design de casa moderna | 12 x 12 metros, 2 andares | 4 quartos (interior moderno)
+120. Casa 120 — Ideia de design de casa moderna | 6 x 9 metros (simples e moderno) | 2 quartos
+121. Casa 121 — Design de casa moderna e simples | Casa de 2 andares | 7 x 11 metros com 4 quartos
+122. Casa 122 — Design de casa moderna com piscina | 7,5 x 9 metros | 2 quartos
+123. Casa 123 — Design de casa simples e moderno | 9 x 20 metros | Casa de 3 quartos
+124. Casa 124 — Design de casa moderna de 2 andares | 7,5m x 9,5m | Tour por casa de 4 quartos
+125. Casa 125 — Design de casa moderna 9,3 x 12 metros
+126. Casa 126 — Ideia de design de casa moderna | 9 x 11 metros | Simples e moderno
+127. Casa 127 — Design de casa pequena simples e moderna | 5,2 x 7,5 metros | Casa de 2 andares
+128. Casa 128 — Ideia moderna de design de casa | 9 x 11 metros | Três quartos
+129. Casa 129 — Veja por dentro desta incrível casa dos sonhos | Design de casa com 4 quartos
+130. Casa 130 — Ideia de design de casa simples e moderna | 12 x 18 metros | Casa de 4 quartos
+131. Casa 131 — Design de casa de luxo incrível | 7,5 x 9 metros, 3 quartos (tour pela casa)
+132. Casa 132 — Design de casa moderna de um pavimento | 9 x 12 metros, 3 quartos
+133. Casa 133 — Ideia moderna de design de casa | 10 x 12 metros | Casa de três quartos
+134. Casa 134 — Ideia de design de casa moderna | 6 x 9 metros (pequeno e moderno) com 2 quartos
+135. Casa 135 — Ideia de design de casa simples | 8,5m x 15m com 4 quartos (vida simples)
+136. Casa 136 — Ideia de design de casa simples e moderna | 7,4 x 13 metros, 2 quartos (tipo caixa)
+137. Casa 137 — Design de casa de 2 andares | Casa moderna (4 quartos)
+138. Casa 138 — Design moderno de casa pequena | 6 x 7 metros, 2 andares, 3 quartos
+139. Casa 139 — Design moderno de casa pequena | 6,2 x 9,2 metros (4 quartos)
+140. Casa 140 — Casa simples e moderna | 7,5 x 9 metros com 2 quartos (vida simples)
+141. Casa 141 — Ideia moderna de design de casa | 7m x 10m, 4 quartos | Casa de 2 andares
+142. Casa 142 — Bela ideia de design de casa moderna | 11 x 16 metros | Casa de 4 quartos
+143. Casa 143 — Ideia de design de casa moderna de 2 andares | 7,5 x 9 metros com 4 quartos (casa de luxo)
+144. Casa 144 — Design de casa moderna 7,5 x 10 metros | Minimalista de 2 quartos
+145. Casa 145 — Design de casa pequena moderna | 6 x 9 metros (tenha um bom dia)
+146. Casa 146 — Design de casa moderna 9,5 x 11m, 2 quartos | Telhado plano e estética minimalista
+147. Casa 147 — Design de casa moderna perfeita, 2 andares, 2 quartos, casa em um lote compacto
+148. Casa 148 — Design de casa minimalista moderna | 9,2 x 12 metros | 3 quartos
+149. Casa 149 — Design de casa moderna 9 x 11 metros | Casa de 4 quartos
+150. Casa 150 — Design de casa moderna | 4 quartos, 2 andares com planta completa (luxo)
+151. Casa 151 — Ideia de design de casa moderna | 8,5 x 12 metros (piscina)
+152. Casa 152 — Casa moderna de 2 quartos 7x11m | Design de casa minimalista (tipo caixa)
+153. Casa 153 — (6x9 metros) Design moderno de casa pequena | Tour por casa de 2 quartos
+154. Casa 154 — Casa de um pavimento pequena e moderna | 2 quartos | Planta 7,5x9 metros
+155. Casa 155 — Casa minúscula moderna 4 x 7 metros | Tour de design minimalista
+156. Casa 156 — Casa pequena moderna 9,5x12 metros | 3 quartos de arquitetura contemporânea
+157. Casa 157 — Tour moderno por casa de 8 x 9 metros | detalhes em madeira e luz natural por toda parte
+158. Casa 158 — Casa moderna de 2 andares 9x11 metros – Tour exterior e interior
+159. Casa 159 — Casa de dois andares 6x11 metros | Tour em casa moderna com 4 quartos
+160. Casa 160 — Linda ideia de design de casa moderna | Casa de 2 quartos (8,2x14 metros)
+161. Casa 161 — Design moderno de casa pequena 5,5x8m | 3 quartos, características completas, lote compacto
+162. Casa 162 — Design de casa moderna 7,5x11m | 2 quartos com piscina
+163. Casa 163 — Design de casa moderna de 2 andares 7x9 metros | Tour completo de interiores e exteriores
+164. Casa 164 — Casa simples de 7x8 metros | Design de interiores atraente
+165. Casa 165 — Ideia de design de casa simples e moderna | 9x12 metros com 3 quartos (tour completo)
+166. Casa 166 — Esta casa moderna de 9,5x12 metros tem o design mais sofisticado
+167. Casa 167 — Casa de luxo moderna com 6 quartos | Tour de design de interiores
+168. Casa 168 — Design de casa moderna 8x9,2 metros | 2 andares com 3 quartos
+169. Casa 169 — Casa de luxo moderna com 5 quartos | Design exterior e interior
+170. Casa 170 — Design de casa moderno de 7x8 metros | 4 quartos em uma pequena área
+171. Casa 171 — Tour de luxo: casa moderna de 4 quartos | Casa de um pavimento
+172. Casa 172 — Design de casa moderna com piscinas | Casa de 3 quartos
+173. Casa 173 — Design de casa moderna de 2 andares | Casa de 4 quartos em 9x11 metros
+174. Casa 174 — Design de casa moderna | 7 x 9 metros, 2 andares | 4 quartos (casa de luxo)

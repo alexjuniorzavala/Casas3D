@@ -1,0 +1,346 @@
+| Nº | Nome | Título traduzido |
+|---:|---|---|
+| 1 | casa 1 | Design de casa \| Casa moderna T2 (2 andares) \| 9m x 16m \| T5 |
+| 2 | casa 2 | Design de casa \| Casa simples \| 9m x 15m, térrea \| T3 |
+| 3 | casa 3 | Design de casa T2 (2 andares) \| Casa simples \| 7,5m x 12m \| T4 |
+| 4 | casa 4 | Design de casa pequena \| 9m x 12m (108 m²) \| T3 |
+| 5 | casa 5 | Design de casa pequena \| 8m x 8m \| T2 (2 andares) com T3 |
+| 6 | casa 6 | Design de casa minúscula (6,8 x 10 metros) |
+| 7 | casa 7 | Casa pequena 9x10 metros, T1 |
+| 8 | casa 8 | Planta de casa 12x7 metros, 2 andares, altura de 2 pisos e cobertura |
+| 9 | casa 9 | Design de casa 7x8 metros, T2 |
+| 10 | casa 10 | Design de casa térrea 11,5 x 12,7 metros (120 m²), T3 |
+| 11 | casa 11 | Design de casa pequena \| Bangalô 5,8 x 5,8 metros (34 m²) |
+| 12 | casa 12 | Design de casa pequena 7x8 metros (bangalô circular tipo B, 56 m²) |
+| 13 | casa 13 | Design de casa pequena 8x10 metros, 80 m², T2 |
+| 14 | casa 14 | Design de casa pequena \| 8 x 8,5 metros (68 m²) \| T1 |
+| 15 | casa 15 | Design de casa moderna 14 x 12m com T2 (168 m²) |
+| 16 | casa 16 | Design de casa 6,5x10 m com T2 (65 m²) |
+| 17 | casa 17 | Design de casa moderna \| 8 x 9,5 metros \| T2 (2 andares) com T3 |
+| 18 | casa 18 | Design de casa pequena \| Casa simples 7m x 10m, T2 (2 andares) \| T3 |
+| 19 | casa 19 | Design de casa pequena 6 x 7 m (42 m²) \| T2 |
+| 20 | casa 20 | Design de casa pequena 7,5 x 8 metros (60 m²), T2 |
+| 21 | casa 21 | Design de casa pequena (4 x 7 m), T2 (2 andares) |
+| 22 | casa 22 | Design de casa pequena \| 8,20m x 7,50 m (62 m²) \| T2 |
+| 23 | casa 23 | Design de casa pequena \| 5,50m x 5,50 m (30 m²) \| T2 (2 andares) com T2 |
+| 24 | casa 24 | Design de casa pequena 6m x 5m (30 m²) |
+| 25 | casa 25 | Design de casa pequena \| T2 (2 andares) \| 8,50m x 10 m (85 m²) \| T3 |
+| 26 | casa 26 | Design de casa pequena \| 6,50 m x 8,00 m (52 m²) \| T2 |
+| 27 | casa 27 | Design de casa pequena \| 7,80 m x 11,00 m (85 m²) \| T3 |
+| 28 | casa 28 | Design de casa pequena \| 6,00 m x 6,00 m (36 m²) \| Casa para família pequena |
+| 29 | casa 29 | Design de casa pequena com terraço/cobertura \| 11,50m x 8,90 m (102 m²) \| T3 |
+| 30 | casa 30 | Design de casa pequena com mezanino \| 7,50m x 7,00 m (52 m²) \| T2 |
+| 31 | casa 31 | Design de casa pequena com terraço/cobertura \| 7,60m x 7,80 m (60 m²) \| 1 vaga de carro |
+| 32 | casa 32 | Design de casa pequena \| 9,00m x 9,70m (87 m²) \| T3 |
+| 33 | casa 33 | Design de casa pequena \| 9,00m x 15,60m (125 m²) \| T3 |
+| 34 | casa 34 | Design de casa pequena \| 10,00m x 12,50m (125 m²) \| T4 |
+| 35 | casa 35 | Design de casa T2 (2 andares) \| 8,50m x 10m (85 m²) \| T4 |
+| 36 | casa 36 | Design de casa pequena com terraço/cobertura \| 6m x 7m com T2 |
+| 37 | casa 37 | Design de casa pequena \| 9m x 12m (108 m²) \| T3 |
+| 38 | casa 38 | Design de casa pequena \| 8m x 8m \| T2 (2 andares) com T3 |
+| 39 | casa 39 | Design de casa pequena \| Casa simples 8m x 12m \| T3 |
+| 40 | casa 40 | Design de casa pequena \| 7m x 7,5m, T2 (2 andares) \| T4 |
+| 41 | casa 41 | Design de casa pequena \| Casa simples \| 5,5m x 8m, T2 (2 andares) \| T2 |
+| 42 | casa 42 | Design de casa pequena \| Casa simples \| 4,5m x 10m, T3 (3 andares) \| T3 |
+| 43 | casa 43 | Design de casa \| Casa simples \| 9m x 9m com terraço/cobertura \| T3 |
+| 44 | casa 44 | Design de casa \| Casa simples \| 9m x 16m, T2 (2 andares) \| T4 |
+| 45 | casa 45 | Design de casa pequena \| Casa simples \| 5,5m x 7m, T2 (2 andares) \| T3 |
+| 46 | casa 46 | Design de casa \| Casa simples \| 7m x 9m, T2 (2 andares) \| T4 |
+| 47 | casa 47 | Design de casa \| Design de casa simples \| 8,5m x 11m, T2 (2 andares) \| T4 |
+| 48 | casa 48 | Design de casa \| Design de casa simples \| 7m x 7,5m (116 m²) \| T3 |
+| 49 | casa 49 | Design de casa \| Design de casa simples \| 10m x 15m (150 m²) \| T4 |
+| 50 | casa 50 | Design de casa \| Design de casa moderna \| 10m x 10m, T2 (2 andares) \| T4 |
+| 51 | casa 51 | Trailer de design de casa \| 11m x 12m com T5 |
+| 52 | casa 52 | Design de casa moderna \| 11m x 12m com terraço/cobertura \| T5 |
+| 53 | casa 53 | Design de casa \| Design de casa simples \| 14m x 16m (200 m²) \| T4 |
+| 54 | casa 54 | Design de casa \| Design de casa simples \| 8m x 15m com T4 |
+| 55 | casa 55 | Trailer de design de casa \| Casa simples \| 10m x 12m com T5 |
+| 56 | casa 56 | Design de casa moderna \| Casa simples \| 10m x 12m \| T5 |
+| 57 | casa 57 | Design de casa simples \| Design de casa relaxante \| 8m x 9m com piscina |
+| 58 | casa 58 | Design de casa \| Design de casa simples \| 10m x 20m com piscina |
+| 59 | casa 59 | Design de casa \| Casa simples T2 (2 andares) \| 7m x 9,5m \| T4 |
+| 60 | casa 60 | Design de casa \| Design de casa simples \| 8,5m x 15m com piscina |
+| 61 | casa 61 | Design de casa pequena \| Casa moderna T2 (2 andares) \| 6m x 7m com T3 |
+| 62 | casa 62 | Design de casa \| Casa moderna T2 (2 andares) \| 11m x 11m \| T4 |
+| 63 | casa 63 | Design de casa \| Casa moderna T3 (3 andares) \| 8,5m x 11m \| T4 |
+| 64 | casa 64 | Trailer de design de casa \| 7m x 11m \| Design de casa T2 (2 andares) |
+| 65 | casa 65 | Design de casa \| Casa simples T2 (2 andares) \| 7m x 11m com T3 |
+| 66 | casa 66 | Trailer de casa relaxante \| 10m x 11m com piscina |
+| 67 | casa 67 | Design de casa relaxante \| 10m x 11m com piscina |
+| 68 | casa 68 | Trailer de design de casa \| 7m x 12m com T5 |
+| 69 | casa 69 | Design de casa \| Casa moderna T2 (2 andares) \| 7m x 12m com T5 |
+| 70 | casa 70 | Trailer de design de casa \| 10m x 16m com piscina |
+| 71 | casa 71 | Design de casa \| Design de casa simples \| 10m x 16m com piscina |
+| 72 | casa 72 | Design de casa \| Casa moderna T2 (2 andares) \| 10m x 15m com T4 |
+| 73 | casa 73 | Design de casa \| Casa moderna T2 (2 andares) \| 12m x 15m com T5 |
+| 74 | casa 74 | Design de casa \| Casa moderna T2 (2 andares) \| 11m x 16m com T5 |
+| 75 | casa 75 | Design de casa \| Casa moderna T2 (2 andares) \| 9m x 12m com T4 |
+| 76 | casa 76 | Design de casa \| Casa moderna 9m x 15m \| T5 |
+| 77 | casa 77 | Design de casa \| Casa moderna T2 (2 andares) \| 8m x 9,5m com T4 |
+| 78 | casa 78 | Design de casa \| Casa moderna \| 9m x 10m com T4 |
+| 79 | casa 79 | Design de casa pequena \| Casa T2 (2 andares) \| 7m x 8m com T4 |
+| 80 | casa 80 | Design de casa \| Design de casa simples \| 12m x 16m com T4 |
+| 81 | casa 81 | Design de casa \| Casa moderna T2 (2 andares) \| 10m x 17m com T6 |
+| 82 | casa 82 | Design de casa \| 7,5m x 9m com piscina \| T4 |
+| 83 | casa 83 | Design de casa \| Casa moderna T2 (2 andares) \| 11m x 15m (288 m²) \| T5 |
+| 84 | casa 84 | Design de casa \| Casa T2 (2 andares) \| 9m x 11m com T4 |
+| 85 | casa 85 | Design de casa \| Casa moderna T3 (3 andares) \| 10m x 10m com T4 |
+| 86 | casa 86 | Design de casa \| Casa pequena T2 (2 andares) \| 7m x 9m com T4 |
+| 87 | casa 87 | Casa moderna \| Design de casa com terraço/cobertura \| 6m x 11m com T4 |
+| 88 | casa 88 | Design de casa \| 12m x 17m com piscina \| T6 |
+| 89 | casa 89 | Design de casa \| Casa T2 (2 andares) \| 8m x 12m com T4 |
+| 90 | casa 90 | Design de casa \| Casa moderna T2 (2 andares) \| 9m x 11m com T4 |
+| 91 | casa 91 | Design de casa moderna \| Casa T2 (2 andares) \| 12m x 16m com T5 |
+| 92 | casa 92 | Design de casa \| Casa T2 (2 andares) \| 9,5m x 15m com T5 |
+| 93 | casa 93 | Design de casa moderna \| Casa T2 (2 andares) \| 8m x 10m com T3 |
+| 94 | casa 94 | Design de casa \| Casa moderna T2 (2 andares) \| 11m x 12m \| T5 |
+| 95 | casa 95 | Design de casa moderna \| 10m x 12m com piscina \| T4 |
+| 96 | casa 96 | Design de casa \| Casa moderna T2 (2 andares) \| 12m x 14m com T4 |
+| 97 | casa 97 | Design de casa moderna \| Casa T2 (2 andares) \| 13m x 15m com T5 |
+| 98 | casa 98 | Design de casa pequena \| Design de casa T2 (2 andares) \| 7,5m x 8m com T4 |
+| 99 | casa 99 | Design de casa \| Casa moderna T2 (2 andares) \| 8,5m x 12m com T4 |
+| 100 | casa 100 | Design de casa moderna \| 9m x 17m com piscina \| T5 |
+| 101 | casa 101 | Design de casa \| Casa pequena T2 (2 andares) \| 7m x 7,5m com T3 |
+| 102 | casa 102 | Design de casa moderna \| 15m x 15m com piscina \| T5 |
+| 103 | casa 103 | Design de casa moderna \| 10m x 16m \| T4 |
+| 104 | casa 104 | Design de casa \| Design de casa simples \| 12m x 20m com T4 |
+| 105 | casa 105 | Design de casa moderna \| Casa T2 (2 andares) \| 12m x 15m com T5 |
+| 106 | casa 106 | Design de casa moderna \| Casa tipo caixa \| 12m x 17m com T5 |
+| 107 | casa 107 | Design de casa pequena \| Casa T2 (2 andares) \| 7m x 9m com T3 |
+| 108 | casa 108 | Design de casa \| 10m x 16m com piscina \| T5 |
+| 109 | casa 109 | Design de casa \| 9m x 15m com piscina \| T5 |
+| 110 | casa 110 | Design de casa \| Design de casa simples \| 11m x 11m com T3 |
+| 111 | casa 111 | Design de casa loft (tipo caixa) \| 5m x 8m com T2 |
+| 112 | casa 112 | Design de casa pequena \| Casa loft \| 4m x 7m com T2 |
+| 113 | casa 113 | Design de casa \| 11m x 15m com piscina \| T5 |
+| 114 | casa 114 | Design de casa \| Casa moderna T2 (2 andares) \| 9m x 15m \| T5 |
+| 115 | casa 115 | Design de casa \| 11m x 7m com piscina \| T3 |
+| 116 | casa 116 | Design de casa moderna \| 10m x 11m com piscina \| T4 |
+| 117 | casa 117 | Design de casa simples \| 9,5m x 19m com piscina \| T3 |
+| 118 | casa 118 | Casa moderna \| Design de casa T2 (2 andares) \| 12m x 15m com T5 |
+| 119 | casa 119 | Casa moderna \| Design de casa T2 (2 andares) \| 12m x 17m com T6 |
+| 120 | casa 120 | Casa moderna \| Design de casa T2 (2 andares) \| 12m x 12m com T4 |
+| 121 | casa 121 | Design de casa \| Casa moderna T2 (2 andares) \| 11m x 15m \| T5 |
+| 122 | casa 122 | Design de casa pequena \| Casa simples \| 5m x 11m com T3 |
+| 123 | casa 123 | Casa moderna \| Design de casa T2 (2 andares) \| 15m x 17m com T5 |
+| 124 | casa 124 | Design de casa pequena \| Casa simples \| 6m x 15m com T3 |
+| 125 | casa 125 | Design de casa \| Casa T2 (2 andares) \| 12m x 12m com T5 |
+| 126 | casa 126 | Trailer de design de casa \| 14m x 16m \| Casa T2 (2 andares) |
+| 127 | casa 127 | Casa moderna \| Design de casa T2 (2 andares) \| 14m x 16m com T5 |
+| 128 | casa 128 | Design de casa pequena \| Casa T2 (2 andares) \| 7m x 11m com T4 |
+| 129 | casa 129 | Design de casa moderna \| Casa T2 (2 andares) \| 15m x 19m com T6 |
+| 130 | casa 130 | Design de casa moderna com piscina \| 18m x 20m |
+| 131 | casa 131 | Design de casa pequena \| Casa T2 (2 andares) \| 7m x 10m com T4 |
+| 132 | casa 132 | Casa em contentor marítimo \| Vida simples com natureza |
+| 133 | casa 133 | Design de casa pequena – tipo loft (5m x 15m) com T2 |
+| 134 | casa 134 | Design de casa pequena \| Casa T2 (2 andares) \| 8m x 11m com T3 |
+| 135 | casa 135 | Design de casa de fazenda \| 4m x 7m com T1 |
+| 136 | casa 136 | Casa moderna \| Design de casa simples \| 9m x 15m com T4 |
+| 137 | casa 137 | Design de casa \| Casa pequena 7m x 9m \| T4 |
+| 138 | casa 138 | Casa moderna \| Design de casa T2 (2 andares) \| 12m x 15m com T4 |
+| 139 | casa 139 | Design de casa \| Casa pequena 8,2m x 10m \| T4 |
+| 140 | casa 140 | Design de casa pequena \| 7m x 9m com piscina |
+| 141 | casa 141 | Design de casa T2 (2 andares) \| Casa moderna \| 12m x 15m com T5 |
+| 142 | casa 142 | Design de casa minúscula \| Design de casa tipo caixa \| 4,5m x 7m |
+| 143 | casa 143 | Casa minúscula bonita \| Design de casa de fazenda 5m x 8m |
+| 144 | casa 144 | Design de casa minúscula \| Casa pequena T2 (2 andares) \| 5m x 7m com T2 |
+| 145 | casa 145 | Vida simples em casa minúscula \| Design de casa pequena moderna (4,5m x 7m) |
+| 146 | casa 146 | Casa de fazenda bonita com natureza \| 5m x 12m com T2 |
+| 147 | casa 147 | Casa minúscula – casa de fazenda (tipo triângulo) \| Design com natureza |
+| 148 | casa 148 | Design de casa minúscula \| Casa de fazenda bonita 5m x 8m |
+| 149 | casa 149 | Design de casa minúscula bonita \| Hora de relaxar com a natureza |
+| 150 | casa 150 | Design de casa minúscula \| 5m x 7,5m com T2 (vida simples) |
+| 151 | casa 151 | Design de casa minúscula \| Planta 5,5m x 8m com T2 |
+| 152 | casa 152 | Design de casa pequena 7m x 9m \| Vida simples em casa pequena |
+| 153 | casa 153 | Design de casa pequena 6m x 7m \| Vida simples com a natureza |
+| 154 | casa 154 | Casa moderna \| Casa térrea 9m x 11m (T2) |
+| 155 | casa 155 | Casa pequena moderna \| Design 7m x 7m tipo caixa |
+| 156 | casa 156 | Casa minúscula bonita \| Design de casa (casa de fazenda) 6m x 9m |
+| 157 | casa 157 | Casa pequena bonita \| Design de casa 9m x 9m |
+| 158 | casa 158 | Design de casa pequena \| Casa T2 (2 andares) 7,5m x 9,5m (T4) |
+| 159 | casa 159 | Design de casa pequena \| 6m x 11m \| Casa T2 |
+| 160 | casa 160 | Design de casa minúscula bonita \| 7,7m x 8,3m com T2 |
+| 161 | casa 161 | Ideia de design de casa minúscula \| 4,5m x 7m (vida simples em casa minúscula) |
+| 162 | casa 162 | Casa minúscula moderna \| Design de casa (tipo caixa) 6m x 6m |
+| 163 | casa 163 | Casa pequena bonita \| Design de casa 7m x 7m T2 |
+| 164 | casa 164 | Casa pequena moderna \| 5m x 9m com terraço/cobertura |
+| 165 | casa 165 | Design de casa pequena \| 8m x 9m com T2 (casa de fazenda) |
+| 166 | casa 166 | Casa pequena bonita \| Design de casa 8m x 8m (T2) |
+| 167 | casa 167 | Design de casa pequena \| 6m x 6m (casa de fazenda) |
+| 168 | casa 168 | Casa pequena moderna \| 8m x 9m com T2 |
+| 169 | casa 169 | Casa pequena moderna \| Casa T2 (2 andares) 5m x 9m com T3 |
+| 170 | casa 170 | Design de casa pequena com madeira \| 5,50m x 6,50m com terraço/cobertura |
+| 171 | casa 171 | Casa pequena bonita \| Design 6m x 9m com T2 |
+| 172 | casa 172 | Design de casa minúscula \| 5m x 6m casa moderna |
+| 173 | casa 173 | Casa minúscula bonita \| Design de casa de fazenda 6m x 7m |
+| 174 | casa 174 | Design de casa pequena \| 7m x 8m (T2) |
+| 175 | casa 175 | Design de casa moderna \| Design 7,2m x 9,5m com piscina |
+| 176 | casa 176 | Casa pequena bonita \| 6m x 10m \| Vida simples em casa pequena |
+| 177 | casa 177 | Casa pequena moderna \| Planta 7,5m x 8m (T2) |
+| 178 | casa 178 | Design de casa minúscula \| 4m x 6m casa moderna (tipo caixa) |
+| 179 | casa 179 | Design de casa pequena \| Casa moderna T2 (2 andares) 4,5m x 7m |
+| 180 | casa 180 | Design de casa \| Casa pequena \| 7m x 9m, T2 (2 andares) com T4 |
+| 181 | casa 181 | Casa pequena bonita \| Design de casa (casa de fazenda) 8m x 9m |
+| 182 | casa 182 | Design de casa minúscula moderna \| 4,5m x 7m (vida simples em casa minúscula) |
+| 183 | casa 183 | Design de casa pequena \| 5m x 9m com T2 (casa simples) |
+| 184 | casa 184 | Casa minúscula bonita \| Design de casa (casa de fazenda) 7m x 7m |
+| 185 | casa 185 | Design de casa minúscula \| Design de casa 5m x 6m com piscina |
+| 186 | casa 186 | Design de casa pequena \| Design de casa 6m x 9m (T2) |
+| 187 | casa 187 | Design de casa minúscula moderna \| 4m x 7m T2 (2 andares) (T2) |
+| 188 | casa 188 | Casa pequena bem desenhada \| 6m x 9m com T2 |
+| 189 | casa 189 | Design de casa pequena \| Casa moderna T2 (2 andares) \| 7,5m x 9m com T3 |
+| 190 | casa 190 | Design de casa pequena \| Design de casa 9m x 9m (T3) |
+| 191 | casa 191 | Design de casa pequena \| Design de casa (casa de madeira) 5m x 11m |
+| 192 | casa 192 | Design de casa minúscula \| Design de casa com madeira 6m x 8m |
+| 193 | casa 193 | Casa bonita \| 9m x 5m \| Vida simples em casa pequena |
+| 194 | casa 194 | Design de casa minúscula \| Design de casa T2 (2 andares) com 4m x 7m |
+| 195 | casa 195 | Design de casa pequena \| Design de casa 7m x 8m (tipo caixa) |
+| 196 | casa 196 | Casa de fazenda bonita \| Design de casa (casa de madeira) 9m x 7m |
+| 197 | casa 197 | Design de casa pequena T2 (2 andares) \| 7m x 10m com T4 |
+| 198 | casa 198 | Casa pequena bem desenhada com planta 6m x 9m \| Vida simples |
+| 199 | casa 199 | Design de casa minúscula moderna bonita 5m x 7m \| Design para família pequena |
+| 200 | casa 200 | Design de casa minúscula 4,5m x 6m \| Adequada para família pequena |
+| 201 | casa 201 | Casa bonita com planta 8m x 7,5m \| Vida simples em casa pequena |
+| 202 | casa 202 | Design de casa minúscula \| Casa moderna 4m x 7m \| Vida simples |
+| 203 | casa 203 | Casa pequena bonita (tipo caixa) \| 9m x 7,2m com piscina |
+| 204 | casa 204 | Design de casa de fazenda bonita com natureza \| 5m x 9,4m com T2 |
+| 205 | casa 205 | Design de casa pequena com madeira \| 8m x 6m com T2 |
+| 206 | casa 206 | Casa pequena moderna \| Design de casa 6m x 6,5m (T2) |
+| 207 | casa 207 | Design de casa minúscula T2 (2 andares) \| 5m x 5m com T3 |
+| 208 | casa 208 | 1 hora dos melhores designs de casa moderna por Tiny House Design |
+| 209 | casa 209 | Casa minúscula bem desenhada com planta 6m x 5m \| Vida simples |
+| 210 | casa 210 | Design de casa de fazenda bonita \| 6m x 9m com T2 (vida simples) |
+| 211 | casa 211 | Design de casa pequena T2 \| Planta 7m x 7m (casa rural) |
+| 212 | casa 212 | Design de casa pequena 7,2m x 7,5m \| Vida simples em casa pequena |
+| 213 | casa 213 | Design de casa pequena bonita \| 6,5m x 7,5m (relaxar em casa pequena) |
+| 214 | casa 214 | Design de casa minúscula moderna bonita 6m x 5m \| Design de casa tipo caixa |
+| 215 | casa 215 | Design de casa pequena moderna \| 9m x 9m com T2 (vida simples) |
+| 216 | casa 216 | Casa minúscula bonita \| Design tipo casa de fazenda 6m x 6m com madeira |
+| 217 | casa 217 | Casa minúscula moderna 4,5m x 7m \| Casa aconchegante e bem iluminada |
+| 218 | casa 218 | Design de casa pequena bonita \| Planta 7m x 8m com T2 (adequada para famílias pequenas) |
+| 219 | casa 219 | Casa minúscula moderna \| Design de casa T2 (2 andares) 5m x 7m com piscina |
+| 220 | casa 220 | Design de casa pequena \| Planta 8,2m x 8,2m \| Vida simples em casa pequena |
+| 221 | casa 221 | Design de casa minúscula bonita \| Planta 5m x 7,5m (casa dos sonhos) |
+| 222 | casa 222 | Design de casa pequena \| Casa simples 8m x 9m com T2 |
+| 223 | casa 223 | Design de casa pequena \| Planta 7,5m x 7,5m \| Casa simples com terraço/cobertura |
+| 224 | casa 224 | Design de casa pequena moderna \| Planta 5m x 9m com piscina |
+| 225 | casa 225 | Casa minúscula bonita \| Planta 6,5m x 7,5m (aconchegante e elegante) |
+| 226 | casa 226 | Casa minúscula bonita \| Planta 6m x 6,2m (casa encantadora) |
+| 227 | casa 227 | Casa minúscula moderna \| Planta 4,5m x 6,2m (tipo caixa) |
+| 228 | casa 228 | Design de casa moderna \| 9,7m x 20m com piscina (T3) |
+| 229 | casa 229 | Casa pequena moderna \| Planta 7,2m x 7,2m (T2) |
+| 230 | casa 230 | Design de casa pequena \| 6m x 8m T2 (casa de fazenda) |
+| 231 | casa 231 | Casa pequena e moderna \| 6m x 9m com T2 (vida simples) |
+| 232 | casa 232 | Design de casa minúscula \| Design de casa T2 (2 andares) \| 4,2m x 7,2m com T2 |
+| 233 | casa 233 | Casa pequena bonita \| 6,2m x 7,2m com T2 (casa de fazenda) |
+| 234 | casa 234 | Design de casa pequena \| 7,2m x 9,5m com T3 (vida simples) |
+| 235 | casa 235 | Design de casa pequena \| Design de casa T2 (2 andares) \| 5m x 10m com T3 |
+| 236 | casa 236 | Design de casa pequena bonita \| 8m x 7,5m com T2 |
+| 237 | casa 237 | Casa pequena bonita \| 6,5m x 6,5m com T2 (pequena e simples) |
+| 238 | casa 238 | Casa moderna e simples \| 6,8m x 9m com T2 |
+| 239 | casa 239 | Casa de fazenda bonita \| Planta pequena 7m x 4m (vida simples) |
+| 240 | casa 240 | Casa minúscula moderna \| 5,6m x 6m (33 m²) \| Vida simples em casa minúscula |
+| 241 | casa 241 | Design de casa minúscula \| 7m x 6,5m \| Casa simples no campo |
+| 242 | casa 242 | Design de casa \| 8,4m x 10m com T3 \| Vida simples com a família |
+| 243 | casa 243 | Design de casa pequena \| 6m x 6m com T2 \| Casa simples e encantadora |
+| 244 | casa 244 | Casa de fazenda bonita \| 7,2m x 6,2m com T2 (vida simples) |
+| 245 | casa 245 | Casa simples e pequena \| 6,2m x 5,7m com T1 (casa de fazenda)
+|---:|---|---|
+| 246 | casa 246 | Design de casa pequena \| 9m x 9m com T3 (casa encantadora) |
+| 247 | casa 247 | Design de casa pequena \| 8m x 10m (tipo casa de fazenda) |
+| 248 | casa 248 | Design de casa bonito \| 5,7m x 9m com T2 (casa de fazenda) |
+| 249 | casa 249 | Casa simples e bonita \| 8m x 6m com T2 (vida simples) |
+| 250 | casa 250 | 2 horas de designs de casa de fazenda bonitos por Tiny House Design |
+| 251 | casa 251 | Design de casa encantadora com T3 \| Planta 9m x 11m |
+| 252 | casa 252 | Casa pequena e design moderno \| 7m x 11m com T3 |
+| 253 | casa 253 | Casa de fazenda bonita tipo madeira \| 6m x 5m tiny home |
+| 254 | casa 254 | Design de casa pequena T2 \| 7m x 9m tipo casa de fazenda (vida simples) |
+| 255 | casa 255 | Design de casa bonito \| 6,5m x 8m \| Pequena e aconchegante casa de campo |
+| 256 | casa 256 | Design de casa pequena \| Planta 9m x 9m com T2 (casa encantadora) |
+| 257 | casa 257 | Casa pequena moderna \| Casa T2 (2 andares) 5,5m x 8m com T3 |
+| 258 | casa 258 | Casa moderna e pequena \| Planta 5m x 6,5m (tipo caixa) |
+| 259 | casa 259 | Apaixone-se por esta planta \| 8m x 9m com terraço/cobertura (T2) |
+| 260 | casa 260 | Design de casa minúscula bonita \| 3m x 7m (casa de fazenda) |
+| 261 | casa 261 | Casa pequena bonita e moderna \| 7m x 7m com T2 |
+| 262 | casa 262 | Design de casa minúscula \| 8m x 9m com T2 (casa de fazenda encantadora) |
+| 263 | casa 263 | Casa de fazenda simples \| 6m x 9m com T2 (vida simples) |
+| 264 | casa 264 | Casa pequena moderna \| 5m x 9m com T2 (simples e encantadora) |
+| 265 | casa 265 | Especialista em casas pequenas revela segredos do design 6m x 8m T2 |
+| 266 | casa 266 | As melhores ideias de design 8m x 8,5m T2 que nunca viu antes |
+| 267 | casa 267 | Ideias de design de casa simples T2 que nunca soube que existiam |
+| 268 | casa 268 | Design de casa simples e pequena \| 7,2m x 9,5m com T2 |
+| 269 | casa 269 | Design de casa simples \| 6m x 7m com quarto (tipo fazenda) |
+| 270 | casa 270 | Design de casa perfeito \| 7m x 8m com T2 (simples e aconchegante) |
+| 271 | casa 271 | Casa pequena T2 (2 andares) \| 7m x 8m com T3 (vida simples) |
+| 272 | casa 272 | Design de casa incrível \| 7,2m x 7,7m com T2 (tipo caixa) |
+| 273 | casa 273 | Design de casa pequena \| 8m x 12m T3 \| Casa dos sonhos encantadora |
+| 274 | casa 274 | Casa de fazenda bonita \| 7m x 10m T2 (casa dos sonhos) |
+| 275 | casa 275 | Casa simples com a sua família \| 8,5m x 10,5m (T2) |
+| 276 | casa 276 | Design de casa pequena \| 6m x 11m com T3 (vida simples) |
+| 277 | casa 277 | Casa pequena bonita com T3 \| 10m x 11m (casa dos sonhos) |
+| 278 | casa 278 | Casa pequena moderna \| Casa T2 (2 andares) \| 7m x 7,5m com T4 |
+| 279 | casa 279 | Design de casa pequena \| Casa T2 \| 6m x 9m (casa encantadora) |
+| 280 | casa 280 | Design de casa minúscula \| Simples e moderna \| 4,5m x 9m com piscina |
+| 281 | casa 281 | Casa moderna e minúscula \| 5m x 6,2m \| Vida simples com a casa dos seus sonhos |
+| 282 | casa 282 | Design de casa pequena moderna T2 (2 andares) \| 6m x 9m com T4 (vida simples) |
+| 283 | casa 283 | Design de casa minúscula \| Casa de fazenda 6m x 8m com T3 |
+| 284 | casa 284 | Casa rural bonita \| 96 m² de inspiração |
+| 285 | casa 285 | Design de casa pequena \| Simples e aconchegante com a sua família (vida simples) |
+| 286 | casa 286 | Design de casa minúscula \| 6,2m x 6,5m casa pequena moderna \| Tour de casa T2 |
+| 287 | casa 287 | Design de casa \| Tour de casa T2 (2 andares) \| 11m x 15m com T5 |
+| 288 | casa 288 | Design de casa 5m x 6m \| Design de casa minúscula T2 (2 andares) \| T3 |
+| 289 | casa 289 | Casa pequena moderna \| 7m x 9m com terraço/cobertura \| T2 (simples e aconchegante) |
+| 290 | casa 290 | Design de casa pequena \| 6,5m x 8,5m com T2 \| Moderna e aconchegante |
+| 291 | casa 291 | Design de casa pequena e bonita \| Planta 6m x 10m \| T2 |
+| 292 | casa 292 | Casa pequena moderna \| 6m x 8m (tipo caixa) \| Aproveitar o tempo com a família |
+| 293 | casa 293 | Design de casa perfeito para terreno estreito \| Moderno e simples com T3 |
+| 294 | casa 294 | Design de casa \| Casa moderna \| 7m x 9m, T2 (2 andares) \| T3 |
+| 295 | casa 295 | Casa moderna e pequena \| 6,2m x 6,7m (T2) \| Bonita e aconchegante |
+| 296 | casa 296 | Design de casa pequena \| 6m x 9m com T2 \| Vida simples com a casa dos seus sonhos |
+| 297 | casa 297 | Casa simples e pequena T2 (2 andares) \| 7m x 9m – Planta \| T3 |
+| 298 | casa 298 | Casa minúscula simples e moderna \| 5m x 6m (adequada para famílias pequenas) |
+| 299 | casa 299 | Design de casa pequena \| 8m x 8m com T2 (casa aconchegante com a família) |
+| 300 | casa 300 | Design de casa pequena e moderna \| Vida rural com uma família pequena |
+| 301 | casa 301 | Design de casa simples e bonito \| 7m x 10m \| Design de casa rural com uma família pequena |
+| 302 | casa 302 | Design de casa pequena \| 6 x 9m com T2 (vida confortável) |
+| 303 | casa 303 | Casa minúscula T2 (2 andares) \| 5,2m x 6m com T2 (vida simples) |
+| 304 | casa 304 | Design de casa minúscula \| 6m x 7m \| Casa bonita tipo caixa |
+| 305 | casa 305 | Design de casa simples e pequena com piscina \| 7m x 9m com T2 (casa de fazenda) |
+| 306 | casa 306 | Design de casa pequena bonito \| Casa simples e aconchegante (interior interessante) |
+| 307 | casa 307 | Design de casa minúscula \| 4m x 9m \| Tipo loft (vida simples) |
+| 308 | casa 308 | Design de casa minúscula moderna \| Planta 6m x 6m (casa aconchegante) |
+| 309 | casa 309 | Casa simples e moderna \| 7,8m x 9,2m com T2 |
+| 310 | casa 310 | Design de casa pequena 6m x 9m com T2 \| Vida simples com a casa dos seus sonhos |
+| 311 | casa 311 | Design de casa T2 (2 andares) \| 5m x 11m com T3 \| Aconchegante e confortável |
+| 312 | casa 312 | Design de casa minúscula moderna \| 5m x 6m tipo caixa (vida simples) |
+| 313 | casa 313 | Casa bangalô \| Veja por dentro desta incrível mini casa |
+| 314 | casa 314 | Design de casa aconchegante e rural \| Conheça por dentro este tour de casa minúscula moderna |
+| 315 | casa 315 | Design de casa moderna \| Design de casa T2 \| Luxuosa e moderna |
+| 316 | casa 316 | Design de casa pequena bonito \| 6m x 9,5m com T2 (vida simples) |
+| 317 | casa 317 | Design de casa minúscula encantadora \| 6m x 7m T2 \| Vida simples com casa de fazenda |
+| 318 | casa 318 | Design de casa simples e moderno \| 7,2m x 10m T2 (felicidade na sua vida) |
+| 319 | casa 319 | Design de casa de fazenda bonito T2 (simples com a casa dos seus sonhos) |
+| 320 | casa 320 | Design de casa aconchegante e pequena \| Casa T2 (vida simples) |
+| 321 | casa 321 | Design de casa minúscula encantadora \| 7,5m x 7,5m \| Vida simples com a natureza |
+| 322 | casa 322 | Casa minúscula simples e perfeita \| 6m x 7m T2 (casa rural) |
+| 323 | casa 323 | Design de casa minúscula moderna \| 6m x 6,5m com T2 (vida simples com a sua família) |
+| 324 | casa 324 | Design de casa pequena simples e moderna \| 5m x 9m (45 m²) |
+| 325 | casa 325 | Casa simples e pequena \| 7,2m x 7,2m (casa rural) |
+| 326 | casa 326 | Design de casa pequena moderna \| Veja por dentro desta incrível casa confortável |
+| 327 | casa 327 | Design de casa pequena \| Veja este design de casa moderna para 2025 |
+| 328 | casa 328 | Design de casa simples e de fazenda \| 9m x 9m com T2 (casa rural simples) |
+| 329 | casa 329 | Design de casa pequena moderna 7 x 10m com T4 |
+| 330 | casa 330 | Design de casa minúscula \| Esta casa minúscula vai surpreendê-lo |
+| 331 | casa 331 | Casa pequena simples e moderna \| 8m x 9m com T2 (casa moderna) |
+| 332 | casa 332 | Design de casa pequena moderna bonito \| 7m x 9m com T2 |
+| 333 | casa 333 | Casa simples e moderna \| 7m x 9m com T2 (vida simples) |
+| 334 | casa 334 | Design de casa moderna e pequena \| Casa T3 (vida simples com a casa dos sonhos) |
+| 335 | casa 335 | Design de casa minúscula moderna 7,2 x 9 metros \| T2 espaço de living aconchegante |
+| 336 | casa 336 | Design de casa moderna 6,2 x 11m T2 (aconchegante e compacta) |
+| 337 | casa 337 | Esta casa pequena tem TUDO em 6,2x11 metros \| Design T2 |
+| 338 | casa 338 | Casa minúscula minimalista moderna \| T2 em 6,5 x 9 metros \| Tour completo |
+| 339 | casa 339 | Design de casa minúscula moderna \| T2 \| Tour completo da casa com planta |
+| 340 | casa 340 | Design de casa pequena \| 7,5m x 7,5m com T2 (terraço/cobertura) |
+| 341 | casa 341 | Design de casa bonito 6m x 7m \| Tour de design moderno T2 (vida simples) |
+| 342 | casa 342 | Design de casa T3 \| Pequena casa moderna com living em seção e espaço exterior |
+| 343 | casa 343 | Design de casa pequena moderna \| 5 x 7 metros \| Vivência minimalista |

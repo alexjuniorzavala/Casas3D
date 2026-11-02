@@ -1,8 +1,18 @@
 Originais/
+Backup Thumbnails/*
+Old/*
 thumbnails/
 thumbnails/*
+Thumbnails_14studio_T4/
+Thumbnails_14studio_T4/*
+Thumbnails_14studio_T5/
+Thumbnails_14studio_T5/*
+Thumbnails_Planta_Facil/*
+Thumbnails_Planta_Facil/
+Thumbnails_Planta_Facil/*
 thumbnails/*.jpg
 !thumbnailsYT/
+thumbnailsYT TRADUZIDAS/*
 thumbnails_YT/
 Videos/*
 *.mp4
@@ -16,3 +26,4 @@ Videos/*
 *.webm
 *.WEBM
 !Videos/Casas3D16p9.mp4
+
