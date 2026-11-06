@@ -44,7 +44,7 @@ a{color:inherit}
 img{max-width:100%}
 .container{width:min(1160px,calc(100% - 40px));margin:auto}
 .topbar{position:sticky;top:0;z-index:900;background:rgba(255,255,255,.94);backdrop-filter:blur(14px);border-bottom:1px solid rgba(20,37,31,.08)}
-.nav{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+.nav{overflow-x: auto; min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:22px}
 .brand{font-weight:900;letter-spacing:-.04em;font-size:20px;text-decoration:none;white-space:nowrap}
 .brand span{color:var(--blue)}
 .navlinks{display:flex;align-items:center;gap:25px}
@@ -76,17 +76,19 @@ img{max-width:100%}
 .trust-item:last-child{border:0}
 .trust-item strong{display:block;font-size:22px;color:var(--blue);line-height:1.2}
 .trust-item span{font-size:12px;color:var(--muted);font-weight:700}
-.section{padding:78px 0}
+.section{padding:12px 0}
 .section-soft{background:var(--cream)}
-.section-head{max-width:720px;text-align:center;margin:0 auto 38px}
+.section-head{max-width:720px;text-align:center;margin:0 auto 22px}
 .kicker{color:var(--blue);font-size:11px;font-weight:900;letter-spacing:.16em;text-transform:uppercase}
 .section h2{font-size:clamp(29px,4vw,43px);letter-spacing:-.045em;line-height:1.12;margin:10px 0 14px}
 .section-head p{color:var(--muted);margin:0;font-size:15px}
-.video-layout{display:grid;grid-template-columns:1fr;gap:28px;align-items:center}
-.video-frame{overflow:hidden;margin-bottom: 22px;border-radius:20px;background:#0d1712;box-shadow:var(--shadow)}
-.video-frame video{display:block;width:100%;height:auto;background:#000}
-.video-copy h3{font-size:27px;line-height:1.15;letter-spacing:-.03em;margin:0 0 14px}
-.video-copy p{color:var(--muted)}
+.video-layout{align-items:center}
+.video-frame{position:relative;overflow:hidden;margin-bottom:22px;border-radius:20px;background:#0d1712;}
+.video-frame video{aspect-ratio:16/9;display:block;width:100%;height:auto;background:#000}
+.slide-nav{position:absolute;inset:0;display:flex;align-items:center;justify-content:space-between;padding:18px;pointer-events:none;opacity:0;transition:opacity .22s ease;z-index:2}
+.video-frame:hover .slide-nav,.video-frame:focus-within .slide-nav,.slide-nav.is-visible{opacity:1;pointer-events:auto}
+.slide-button{pointer-events:auto;width:42px;height:42px;border:1px solid rgba(20,37,31,.18);border-radius:50%;background:rgba(255,255,255,.9);color:var(--ink);font-size:24px;line-height:1;cursor:pointer;transition:all .2s ease;box-shadow:0 8px 20px rgba(10,20,15,.18)}
+.slide-button:hover{border-color:var(--blue);color:var(--blue);transform:translateY(-1px)}
 .check-list{padding:0;list-style:none;margin:22px 0}
 .check-list li{margin:11px 0;font-weight:700;font-size:14px}
 .check-list li:before{content:"✓";display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:#e5f2e9;color:var(--blue);margin-right:10px}
@@ -110,8 +112,8 @@ img{max-width:100%}
 .search-box:focus{border-color:var(--blue)}
 .catalog-count{font-size:12px;color:var(--muted);font-weight:750}
 .catalog-filter-tags{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px}
-.model-switcher{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px;justify-content:center; border-top: 1px solid var(--line);}
-.model-btn{margin-top: 8px;border:1px solid var(--line);background:#fff;color:var(--ink);padding:10px 14px;border-radius:999px;font:inherit;font-size:12px;font-weight:800;cursor:pointer;transition:all .2s ease}
+.model-switcher{ z-index: 3; display:flex;flex-wrap:wrap;gap:8px;margin:0 0 8px; background: white;justify-content:center; padding: 4px 0; border-radius: 24px; position:sticky; top:64px}
+.model-btn{margin-top: 0px;border:1px solid var(--line);background:#fff;color:var(--ink);padding:10px 14px;border-radius:999px;font:inherit;font-size:12px;font-weight:800;cursor:pointer;transition:all .2s ease}
 .model-btn:hover,.model-btn:focus{border-color:var(--blue);color:var(--blue)}
 .model-btn.is-active{background:var(--blue);border-color:var(--blue);color:#fff;box-shadow:0 8px 18px rgba(46,104,224,.2)}
 .tag-chip{border:1px solid var(--line);background:#fff;color:var(--ink);padding:9px 12px;border-radius:999px;font:inherit;font-size:12px;font-weight:800;cursor:pointer;transition:all .2s ease}
@@ -164,17 +166,57 @@ img{max-width:100%}
 .final-cta h2{font-size:clamp(30px,4vw,46px);line-height:1.1;letter-spacing:-.04em;margin:0 0 13px}
 .final-cta p{color:rgba(255,255,255,.8);margin:0 auto 25px;max-width:620px}
 .disclaimer{font-size:11px;color:var(--muted);text-align:center;padding:20px 0 8px}
-.cta-bar{position:fixed;left:0;right:0;bottom:0;z-index:1000;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(15,35,26,.94);backdrop-filter:blur(12px);border-top:1px solid rgba(255,255,255,.12)}
-.cta-botao{display:flex;align-items:center;justify-content:center;width:min(100%,560px);min-height:54px;margin:auto;padding:12px 22px;border-radius:999px;background: linear-gradient(135deg, #2234c5, #11a045);;color:#fff;font-weight:900;font-size:16px;text-decoration:none;box-shadow:0 8px 25px rgba(32,164,100,.28)}
-.cta-botao:hover{background: linear-gradient(135deg, #11a045, #2234c5);}
+@keyframes zoomPulse{
+  0% { transform: scale(1); }
+  50% { transform: scale(1.025); }
+  100% { transform: scale(1); }
+}
+
+.cta-bar{position:fixed;right:0;bottom:0;z-index:1000;padding:5px 16px calc(10px + env(safe-area-inset-bottom))}
+.cta-botao{display:flex;align-items:center;justify-content:center;width:min(100%,560px);min-height:54px;margin:auto;padding:12px 22px;border-radius:999px;background: linear-gradient(135deg, #2234c5, #11a045);color:#fff;font-weight:900;font-size:16px;text-decoration:none;box-shadow:0 8px 25px rgba(32,164,100,.28);transition:filter .2s ease, box-shadow .2s ease;animation:zoomPulse 2.6s ease-in-out infinite alternate;}
+.cta-botao:hover{background: linear-gradient(135deg, #11a045, #2234c5);filter:brightness(1.04);box-shadow:0 10px 28px rgba(32,164,100,.34)}
 .scroll-top-btn{position:fixed;right:8px;bottom:84px;z-index:998;width:45px;height:41px;border:none;border-radius:50%;background:var(--blue);color:#fff;font-size:25px; font-weight: bolder;line-height:1;box-shadow:0 12px 26px rgba(31,69,110,.28);cursor:pointer;opacity:0;visibility:hidden;transform:translateY(12px);transition:all .2s ease}
 .scroll-top-btn.is-visible{opacity:1;visibility:visible;transform:translateY(0)}
 .scroll-top-btn:hover{background:#2247b5}
+.download-modal-overlay{position:fixed;inset:0;z-index:2000;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(8,18,15,.68);backdrop-filter:blur(6px)}
+.download-modal{position:relative;width:min(560px,100%);background:#fff;border-radius:22px;padding:32px 28px 24px;box-shadow:0 18px 60px rgba(0,0,0,.28);text-align:center}
+.download-modal-close{position:absolute;top:12px;right:12px;width:34px;height:34px;border:none;border-radius:50%;background:#edf5ef;color:var(--ink);font-size:22px;cursor:pointer}
+.download-options{display:grid;gap:12px;margin-top:18px}
+.download-option{display:flex;align-items:center;justify-content:center;min-height:52px;border-radius:12px;background:linear-gradient(135deg,#2234c5,#11a045);color:#fff;text-decoration:none;font-weight:800;box-shadow:0 10px 22px rgba(37,99,235,.18)}
+.download-option:hover{filter:brightness(1.04)}
+.download-modal-overlay.is-hidden{display:none}
 @media(min-width:560px){.feature-grid,.types-grid,.catalog-grid,.audience-grid,.steps{grid-template-columns:repeat(2,1fr)}.catalog-grid{gap:15px}}
 @media(min-width:640px){.visual-tag{left:-20px;right:auto;bottom:22px;max-width:none}}
 @media(min-width:860px){.hero-inner{grid-template-columns:1.05fr .95fr;gap:55px;padding:78px 0 86px}.feature-grid,.types-grid{grid-template-columns:repeat(4,1fr)}.catalog-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}.video-layout,.plan-panel{grid-template-columns:1.15fr .85fr;gap:38px}.steps{grid-template-columns:repeat(4,1fr)}.audience-grid{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:640px){.container{width:min(100% - 30px,1160px)}.nav{min-height:62px}.navlinks{display:none}.brand{font-size:18px}.nav-cta{padding:10px 14px;font-size:12px}.hero h1{font-size:42px}.hero-copy{font-size:15px}.hero-photo{border-width:4px;border-radius:17px}.trust-grid{gap:7px;padding:17px 0}.trust-item strong{font-size:18px}.trust-item span{font-size:10px}.section{padding:56px 0}.section-head{margin-bottom:27px}.video-copy h3{font-size:23px}.feature-card{padding:17px 14px}.feature-card h3{font-size:14px}.feature-card p{font-size:12px}.type-card h3{font-size:16px}.gallery-intro{display:block}.gallery-intro .catalog-count{display:block;margin-top:8px}.nome{font-size:12px;padding:11px 10px 8px;min-height:58px;gap:7px}.numero{width:26px;height:26px;flex-basis:26px;font-size:10px}.imagem{padding:0 7px}.card-actions{padding:9px 9px 11px;gap:5px}.card-actions a{font-size:10px}.card-actions a:last-child{padding:7px 8px}.audience-card{padding:15px}.audience-card strong{font-size:13px}.audience-card p{font-size:11px}.plan-panel{padding:23px}.plan-visual img{height:120px}.step{padding:16px}.step h3{font-size:13px}.step p{font-size:11px}.offer{grid-template-columns:1fr;padding:23px;text-align:center}.offer-price{min-width:0}.payment-grid{grid-template-columns:1fr}.final-cta{padding:54px 0}.cta-botao{min-height:50px;font-size:14px}}
+@media(max-width:640px){.container{width:min(100% - 30px,1160px)}.nav{min-height:62px}.brand{font-size:18px}.nav-cta{padding:10px 14px;font-size:12px}.hero h1{font-size:42px}.hero-copy{font-size:15px}.hero-photo{border-width:4px;border-radius:17px}.trust-grid{gap:7px;padding:17px 0}.trust-item strong{font-size:18px}.trust-item span{font-size:10px}.section{padding:12px 0}.section-head{margin-bottom:14px}.video-copy h3{font-size:23px}.feature-card{padding:17px 14px}.feature-card h3{font-size:14px}.feature-card p{font-size:12px}.type-card h3{font-size:16px}.gallery-intro{display:block}.gallery-intro .catalog-count{display:block;margin-top:8px}.nome{font-size:12px;padding:11px 10px 8px;min-height:58px;gap:7px}.numero{width:26px;height:26px;flex-basis:26px;font-size:10px}.imagem{padding:0 7px}.card-actions{padding:9px 9px 11px;gap:5px}.card-actions a{font-size:10px}.card-actions a:last-child{padding:7px 8px}.audience-card{padding:15px}.audience-card strong{font-size:13px}.audience-card p{font-size:11px}.plan-panel{padding:23px}.plan-visual img{height:120px}.step{padding:16px}.step h3{font-size:13px}.step p{font-size:11px}.offer{grid-template-columns:1fr;padding:23px;text-align:center}.offer-price{min-width:0}.payment-grid{grid-template-columns:1fr}.final-cta{padding:54px 0}.cta-botao{min-height:50px;font-size:14px}}
+.load-more-btn {
+    display: block;
+    margin-inline: auto;
+    padding: 0.85rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    background: #2a6df4;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.15s ease;
+    width: fit-content;
+}
 
+.load-more-btn:hover {
+    background: #1f57c9;
+    transform: translateY(-1px);
+}
+
+.load-more-btn:active {
+    transform: translateY(0);
+}
+
+.load-more-btn:focus-visible {
+    outline: 3px solid #2a6df4;
+    outline-offset: 3px;
+}
 </style>
 </head>
 
@@ -183,29 +225,35 @@ img{max-width:100%}
   <div class="container nav">
     <a class="brand" href="#inicio">CASAS<span>3D</span></a>
     <nav class="navlinks" aria-label="Navegação principal">
-      <a href="#inicio">Início</a><a href="#modelos">Plantas</a><a href="#inclui">O que inclui</a><a href="#comprar">Como comprar</a><a href="#faq">Perguntas</a>
-    </nav>
-    <a class="nav-cta" href="https://wa.me/842922516?text=Estou%20interresado%20nas%20casas.%20Como%20fazer%20o%20pagamento?" target="_blank" rel="noopener">Comprar agora(200MT) ↗</a>
+
+      <a href="#modelos">Plantas</a><a href="#inclui">Oferta</a><a href="#comprar">Pagamento</a><a href="#faq">Perguntas</a></nav>
   </div>
 </header>
+
+<!-- <div class="download-modal-overlay" id="download-modal" aria-live="polite">
+  <div class="download-modal" role="dialog" aria-modal="true" aria-labelledby="download-title">
+    <button type="button" class="download-modal-close" id="download-modal-close" aria-label="Fechar download">×</button>
+    <span class="kicker">Baixar catálogo</span>
+    <h2 id="download-title" style="margin:10px 0 0; font-size:clamp(28px,4vw,38px); line-height:1.1; letter-spacing:-.045em;">Escolha o modelo</h2>
+    <div class="download-options">
+      <a class="download-option" href="./catalogo_Thumbnails_sdesign.pdf" download="catalogo_Thumbnails_sdesign.pdf">Modelo 1</a>
+      <a class="download-option" href="./catalogo_thumbnailsYT.pdf" download="catalogo_thumbnailsYT.pdf">Modelo 2</a>
+      <a class="download-option" href="./catalogo_thumbnails_Plano_en_3D.pdf" download="catalogo_thumbnails_Plano_en_3D.pdf">Modelo 3</a>
+    </div>
+  </div> -->
+</div>
 
 <main>
 <section class="hero" id="inicio">
   <div class="container hero-inner">
     <div>
-      <span class="eyebrow">✦ Catálogo digital de casas modernas</span>
       <h1>Veja a sua futura casa <em>antes de construir.</em></h1>
       <p class="hero-copy">Explore mais de 300 plantas de casas com apresentações em vídeo 3D e plantas com dimensões. Visualize melhor o projecto que deseja construir.</p>
       <div class="hero-points"><span>+300 plantas</span><span>Vídeos de apresentação</span><span>Plantas com dimensões</span></div>
       <div class="hero-actions">
         <a class="btn" href="#modelos">Explorar as plantas ↓</a>
-        <a class="btn btn-light" href="https://wa.me/842922516?text=Estou%20interresado%20nas%20casas.%20Como%20fazer%20o%20pagamento?" target="_blank" rel="noopener">Comprar agora(200MT)</a>
+        <a class="btn btn-light" href="https://wa.me/842922516?text=Estou%20interresado%20nas%20casas.%20Como%20fazer%20o%20pagamento?" target="_blank" rel="noopener">Comprar tudo(200MT)</a>
       </div>
-      <p class="price-note">Acesso ao catálogo completo por apenas <strong>200 MT</strong>.</p>
-    </div>
-    <div class="hero-visual">
-      <img class="hero-photo" src="imgs/Hero">
-      <div class="visual-tag"><strong>+300</strong> ideias para a sua próxima casa</div>
     </div>
   </div>
 </section>
@@ -219,40 +267,47 @@ img{max-width:100%}
 </section>
 
 <section class="section" id="apresentacao">
+    <h3 style="text-align: center; margin:0;">Confira alguns trechos dos videos das casas</h3>
   <div class="container video-layout">
-    <div class="video-frame">
-        <video autoplay muted loop playsinline controls>
-            <source src="Videos/Planta3D.mp4" type="video/mp4">
-            Seu navegador não suporta vídeos em HTML5.
+    <div class="video-frame" id="video-frame">
+        <video autoplay muted playsinline aria-label="Trechos de algumas plantas 3D">
         </video>
-    </div>
-    <div class="video-copy">
-      <span class="kicker">Veja antes de decidir</span>
-      <h3>Não fique apenas pela fotografia. Explore a casa como se estivesses lá.</h3>
-      <p>Os vídeos ajudam a ter uma noção mais clara do visual da casa, dos ambientes e de diferentes detalhes do design.</p>
-      <ul class="check-list">
-        <li>Observe fachadas e espaços interiores</li>
-        <li>Veja diferentes estilos e soluções de design</li>
-        <li>Escolha referências para conversar com o seu profissional de construção</li>
-      </ul>
-      <a class="btn" href="#modelos">Ver plantas disponíveis</a>
+        <div class="slide-nav" id="slide-nav" aria-label="Navegação do slideshow">
+          <button type="button" class="slide-button" id="prev-slide" aria-label="Vídeo anterior">‹</button>
+          <button type="button" class="slide-button" id="next-slide" aria-label="Próximo vídeo">›</button>
+        </div>
     </div>
   </div>
 </section>
 
-<section class="section section-soft" id="inclui">
+<!-- <section class="section section-soft" id="inclui">
   <div class="container">
-    <div class="section-head"><span class="kicker">O que vai encontrar</span><h2>+300 opcões de plantas 3D de variados estilos + Plantas com medidas</h2><p>Um catálogo digital pensado para facilitar a escolha da sua casa dos sonhos</p></div>
-    <div class="feature-grid">
-      <article class="feature-card"><div class="feature-icon">🏡</div><h3>+300 plantas</h3><p>Uma colecção variada de casas modernas, compactas e familiares.</p></article>
-      <article class="feature-card"><div class="feature-icon">🎬</div><h3>Vídeos 3D</h3><p>Apresentações visuais para observar melhor os espaços e o design.</p></article>
-      <article class="feature-card"><div class="feature-icon">📐</div><h3>Plantas e dimensões</h3><p>Referências de distribuição e medidas indicadas nas plantas correspondentes.</p></article>
-      <article class="feature-card"><div class="feature-icon">✨</div><h3>Ideias de design</h3><p>Inspiração para fachadas, interiores, cores, acabamentos e ambientes.</p></article>
+    <div class="section-head"><span class="kicker">O que vai encontrar</span><h2>+300 opcões de plantas 3D de variados estilos + Plantas com medidas</h2></div>
+    <div class="feature-grid" style="grid-template-columns:1fr;">
+      <article class="feature-card" style="padding:30px 28px;">
+        <div class="feature-icon" style="margin-bottom:18px;">🏡</div>
+        <h3 style="font-size:22px; line-height:1.3; margin-bottom:18px;">PORQUE UTILIZAR PLANTAS 3D ANTES DE CONSTRUIR?</h3>
+        <p style="font-size:15px; line-height:1.7; color:var(--ink); margin:0 0 16px;">Diferente de apenas explicar <em style="font-style:italic; color:var(--blue); font-weight:800;">com palavras</em> o que quer ao pedreiro e ele acabar por fazer uma obra diferente daquilo que imaginou, com estas plantas 3D, você e o seu <em style="font-style:italic; color:var(--blue); font-weight:800;">“Mestre”</em> podem ter uma noção visual e realista do resultado final.</p>
+        <p style="font-size:15px; line-height:1.7; color:var(--ink); margin:0 0 16px;">As plantas 3D ajudam a orientar o mestre de obras e permitem que ambos tenham uma ideia mais clara daquilo que pretendem construir.</p>
+        <p style="font-size:15px; line-height:1.7; color:var(--ink); margin:0 0 16px;">É diferente de desenhar pessoalmente as plantas numa folha, sem respeitar convenções arquitectónicas, e acabar com uma casa abafada.</p>
+
+        <h3 style="font-size:22px; line-height:1.3; margin:26px 0 16px;">O QUE GANHA COM AS PLANTAS 3D?</h3>
+        <ul style="list-style:none; padding:0; margin:0; display:grid; gap:12px; color:var(--ink);">
+          <li style="font-size:15px; line-height:1.7;"><strong style="color:var(--blue);">📐</strong> <strong>Medidas pensadas por arquitectos.</strong></li>
+          <li style="font-size:15px; line-height:1.7;"><strong style="color:var(--blue);">💰</strong> <strong>Poupe nos custos com projectos:</strong> não precisa pagar entre <em style="font-style:normal; font-weight:800; color:var(--blue);">30.000 a 75.000 MZN por m²</em> para um arquitecto desenvolver um projecto do zero, ou, se adquirir os modelos, ele poderá cobrar muito menos para modificar algumas coisas num projecto já pronto.</li>
+          <li style="font-size:15px; line-height:1.7;"><strong style="color:var(--blue);">🏡</strong> <strong>Casas Modernas:</strong> Seja o primeiro no bairro com a casa mais moderna.</li>
+          <li style="font-size:15px; line-height:1.7;"><strong style="color:var(--blue);">✏️</strong> <strong>Pode modificar:</strong> podes modificar pequenos detalhes para adaptar a sua obra.</li>
+          <li style="font-size:15px; line-height:1.7;"><strong style="color:var(--blue);">🧱</strong> <strong>Facilita o levantamento dos materiais:</strong> fica mais fácil fazer o levantamento do material da obra com o mestre de obras quando já existe uma noção visual do resultado final, em vez de apenas imaginar.</li>
+          <li style="font-size:15px; line-height:1.7;"><strong style="color:var(--blue);">🎨</strong> <strong>Combinações e organização já definidas:</strong> não precisa preocupar-se com as combinações das cores, organização, etc. Está tudo decidido nas casas 3D.</li>
+          <li style="font-size:15px; line-height:1.7;"><strong style="color:var(--blue);">💡</strong> <strong>Inspiração para a sua futura casa:</strong> pode utilizar as plantas 3D para ganhar ideias e inspirações para construir a casa dos seus sonhos.</li>
+          <li style="font-size:15px; line-height:1.7; font-weight:900; color:var(--blue);">🏠 <strong>Primeiro visualize. Depois construa!</strong></li>
+        </ul>
+      </article>
     </div>
   </div>
-</section>
+</section> -->
 
-<section class="section">
+<!-- <section class="section">
   <div class="container">
     <div class="section-head"><span class="kicker">Diversidade de estilos</span><h2>Encontre uma planta que combine com a sua ideia.</h2><p>Explore diferentes dimensões, configurações e estilos.</p></div>
     <div class="types-grid">
@@ -262,53 +317,63 @@ img{max-width:100%}
       <article class="type-card"><img src="Thumbnails_sdesign/166 - O mais belo design de casa moderna com piscinas _ 9 x 15 metros (3 quartos).jpg" alt="Casa com piscina"><div><h3>Casas com piscina</h3><p>Inspiração para espaços exteriores</p></div></article>
     </div>
   </div>
+</section> -->
+
+<section class="section section-soft">
+  <div class="container">
+    <div class="section-head"><span class="kicker">Para quem quer</span><h2 style="margin:0">Construir sua casa, um anexo, dependência ou reforma.</h2></div>
+    <div class="audience-grid">
+      <article class="audience-card"><strong>🏠 Quem vai construir</strong><p>Varias opções e estilos de plantas 3D para escolher.</p></article>
+      <article class="audience-card"><strong>🧱 Pedreiros e construtores</strong><p>Para apresentar propostas de casas aos seus clientes </p></article>
+      <article class="audience-card"><strong>📐 Profissionais e estudantes</strong><p>Para inspiração e pesquisa visual de soluções arquitectónicas.</p></article>
+      <article class="audience-card"><strong>🎨 Design Interior</strong><p>Para descobrir ideias de fachadas, interiores e acabamentos.</p></article>
+      <article class="audience-card"><strong>🏘️ Novas Tendências</strong><p>Descubra as últimas tendências em design de casas modernas.</p></article>
+    </div>
+  </div>
 </section>
 
 <section class="section section-soft" id="modelos">
-  <div class="container">
-    <div class="gallery-intro"><div><span class="kicker">Explore uma amostra</span><h2>Algumas plantas do catálogo</h2></div><span class="catalog-count" id="catalog-count">A carregar plantas...</span></div>
-    <div class="catalog-tools"><input class="search-box" id="catalog-search" type="search" placeholder="Pesquisar por dimensão, quartos ou estilo..." aria-label="Pesquisar plantas"><span class="catalog-count">Seleccione um vídeo para ver a planta.</span></div>
-    <div class="catalog-filter-tags" aria-label="Filtros rápidos do catálogo">
-      <button type="button" class="tag-chip is-active" data-filter="all">Todos</button>
-      <button type="button" class="tag-chip" data-filter="T1">T1</button>
-      <button type="button" class="tag-chip" data-filter="T2">T2</button>
-      <button type="button" class="tag-chip" data-filter="T3">T3</button>
-      <button type="button" class="tag-chip" data-filter="T4">T4</button>
-      <button type="button" class="tag-chip" data-filter="T5">T5</button>
-      <button type="button" class="tag-chip" data-filter="T6">T6</button>
-      <button type="button" class="tag-chip" data-filter="2-andares">2 andares</button>
-      <button type="button" class="tag-chip" data-filter="terrea">Térrea</button>
-      <button type="button" class="tag-chip" data-filter="fazenda">Fazenda</button>
-      <button type="button" class="tag-chip" data-filter="pequenas">Pequenas</button>
-      <button type="button" class="tag-chip" data-filter="grandes">Grandes</button>
+    <div class="container">
+        <div class="gallery-intro">
+            <div>
+                <span class="kicker">O que temos disponível</span>
+                <h2>Algumas plantas disponíveis</h2>
+                <p style="margin: 0;">Você receberá no formato vídeo</p>
+            </div>
+        </div>
+        <div class="catalog-tools">
+            <input class="search-box" id="catalog-search" type="search" placeholder="Pesquisar por tipo, dimensão, pequena..." aria-label="Pesquisar plantas">
+        </div>
+        <!--
+        <div class="catalog-filter-tags" aria-label="Filtros rápidos do catálogo">
+        <button type="button" class="tag-chip is-active" data-filter="all">Todos</button>
+        <button type="button" class="tag-chip" data-filter="T1">T1</button>
+        <button type="button" class="tag-chip" data-filter="T2">T2</button>
+        <button type="button" class="tag-chip" data-filter="T3">T3</button>
+        <button type="button" class="tag-chip" data-filter="T4">T4</button>
+        <button type="button" class="tag-chip" data-filter="T5">T5</button>
+        <button type="button" class="tag-chip" data-filter="T6">T6</button>
+        <button type="button" class="tag-chip" data-filter="2-andares">2 andares</button>
+        <button type="button" class="tag-chip" data-filter="terrea">Térrea</button>
+        <button type="button" class="tag-chip" data-filter="fazenda">Fazenda</button>
+        <button type="button" class="tag-chip" data-filter="pequenas">Pequenas</button>
+        <button type="button" class="tag-chip" data-filter="grandes">Grandes</button>
+        </div>
+        -->
+        <div class="model-switcher" aria-label="Alternar estilos de casas">
+            <button type="button" class="model-btn is-active" data-model-index="0">Estilo 1</button>    
+            <button type="button" class="model-btn" data-model-index="1">Estilo 2</button>
+            <button type="button" class="model-btn" data-model-index="2">Estilo 3</button>
+        </div>
+        <div id="catalog-grid" class="catalog-grid" aria-live="polite"></div>
+        <p class="audience-card">⚠️Compre para receber todas casas e estilos disponiveis</p>
     </div>
-    <div class="model-switcher" aria-label="Alternar estilos de casas">
-      <button type="button" class="model-btn is-active" data-model-index="0">Modelo 1</button>
-      <button type="button" class="model-btn" data-model-index="1">Modelo 2</button>
-      <button type="button" class="model-btn" data-model-index="2">Modelo 3</button>
-    </div>    
-    <div id="catalog-grid" class="catalog-grid" aria-live="polite"></div>
-  </div>
 </section>
 
 <section class="section">
   <div class="container plan-panel">
       <div class="plan-visual"><img src="thumbnailsYT/111 - Design de casa loft (tipo caixa) 5m x 8m T2.jpg" alt="Referência visual de modelo de casa"><img src="thumbnailsYT/304 - Design de casa minuscula 6m x 7m Bela casa tipo caixa.jpg" alt="Outro exemplo de modelo de casa"></div>
-    <div><span class="kicker" style="color:#f2cd82">Planeie com referências visuais</span><h2>Veja ideias de distribuição e dimensões.</h2><p>Os modelos que incluem plantas ajudam a compreender a organização dos compartimentos e as medidas apresentadas. Use-os como referência para conversar com um arquitecto ou engenheiro e adaptar o projecto ao seu terreno e às normas locais.</p><a class="btn btn-light" href="https://pagar.co.mz/p/plantas-3d-realisticas-u08vyq" target="_blank" rel="noopener">Comprar agora</a></div>
-  </div>
-</section>
-
-<section class="section section-soft">
-  <div class="container">
-    <div class="section-head"><span class="kicker">Para quem é</span><h2>Um catálogo para quem está a imaginar, planear ou construir.</h2></div>
-    <div class="audience-grid">
-      <article class="audience-card"><strong>🏠 Quem vai construir</strong><p>Para pesquisar estilos e definir melhor o tipo de casa que deseja.</p></article>
-      <article class="audience-card"><strong>👨‍👩‍👧 Famílias</strong><p>Para comparar ideias de casas com diferentes dimensões e compartimentos.</p></article>
-      <article class="audience-card"><strong>🧱 Pedreiros e construtores</strong><p>Para usar referências visuais nas conversas com os clientes.</p></article>
-      <article class="audience-card"><strong>📐 Profissionais e estudantes</strong><p>Para inspiração e pesquisa visual de soluções arquitectónicas.</p></article>
-      <article class="audience-card"><strong>🏘️ Investidores</strong><p>Para reunir referências para diferentes projectos imobiliários.</p></article>
-      <article class="audience-card"><strong>🎨 Apaixonados por design</strong><p>Para descobrir ideias de fachadas, interiores e acabamentos.</p></article>
-    </div>
+    <div><span class="kicker" style="color:#f2cd82">Construa com referências visuais</span><h2>Veja distribuição e dimensões.</h2><p>Os modelos 3D incluem plantas que ajudam a compreender a organização dos compartimentos e as medidas.As plantas 3D ajudam a orientar o mestre de obras e permitem que ambos tenham uma ideia mais clara daquilo que pretendem construir.</p><a class="btn btn-light" href="https://pagar.co.mz/p/plantas-3d-realisticas-u08vyq" target="_blank" rel="noopener">Comprar agora</a></div>
   </div>
 </section>
 
@@ -327,8 +392,8 @@ img{max-width:100%}
 <section class="section section-soft">
   <div class="container">
     <div class="offer">
-      <div><span class="kicker">Oferta de acesso</span><h2>+300 plantas de casas por apenas 200 MT.</h2><p>Explore vídeos de apresentação, referências de plantas com dimensões e ideias para planear a sua próxima construção.</p></div>
-      <div class="offer-price"><small>Acesso ao catálogo</small><strong>200 MT</strong><span>Pagamento único</span><br><br><a class="btn" href="https://wa.me/842922516?text=Estou%20interresado%20nas%20casas.%20Como%20fazer%20o%20pagamento?" target="_blank" rel="noopener">Comprar agora(200MT)</a></div>
+      <div><span class="kicker">Oferta de acesso</span><h2>+300 plantas de casas por apenas 200 MT.</h2><p>Explore plantas 3D, plantas com dimensões e ideias para sua próxima construção.</p></div>
+      <div class="offer-price"><small>Acesso ao catálogo</small><strong>200 MT</strong><span>Pagamento único</span><br><br><a class="btn" href="https://wa.me/842922516?text=Estou%20interresado%20nas%20casas.%20Como%20fazer%20o%20pagamento?" target="_blank" rel="noopener">Comprar tudo(200MT)</a></div>
     </div>
     <div class="payment-grid">
       <div class="payment-card"><strong>📱 M-Pesa</strong><span>Envie o pagamento para:</span><div class="holder">Número: <b>842 922 516</b></div></div>
@@ -342,11 +407,11 @@ img{max-width:100%}
   <div class="container">
     <div class="section-head"><span class="kicker">Dúvidas frequentes</span><h2>Antes de comprar, esclareça as suas dúvidas.</h2></div>
     <div class="faq-list">
-      <details><summary>O que está incluído nos 200 MT?</summary><p>O acesso ao catálogo com mais de 300 plantas de casas, incluindo vídeos de apresentação e referências de plantas com dimensões nas plantas correspondentes.</p></details>
-      <details><summary>São apenas fotografias?</summary><p>Não. O catálogo inclui vídeos de apresentação das plantas, para ajudar a visualizar melhor o design e os diferentes ambientes.</p></details>
-      <details><summary>O catálogo tem plantas com medidas?</summary><p>Sim, há plantas acompanhados de plantas e dimensões. Verifique sempre as características de cada planta e peça a um profissional para adaptar o projecto ao seu terreno.</p></details>
-      <details><summary>Posso usar a planta directamente para construir?</summary><p>Use as plantas como referências de inspiração e planeamento. Antes de construir, um arquitecto ou engenheiro habilitado deve verificar e adaptar o projecto às condições do terreno e às exigências locais.</p></details>
-      <details><summary>Como faço para receber o catálogo?</summary><p>Faça o pagamento de 200 MT por M-Pesa (842 922 516) ou E-Mola (871 546 160), titular Alex Junior Zavala. Depois envie o comprovativo pelo WhatsApp para confirmação e instruções de acesso.</p></details>
+      <details><summary>O que recebo nos 200 MT?</summary><p>O link de acesso a mais de 300 plantas 3D de casas, em vídeo + plantas com dimensões.</p></details>
+      <details><summary>São apenas fotografias?</summary><p>Não. As plantas 3D estão no formato vídeo para ver facilmente no computador ou celular. Explore como se estivesses dentro da casa todos os compartimentos.</p></details>
+      <details><summary>Os modelos tem plantas 3D com medidas?</summary><p>Sim, modelos 3D tambem oferecem plantas 3D para auxilia na construcao da casa.</p></details>
+      <details><summary>Posso usar a planta directamente para construir?</summary><p>Sim! As plantas sao de livre acesso permitindo a sua utilizacao em projetos de construcao.</p></details>
+      <details><summary>Como faço para receber o as plantas 3D?</summary><p>Faça o pagamento de 200 MT por M-Pesa (842 922 516) ou E-Mola (871 546 160), titular Alex Junior Zavala. Depois envie o comprovativo pelo WhatsApp para confirmação e instruções de acesso.</p></details>
     </div>
   </div>
 </section>
@@ -356,15 +421,16 @@ img{max-width:100%}
     <span class="eyebrow">A sua próxima casa começa com uma ideia</span>
     <h2>Descubra mais de 300 plantas<br>e escolha a sua inspiração.</h2>
     <p>Explore o catálogo, compare estilos e visualize possibilidades antes de avançar com a construção.</p>
-    <a class="btn btn-light" href="https://wa.me/842922516?text=Estou%20interresado%20nas%20casas.%20Como%20fazer%20o%20pagamento?" target="_blank" rel="noopener">Comprar agora(200MT) ↗</a>
+    <a class="btn btn-light" href="https://wa.me/842922516?text=Estou%20interresado%20nas%20casas.%20Como%20fazer%20o%20pagamento?" target="_blank" rel="noopener">Comprar tudo(200MT) ↗</a>
   </div>
 </section>
 </main>
 
-<div class="cta-bar"><a class="cta-botao" href="https://wa.me/842922516?text=Estou%20interresado%20nas%20casas.%20Como%20fazer%20o%20pagamento?" target="_blank" rel="noopener noreferrer">📲 Comprar agora(200MT)</a></div>
+<div class="cta-bar"><a class="cta-botao" href="https://wa.me/842   922516?text=Estou%20interresado%20nas%20casas.%20Como%20fazer%20o%20pagamento?" target="_blank" rel="noopener noreferrer">📲 Comprar tudo(200MT)</a></div>
 <button type="button" class="scroll-top-btn" id="scroll-top-btn" aria-label="Voltar ao topo">↑</button>
 
 <script src="./catalogo-titulos.js"></script>
+<script src="./Trechos/PlaylistPorTitulo/manifest.js"></script>
 <script>
     const catalogGrid = document.getElementById('catalog-grid');
     const searchInput = document.getElementById('catalog-search');
@@ -376,15 +442,20 @@ img{max-width:100%}
     let catalogTitles = Object.assign({}, defaultCatalogTitles);
     const catalogCache = {};
     const modelCollections = [
-        { label: 'Modelo 1', folder: './Thumbnails_sdesign', titlesUrl: './Thumbnails_sdesign/catalogo-titulos-sdesign.js', titlesData: null },
-        { label: 'Modelo 2', folder: './thumbnails_Plano_en_3D', titlesUrl: './thumbnails_Plano_en_3D/catalogo-titulo-plano.js', titlesData: null },
-        { label: 'Modelo 3', folder: './thumbnailsYT', titlesUrl: null, titlesData: Object.assign({}, defaultCatalogTitles) },
+        { label: 'Modelo 1', folder: './thumbnailsYT', titlesUrl: null, titlesData: Object.assign({}, defaultCatalogTitles) },
+        { label: 'Modelo 2', folder: './Thumbnails_sdesign', titlesUrl: './Thumbnails_sdesign/catalogo-titulos-sdesign.js', titlesData: null },
+        { label: 'Modelo 3', folder: './thumbnails_Plano_en_3D', titlesUrl: './thumbnails_Plano_en_3D/catalogo-titulo-plano.js', titlesData: null },
         { label: 'Modelo 4', folder: './Thumbnails_14studio_T4', titlesUrl: null, titlesData: Object.assign({}, defaultCatalogTitles) },
         { label: 'Modelo 5', folder: './Thumbnails_Planta_Facil', titlesUrl: null, titlesData: Object.assign({}, defaultCatalogTitles) },
         { label: 'Modelo 6', folder: './Thumbnails_sdesign', titlesUrl: null, titlesData: Object.assign({}, defaultCatalogTitles) }
     ];
     let activeFilter = 'all';
     let activeModelIndex = 0;
+
+    // ===== Paginação =====
+    const PAGE_SIZE = 25;
+    let visibleCount = PAGE_SIZE;
+    let loadMoreBtn = null;
 
     async function loadCatalogTitles(url) {
         if (!url) {
@@ -513,7 +584,7 @@ img{max-width:100%}
             window.catalogoTitulos = Object.assign({}, defaultCatalogTitles);
         }
 
-        renderCatalogo();
+        renderCatalogo(true);
     }
 
     function getHouseTypeFromTitle(title) {
@@ -576,10 +647,17 @@ img{max-width:100%}
         }
     }
 
+    function matchesQuickFilterFn(title, filterKey) {
+        return matchesQuickFilter(title, filterKey);
+    }
+
     function bindImageFallbacks() {
         const images = document.querySelectorAll('.casa img[data-number]');
 
         images.forEach((img) => {
+            if (img.dataset.fallbackBound === '1') return;
+            img.dataset.fallbackBound = '1';
+
             const number = Number(img.dataset.number);
             const rawTitle = img.dataset.title || catalogTitles[number] || `Casa ${number}`;
             const candidates = buildThumbnailCandidates(number, rawTitle);
@@ -603,36 +681,73 @@ img{max-width:100%}
         });
     }
 
-    function renderCatalogo() {
+    function getFilteredNumbers() {
         const validNumbers = Object.keys(catalogTitles)
             .map((value) => Number(value))
             .filter((number) => Number.isFinite(number) && number > 0)
             .sort((a, b) => a - b);
 
         const term = (searchInput?.value || '').trim().toLowerCase();
-        const filteredNumbers = validNumbers.filter((number) => {
+
+        return validNumbers.filter((number) => {
             const title = String(catalogTitles[number] || '');
             const matchesSearch = !term || title.toLowerCase().includes(term) || String(number).includes(term);
-            const matchesQuickFilter = matchesQuickFilterFn(title, activeFilter);
-            return matchesSearch && matchesQuickFilter;
+            const matchesFilter = matchesQuickFilterFn(title, activeFilter);
+            return matchesSearch && matchesFilter;
         });
-
-        catalogGrid.innerHTML = filteredNumbers.length
-            ? filteredNumbers.map((number) => buildCard(number)).join('')
-            : '<div class="empty-state">Não encontrámas plantas com essa pesquisa. Experimente outra palavra ou dimensão.</div>';
-
-        bindImageFallbacks();
-
-        if (countEl) countEl.textContent = `${filteredNumbers.length} de ${validNumbers.length} plantas apresentados`;
     }
 
-    function matchesQuickFilterFn(title, filterKey) {
-        return matchesQuickFilter(title, filterKey);
+    function ensureLoadMoreButton() {
+        if (!loadMoreBtn) {
+            loadMoreBtn = document.createElement('button');
+            loadMoreBtn.id = 'load-more-btn';
+            loadMoreBtn.type = 'button';
+            loadMoreBtn.className = 'load-more-btn';
+            loadMoreBtn.setAttribute('aria-label', 'Carregar mais plantas');
+            loadMoreBtn.addEventListener('click', () => {
+                visibleCount += PAGE_SIZE;
+                renderCatalogo();
+            });
+            catalogGrid.insertAdjacentElement('afterend', loadMoreBtn);
+        }
+        return loadMoreBtn;
+    }
+
+    function removeLoadMoreButton() {
+        if (loadMoreBtn && loadMoreBtn.parentNode) {
+            loadMoreBtn.remove();
+        }
+        loadMoreBtn = null;
+    }
+
+    function renderCatalogo(resetPage = false) {
+        if (resetPage) {
+            visibleCount = PAGE_SIZE;
+        }
+
+        const filteredNumbers = getFilteredNumbers();
+        const total = filteredNumbers.length;
+        const visibleNumbers = filteredNumbers.slice(0, visibleCount);
+        const remaining = total - visibleNumbers.length;
+
+        catalogGrid.innerHTML = visibleNumbers.length
+            ? visibleNumbers.map((number) => buildCard(number)).join('')
+            : '<div class="empty-state">Não encontramos plantas com essa pesquisa. Experimente outra palavra ou dimensão.</div>';
+
+        if (remaining > 0) {
+            const btn = ensureLoadMoreButton();
+            btn.textContent = `Ver mais (${remaining} restantes)`;
+            btn.hidden = false;
+        } else {
+            removeLoadMoreButton();
+        }
+
+        bindImageFallbacks();
     }
 
     function updateScrollTopButton() {
         if (!scrollTopBtn) return;
-        const shouldShow = window.scrollY > 5500;
+        const shouldShow = window.scrollY > 3000;
         scrollTopBtn.classList.toggle('is-visible', shouldShow);
     }
 
@@ -645,7 +760,9 @@ img{max-width:100%}
         });
     }
 
-    if (searchInput) searchInput.addEventListener('input', renderCatalogo);
+    if (searchInput) {
+        searchInput.addEventListener('input', () => renderCatalogo(true));
+    }
 
     modelButtons.forEach((button) => {
         button.addEventListener('click', () => {
@@ -673,21 +790,214 @@ img{max-width:100%}
                 setActiveFilter(selectedFilter);
             }
 
-            renderCatalogo();
+            renderCatalogo(true);
         });
     });
 
+    const downloadModal = document.getElementById('download-modal');
+    const downloadModalClose = document.getElementById('download-modal-close');
+
+    if (downloadModal && downloadModalClose) {
+        downloadModalClose.addEventListener('click', (event) => {
+            event.stopPropagation();
+            downloadModal.classList.add('is-hidden');
+        });
+
+        downloadModal.addEventListener('click', (event) => {
+            if (event.target === downloadModal) {
+                downloadModal.classList.add('is-hidden');
+            }
+        });
+    }
+
     if (scrollTopBtn) {
         scrollTopBtn.addEventListener('click', () => {
-            window.scrollTo({ top: 4000, behavior: 'smooth' });
+            window.scrollTo({ top: 1700, behavior: 'smooth' });
         });
         window.addEventListener('scroll', updateScrollTopButton, { passive: true });
         updateScrollTopButton();
     }
 
-    renderCatalogo();
+    renderCatalogo(true);
 
-if ("serviceWorker" in navigator) {
+    const slideshowVideo = document.querySelector('#apresentacao video');
+    const videoFrame = document.getElementById('video-frame');
+    const slideNav = document.getElementById('slide-nav');
+    const prevSlideBtn = document.getElementById('prev-slide');
+    const nextSlideBtn = document.getElementById('next-slide');
+    const slideArea = document.querySelector('.video-layout');
+    let slideshowSlides = [];
+    let activeSlideIndex = 0;
+    let touchStartX = 0;
+    let slideNavTimer = null;
+
+    function normalizeManifestPath(value) {
+        return String(value || '').replace(/\\/g, '/').replace(/^\.?\/?/, './');
+    }
+
+    function getSlideOrder(value) {
+        const match = String(value || '').match(/trecho(\d+)/i);
+        return match ? Number(match[1]) : Number.MAX_SAFE_INTEGER;
+    }
+
+    function buildSlidesFromManifest(manifest) {
+        const folders = Array.isArray(manifest?.folders) ? manifest.folders : [];
+        const slides = [];
+
+        folders.forEach((folder) => {
+            const folderName = String(folder?.name || 'Casa');
+            const videos = Array.isArray(folder?.videos) ? folder.videos : [];
+            const orderedVideos = videos
+                .slice()
+                .sort((a, b) => getSlideOrder(a) - getSlideOrder(b));
+
+            orderedVideos.forEach((videoPath) => {
+                const path = normalizeManifestPath(videoPath);
+                if (!path) return;
+
+                slides.push({
+                    folder: folderName,
+                    title: folderName,
+                    source: path,
+                    caption: `Trecho ${String(videoPath).match(/trecho(\d+)/i)?.[0]?.toUpperCase() || 'N/D'}`
+                });
+            });
+        });
+
+        return slides;
+    }
+
+    function toggleSlideNav(forceVisible) {
+        if (!slideNav) return;
+
+        if (typeof forceVisible === 'boolean') {
+            window.clearTimeout(slideNavTimer);
+
+            if (forceVisible) {
+                slideNav.classList.add('is-visible');
+                slideNavTimer = window.setTimeout(() => {
+                    slideNav.classList.remove('is-visible');
+                }, 3000);
+            } else {
+                slideNav.classList.remove('is-visible');
+            }
+            return;
+        }
+
+        slideNav.classList.add('is-visible');
+        window.clearTimeout(slideNavTimer);
+        slideNavTimer = window.setTimeout(() => {
+            slideNav.classList.remove('is-visible');
+        }, 3000);
+    }
+
+    function setActiveSlide(index) {
+        if (!slideshowSlides.length || !slideshowVideo) return;
+
+        activeSlideIndex = (index + slideshowSlides.length) % slideshowSlides.length;
+        const slide = slideshowSlides[activeSlideIndex];
+
+        const wasPaused = slideshowVideo.paused;
+
+        slideshowVideo.muted = true;
+        slideshowVideo.loop = false;
+        slideshowVideo.setAttribute('src', slide.source);
+        slideshowVideo.load();
+
+        if (!wasPaused) {
+            slideshowVideo.play().catch(() => {});
+        }
+
+        if (slideNav) {
+            slideNav.classList.remove('is-visible');
+        }
+    }
+
+    function nextSlide() {
+        setActiveSlide(activeSlideIndex + 1);
+    }
+
+    function prevSlide() {
+        setActiveSlide(activeSlideIndex - 1);
+    }
+
+    async function loadTrechoSlides() {
+        try {
+            let manifest = window.trechosManifest || null;
+
+            if (!manifest && location.protocol !== 'file:') {
+                const response = await fetch('./Trechos/PlaylistPorTitulo/manifest.json', { cache: 'no-store' });
+                if (!response.ok) {
+                    throw new Error(`Manifesto indisponível (${response.status})`);
+                }
+                manifest = await response.json();
+            }
+
+            if (!manifest || !Array.isArray(manifest.folders)) {
+                throw new Error('Manifesto de trechos ausente.');
+            }
+
+            slideshowSlides = buildSlidesFromManifest(manifest);
+
+            if (!slideshowSlides.length) {
+                return;
+            }
+
+            setActiveSlide(0);
+        } catch (error) {
+            console.warn('Erro ao carregar slideshow:', error);
+        }
+    }
+
+    if (slideshowVideo) {
+        slideshowVideo.addEventListener('click', () => toggleSlideNav(true));
+        slideshowVideo.addEventListener('pointerdown', () => toggleSlideNav(true));
+        slideshowVideo.addEventListener('ended', nextSlide);
+        slideshowVideo.addEventListener('error', () => {
+            if (slideshowSlides.length > 1) {
+                nextSlide();
+            }
+        });
+    }
+
+    if (prevSlideBtn) prevSlideBtn.addEventListener('click', () => {
+        prevSlide();
+        toggleSlideNav(true);
+    });
+    if (nextSlideBtn) nextSlideBtn.addEventListener('click', () => {
+        nextSlide();
+        toggleSlideNav(true);
+    });
+
+    if (slideArea) {
+        slideArea.addEventListener('touchstart', (event) => {
+            const touch = event.changedTouches[0];
+            touchStartX = touch ? touch.clientX : 0;
+        }, { passive: true });
+
+        slideArea.addEventListener('touchend', (event) => {
+            const touch = event.changedTouches[0];
+            if (!touch) return;
+
+            const delta = touch.clientX - touchStartX;
+            if (Math.abs(delta) > 60) {
+                if (delta < 0) {
+                    nextSlide();
+                } else {
+                    prevSlide();
+                }
+                toggleSlideNav(true);
+            }
+        }, { passive: true });
+    }
+
+    if (videoFrame) {
+        videoFrame.addEventListener('mouseenter', () => toggleSlideNav(true));
+    }
+
+    loadTrechoSlides();
+
+    if ("serviceWorker" in navigator && location.protocol !== 'file:') {
         window.addEventListener("load", function () {
             navigator.serviceWorker.register("./sw.js").catch(function (error) {
                 console.warn("Service Worker não pôde ser registrado:", error);
@@ -696,26 +1006,26 @@ if ("serviceWorker" in navigator) {
     }
 
     async function carregarContador() {
-    const contadorEl = document.getElementById("visitas-valor");
-    if (!contadorEl) return;
+        const contadorEl = document.getElementById("visitas-valor");
+        if (!contadorEl) return;
 
-    try {
-        const resposta = await fetch("https://abacus.jasoncameron.dev/hit/casas3d-github-pages/visitas", {
-          cache: "no-store"
-        });
+        try {
+            const resposta = await fetch("https://abacus.jasoncameron.dev/hit/casas3d-github-pages/visitas", {
+                cache: "no-store"
+            });
 
-        if (!resposta.ok) {
-            throw new Error("Falha ao carregar contador");
+            if (!resposta.ok) {
+                throw new Error("Falha ao carregar contador");
+            }
+
+            const dados = await resposta.json();
+            const valor = Number(dados?.value ?? 0) + 3000;
+            contadorEl.textContent = Number.isFinite(valor) ? valor.toLocaleString("pt-BR") : "N/D";
+        } catch (error) {
+            console.error("Erro no contador:", error);
+            contadorEl.textContent = "N/D";
         }
-
-        const dados = await resposta.json();
-        const valor = Number(dados?.value ?? 0)+3000;
-        contadorEl.textContent = Number.isFinite(valor) ? valor.toLocaleString("pt-BR") : "N/D";
-    } catch (error) {
-        console.error("Erro no contador:", error);
-        contadorEl.textContent = "N/D";
     }
-  }
 
     carregarContador();
 </script>

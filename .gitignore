@@ -15,10 +15,8 @@ thumbnails/*.jpg
 thumbnailsYT TRADUZIDAS/*
 thumbnails_YT/
 Trechos/*
-Trechos/
 Videos/*
-*.mp4
-*.MP4
+*.pdf
 *.mov
 *.MOV
 *.mkv
@@ -27,5 +25,6 @@ Videos/*
 *.AVI
 *.webm
 *.WEBM
+!Trechos/PlaylistPorTitulo/
 !Videos/Planta3D.mp4
 

@@ -1,162 +1,68 @@
-
 #!/bin/bash
+# Uso: ./acelerar_dividir_mp4.sh <video.mkv> <velocidade> [segmento]
+set -e
 
-# ==========================================
-# CONFIGURAÇÕES
-# ==========================================
-
-BASE="/mnt/06A83994A839836B/Alex/Projetos/HTML/Casas3D"
-
-PLAYLIST_URL="https://www.youtube.com/playlist?list=PLE6tt5HXJv4efcyPErOoy7TaZOwfy97LK"
-
-DESTINO="$BASE/Trechos/Playlist"
-
-mkdir -p "$DESTINO"
-
-# Verificar dependências
-for CMD in yt-dlp ffmpeg; do
-    if ! command -v "$CMD" >/dev/null 2>&1; then
-        echo "ERRO: $CMD não está instalado."
-        exit 1
-    fi
-done
-
-# ==========================================
-# INTERVALOS DOS TRECHOS
-# ==========================================
-
-NOMES=(
-    "trecho1"
-    "trecho2"
-    "trecho3"
-    "trecho4"
-    "trecho5"
-)
-
-INICIOS=(
-    "00:00:10"
-    "00:00:50"
-    "00:01:20"
-    "00:02:00"
-    "00:03:40"
-)
-
-FINS=(
-    "00:00:15"
-    "00:00:55"
-    "00:01:30"
-    "00:02:10"
-    "00:03:40"
-)
-
-# ==========================================
-# OBTER LISTA DE VÍDEOS
-# ==========================================
-
-TEMP_LISTA=$(mktemp)
-trap 'rm -f "$TEMP_LISTA"' EXIT
-
-# Embaralhar a ordem dos vídeos
-TEMP_ALEATORIA=$(mktemp)
-shuf "$TEMP_LISTA" > "$TEMP_ALEATORIA"
-
-# Substituir a lista original pela aleatória
-mv "$TEMP_ALEATORIA" "$TEMP_LISTA"
-
-echo "A consultar playlist..."
-
-if ! yt-dlp --flat-playlist \
-    --print "%(playlist_index)03d|%(id)s|%(title)s" \
-    "$PLAYLIST_URL" > "$TEMP_LISTA"; then
-    echo "Não foi possível consultar a playlist."
+if [ $# -lt 2 ]; then
+    echo "Uso: $0 <video.mkv> <velocidade> [segmento]"
+    echo "Exemplo: $0 filme.mkv 2.5 6"
     exit 1
 fi
 
-TOTAL=$(wc -l < "$TEMP_LISTA")
+INPUT="$1"; VELOCIDADE="$2"; SEGMENTO="${3:-6}"
+[ ! -f "$INPUT" ] && { echo "Erro: '$INPUT' não encontrado."; exit 1; }
 
-if [ "$TOTAL" -eq 0 ]; then
-    echo "A playlist não contém vídeos disponíveis."
-    exit 1
+BASENAME=$(basename "$INPUT" .mkv)
+OUTDIR="$(dirname "$INPUT")/${BASENAME}_acelerado_mp4"
+mkdir -p "$OUTDIR"
+
+# ---- Detecta se há áudio ----
+TEM_AUDIO=$(ffprobe -v error -select_streams a -show_entries stream=index \
+    -of csv=p=0 "$INPUT" | head -n1)
+
+echo "=========================================="
+echo "Input:      $INPUT"
+echo "Velocidade: ${VELOCIDADE}x"
+echo "Segmento:   ${SEGMENTO}s"
+echo "Áudio:      ${TEM_AUDIO:+sim}${TEM_AUDIO:-NÃO (apenas vídeo)}"
+echo "Saída:      $OUTDIR"
+echo "=========================================="
+
+TEMP="${OUTDIR}/_temp.mp4"
+
+# ---- Monta filtro e mapa conforme existência de áudio ----
+if [ -n "$TEM_AUDIO" ]; then
+    FILTRO="[0:v]setpts=PTS/${VELOCIDADE}[v];[0:a]atempo=${VELOCIDADE}[a]"
+    MAPAS=(-map "[v]" -map "[a]")
+    AUDIO_OPTS=(-c:a aac -b:a 192k -ac 2)
+else
+    FILTRO="[0:v]setpts=PTS/${VELOCIDADE}[v]"
+    MAPAS=(-map "[v]")
+    AUDIO_OPTS=(-an)
 fi
 
-echo ""
-echo "Total de vídeos encontrados: $TOTAL"
-echo "Destino: $DESTINO"
-echo ""
+echo "[1/2] Acelerando ${VELOCIDADE}x e convertendo para MP4..."
+ffmpeg -y -i "$INPUT" \
+    -filter_complex "$FILTRO" \
+    "${MAPAS[@]}" \
+    -c:v libx264 -preset medium -crf 20 \
+    -pix_fmt yuv420p \
+    -force_key_frames "expr:gte(t,n_forced*${SEGMENTO})" \
+    "${AUDIO_OPTS[@]}" \
+    -movflags +faststart \
+    "$TEMP"
 
-# ==========================================
-# PROCESSAR CADA VÍDEO
-# ==========================================
+echo "[2/2] Dividindo em ${SEGMENTO}s..."
+ffmpeg -y -i "$TEMP" \
+    -c:v libx264 -preset medium -crf 20 \
+    "${AUDIO_OPTS[@]}" \
+    -force_key_frames "expr:gte(t,n_forced*${SEGMENTO})" \
+    -f segment \
+    -segment_time "$SEGMENTO" \
+    -reset_timestamps 1 \
+    -segment_format mp4 \
+    "${OUTDIR}/${BASENAME}_parte_%03d.mp4"
 
-SUCESSOS=0
-ERROS=0
+rm -f "$TEMP"
 
-while IFS='|' read -r NUMERO VIDEO_ID TITULO; do
-
-    [ -n "$VIDEO_ID" ] || continue
-
-    PASTA="$DESTINO/Casa_$NUMERO"
-
-    mkdir -p "$PASTA"
-
-    URL="https://www.youtube.com/watch?v=$VIDEO_ID"
-
-    echo ""
-    echo "=========================================="
-    echo "CASA $NUMERO: $TITULO"
-    echo "=========================================="
-
-    # Extrair os cinco trechos individualmente
-    for i in 0 1 2 3 4; do
-
-        NOME="${NOMES[$i]}"
-        INICIO="${INICIOS[$i]}"
-        FIM="${FINS[$i]}"
-
-        ARQUIVO="$PASTA/$NOME.mp4"
-
-        echo ""
-        echo "[$NOME] $INICIO até $FIM"
-
-        # Não repetir trechos já existentes
-        if [ -f "$ARQUIVO" ]; then
-            echo "Já existe. Ignorado."
-            continue
-        fi
-
-        yt-dlp \
-            --no-warnings \
-            --download-sections "*${INICIO}-${FIM}" \
-            --playlist-items 5-5 \
-            -f "bv*[height<=360]+ba/b[height<=360]" \
-            --merge-output-format mp4 \
-            --remux-video mp4 \
-            -o "$PASTA/$NOME.%(ext)s" \
-            "$URL"
-
-        if [ -f "$ARQUIVO" ]; then
-            echo "Trecho criado com sucesso."
-            ((SUCESSOS++))
-        else
-            echo "ERRO ao extrair $NOME."
-            ((ERROS++))
-        fi
-
-    done
-
-done < "$TEMP_LISTA"
-
-# ==========================================
-# RESUMO
-# ==========================================
-
-echo ""
-echo "=========================================="
-echo "PROCESSAMENTO CONCLUÍDO"
-echo "=========================================="
-echo "Vídeos na playlist: $TOTAL"
-echo "Trechos criados: $SUCESSOS"
-echo "Erros: $ERROS"
-echo ""
-echo "Local dos ficheiros:"
-echo "$DESTINO"
+echo "Concluído! Saída: $OUTDIR"
+ls -lh "$OUTDIR"
